@@ -1,0 +1,18 @@
+---
+layout: default
+title: "小说、诗和其他"
+cat: story
+---
+
+<main>
+  <div class="container">
+    <dl>
+      {% assign filtered_posts = site.posts | where: 'categories', page.cat %}
+      {% for post in filtered_posts %}
+          <dt><h2><a href="{{ post.url }}">{{ post.title }}</a></h2></dt>
+          <dd>{{ post.date | date_to_string }}</dd>
+          <dd>{{ post.excerpt }}</dd>
+      {% endfor %}
+    </dl>
+  </div>
+</main>

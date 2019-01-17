@@ -1,0 +1,8 @@
+- name: "首页"
+  link: /
+- name: "产品设计"
+  link: /work.html
+- name: "小说"
+  link: /stories.html
+- name: "灵感"
+  link: /inspirations.html
