@@ -1,7 +1,7 @@
 <nav>
 	<div class="container">
     {% for item in site.data.nav %}
-      <a href="{{ item.link }}" {% if (page.url == item.link) or (page.url contains item.keyword) %}class="current"{% endif %}>
+      <a href="{{ item.link }}" {% if page.url == item.link %}class="current"{% endif %}>
         {{ item.name }}
       </a>
     {% endfor %}
