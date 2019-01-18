@@ -47,8 +47,8 @@ nav a {
 }
 
 nav a.current {
-  color: #2a2a2a;
-  border-bottom: 1px solid #2a2a2a;
+  color: #333;
+  border-bottom: 1px solid #333;
 }
 
 p {
@@ -61,12 +61,12 @@ h1, h2 {
 }
 
 .weak {
-	color: #999;
+	color: #7b7f83;
 }
 
 dd {
 	margin: 12px 0 0 0;
-  color: #828a92;
+  color: #7b7f83;
 }
 
 dt {
