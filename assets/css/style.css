@@ -1,5 +1,4 @@
 body {
-  /*font-family: "SF Pro SC", "HanHei SC", "SF Pro Text", "Myriad Set Pro", "SF Pro Icons", "PingFang SC", "Segoe UI", SegoeUI, "Microsoft YaHei", 微软雅黑, "Helvetica Neue", Helvetica, Arial, sans-serif;*/
   font-family: -apple-system,BlinkMacSystemFont,"PingFang SC",Helvetica,Tahoma,Arial,"Microsoft YaHei",微软雅黑,黑体,Heiti,sans-serif,SimSun,宋体,serif;
   font-size: 15px;
   line-height: 1.7;
@@ -17,7 +16,7 @@ main {
 }
 
 .container {
-  width: 700px;
+  width: 620px;
   margin: 0 auto;
 }
 
@@ -89,3 +88,6 @@ hr {
   margin: 32px 280px;
 }
 
+img {
+  max-width: 100%;
+}
