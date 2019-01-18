@@ -51,8 +51,12 @@ nav a.current {
   border-bottom: 1px solid #333;
 }
 
-p {
-  
+p.note {
+  background: #eee;
+  font-size: 13px;
+  padding: 24px;
+  color: #666;
+  border-radius: 4px;
 }
 
 h1, h2 {
