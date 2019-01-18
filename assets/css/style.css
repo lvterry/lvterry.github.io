@@ -95,3 +95,7 @@ hr {
 img {
   max-width: 100%;
 }
+
+.excerpt img {
+  width: 240px;
+}

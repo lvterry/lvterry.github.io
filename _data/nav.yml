@@ -1,8 +1,12 @@
 - name: "首页"
   link: /
+  keyword: ""
 - name: "产品设计"
   link: /work.html
+  keyword: "work"
 - name: "小说"
   link: /stories.html
+  keyword: "story"
 - name: "灵感"
   link: /inspirations.html
+  keyword: ""
