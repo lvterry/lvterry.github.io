@@ -1,11 +1,12 @@
 body {
-  font-family: -apple-system,BlinkMacSystemFont,"PingFang SC",Helvetica,Tahoma,Arial,"Microsoft YaHei",微软雅黑,黑体,Heiti,sans-serif,SimSun,宋体,serif;
+  /*font-family: -apple-system,BlinkMacSystemFont,"PingFang SC",Helvetica,Tahoma,Arial,"Microsoft YaHei",微软雅黑,黑体,Heiti,sans-serif,SimSun,宋体,serif;
   font-size: 15px;
-  line-height: 1.7;
-  text-rendering: optimizeLegibility;
+  line-height: 1.7;*/
+  /*text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  color: #494949;
+  -moz-osx-font-smoothing: grayscale;*/
+  font: 14px/1.5 Verdana, Arial, Helvetica, sans-serif;
+  color: #333;
   background-color: #fff;
   padding: 0;
   margin: 0;
@@ -65,8 +66,14 @@ p.note {
 }
 
 h1, h2 {
+  font-family: times, Times New Roman, times-roman, georgia, serif;
+  letter-spacing: -2px;
   margin: 48px 0 0 0;
   color: #333;
+}
+
+h1 {
+  font-size: 51px;
 }
 
 .weak {
