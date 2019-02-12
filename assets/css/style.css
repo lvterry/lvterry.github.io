@@ -17,20 +17,18 @@ main {
 }
 
 .container {
-  width: 620px;
+  width: 90%;
+  max-width: 620px;
   margin: 0 auto;
 }
 
 a {
-  color: #222;
+  color: #0095c5;
   text-decoration: none;
-  padding-bottom: 2px;
-  border-bottom: 1px solid #aaa;
 }
 
 a:hover {
-  border-color: #333;
-  transition: all 0.1s ease-in-out;
+  text-decoration: underline;
 }
 
 nav {
@@ -65,6 +63,10 @@ p.note {
   border-radius: 4px;
 }
 
+li {
+  margin-bottom: 6px;
+}
+
 h1, h2 {
   font-family: times, Times New Roman, times-roman, georgia, serif;
   margin: 48px 0 0 0;
@@ -83,15 +85,6 @@ h2 {
 
 .weak {
 	color: #7b7f83;
-}
-
-dd {
-	margin: 12px 0 0 0;
-  color: #7b7f83;
-}
-
-dt {
-	font-weight: bold;
 }
 
 footer {
@@ -117,6 +110,4 @@ img {
   width: 240px;
 }
 
-.articles li {
-  margin-bottom: 6px;
-}
+
