@@ -104,3 +104,7 @@ img {
 .excerpt img {
   width: 240px;
 }
+
+.articles li {
+  margin-bottom: 6px;
+}
