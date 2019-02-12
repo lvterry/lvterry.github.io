@@ -37,26 +37,6 @@ a:visited {
   color: #bd00bd;
 }
 
-nav {
-  overflow: hidden;
-  padding: 0 16px;
-  border-bottom: 1px solid #eee;
-}
-
-nav a {
-  display: block;
-  border: none;
-  color: #666;
-  float: left;
-  padding: 12px 4px;
-  margin: 0 28px;
-}
-
-nav a.current {
-  color: #333;
-  border-bottom: 2px solid #333;
-}
-
 p {
   margin-bottom: 1.5em;
 }
@@ -112,10 +92,6 @@ hr {
 
 img {
   max-width: 100%;
-}
-
-.excerpt img {
-  width: 240px;
 }
 
 
