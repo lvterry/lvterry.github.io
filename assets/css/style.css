@@ -5,7 +5,9 @@ body {
   /*text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;*/
-  font: 14px/1.5 Verdana, Arial, Helvetica, sans-serif;
+  font-size: 14px;
+  font-family: Verdana, Arial, Helvetica, sans-serif;
+  line-height: 1.5;
   color: #333;
   background-color: #fff;
   padding: 0;
@@ -29,6 +31,10 @@ a {
 
 a:hover {
   text-decoration: underline;
+}
+
+a:visited {
+  color: #bd00bd;
 }
 
 nav {
@@ -76,6 +82,8 @@ h1, h2 {
 h1 {
   font-size: 51px;
   letter-spacing: -2px;
+  line-height: 1;
+  margin-bottom: 0.5em;
 }
 
 h2 {
