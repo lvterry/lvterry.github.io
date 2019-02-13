@@ -64,13 +64,13 @@ categories: work
 
 如果是从头设计一个新功能，设计过程的讲述应该是重点；如果是改版，会更偏重设计方案的讲述（因为改版要解决的问题和现存版本要解决的问题基本一致）。在讲述设计方案时，可以采用下面两种方式：
 
-1. 整体到局部
+ 1. 整体到局部
 
 ![](https://general-1258275882.cos.ap-chengdu.myqcloud.com/writing02.jpg)
 
 先给出整体方案，然后以 callout 的形式分别介绍各个设计细节的思考。可以是交互或视觉，也可以在 callout 里给出中间方案对比介绍。
 
-2. 方案对比
+ 2. 方案对比
 
 ![](https://general-1258275882.cos.ap-chengdu.myqcloud.com/writing03.jpg)
 
