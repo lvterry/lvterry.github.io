@@ -23,7 +23,7 @@ Christopher Alexander writes about the same point in his book [Notes on the Synt
 
 *“…every design problem begins with an effort to achieve fitness between two entities: the form in question and its context. The form is the solution to the problem; the context defines the problem. In other words, when we speak of design, the real object of discussion is not the form alone, but the ensemble comprising the form and the context. Good fit is a desired property of this ensemble which relates to some particular division of the ensemble into form and context.”*
 
-![](https://img3.doubanio.com/view/note/large/public/p10088262.jpg)
+![](https://general-1258275882.cos.ap-chengdu.myqcloud.com/p10088262.jpg)
 
 Ask good questions to define the problem, then solution will emerge.
 
