@@ -85,3 +85,4 @@ Podcast
 Links
 
 - [Uncreative and pround](https://www.abccopywriting.com/2011/01/17/uncreative-and-proud) talks about how creativity is unnecessary in most occasions and as product designers we should focus on effectiveness.
+- [The boring designer](http://blog.capwatkins.com/the-boring-designer) by Cap Watkins
