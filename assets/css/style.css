@@ -1,6 +1,6 @@
 body {
   font-size: 15px;
-  font-family: 'Chinese Quote', 'Segoe UI', Roboto, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Helvetica Neue', Helvetica, Arial, sans-serif, 'Apple Color Emoji';
+  font-family: system-ui, 'Chinese Quote', 'Segoe UI', Roboto, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Helvetica Neue', Helvetica, Arial, sans-serif, 'Apple Color Emoji';
   line-height: 1.74;
   color: #333;
   background-color: #fff;
@@ -17,6 +17,10 @@ main {
   width: 90%;
   max-width: 620px;
   margin: 0 auto;
+}
+
+article {
+  text-align: justify;
 }
 
 a {
