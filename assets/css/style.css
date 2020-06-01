@@ -95,3 +95,6 @@ blockquote {
   color: #666;
 }
 
+video {
+  max-width: 100%;
+}
