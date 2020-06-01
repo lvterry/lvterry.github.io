@@ -19,6 +19,12 @@ main {
   margin: 0 auto;
 }
 
+.container-fixed {
+  padding: 16px;
+  max-width: 620px;
+  margin: 0 auto;
+}
+
 article {
   text-align: justify;
 }
