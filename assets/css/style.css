@@ -104,3 +104,13 @@ blockquote {
 video {
   width: 100%;
 }
+
+.footnotes {
+  margin-top: 36px;
+  border-top: 1px solid #eee;
+  font-size: 14px;
+}
+
+.footnotes p {
+  margin: 0;
+}
