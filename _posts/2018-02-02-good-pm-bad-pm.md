@@ -7,7 +7,7 @@ categories: work
 
 最近一直困惑于产品经理的职责到底是什么，偶然间在网上看到的文章把我带到了 Ben Horowitz 在Netscape 的时候写下的关于产品经理的文章，后来才知道，这差不多是计算机软件／互联网领域最早的关于这个职位的阐述了。不管怎么说，文章是好文章，无论是不是产品经理都值得一读。
 
-原文在[这里](https://a16z.files.wordpress.com/2014/08/good-product-manager.pdf)，全文翻译如下。
+原文在[这里](https://a16z.com/2012/06/15/good-product-managerbad-product-manager/)，全文翻译如下。
 
 ---
 
