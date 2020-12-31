@@ -114,3 +114,10 @@ video {
 .footnotes p {
   margin: 0;
 }
+
+.recommendation {
+  border: 1px solid #dddddd;
+  text-align: center;
+  border-radius: 4px;
+  padding: 12px 16px;
+}

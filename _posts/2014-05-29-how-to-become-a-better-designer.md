@@ -59,31 +59,4 @@ Douglas Martin said:
 
 > Questions about whether design is necessary or affordable are quite beside the point: design is inevitable. The alternative to good design is bad design, not no design at all.
 
-## Inspirations
-Books
-
-- [The Visual Display of Quantitative Information](http://book.douban.com/subject/1316642/) by Edward Tufte
-- [Notes on the Synthesis of Form](http://book.douban.com/subject/1742456/) by Christopher Alexander
-- [Designing Visual Interfaces](http://book.douban.com/subject/1478928/) by Kevin Mullet and Darrell Sano 
-- [设计中的设计](http://book.douban.com/subject/1941558/) by 原研哉
-- [The Elements of Style](http://book.douban.com/subject/1433835/) by William Strunk Jr. and E.B. White
-- [Getting Real](https://basecamp.com/books/Getting%20Real.pdf) by [Basecamp](http://www.basecamp.com)
-- [Just Enough Research](http://abookapart.com/products/just-enough-research) by Erik Hall
-- [The Shape of Design](http://shapeofdesignbook.com/) by Frank Chimero
-
-Talks
-
-- **Invent on Principle** by Bret Victor ・ [Youku](http://v.youku.com/v_show/id_XMzUzMDIzNjUy.html) ・ [Vimeo](http://vimeo.com/36579366)
-- [Ryan Singer's Product Development Tools](https://signalvnoise.com/posts/3914-video-ryan-teaches-product-management-at-mind-the-product-in-san-francisco)
-- [柳冠中谈设计：中国的设计徘徊不前，是因为设计师脑子里有道墙](http://www.bilibili.com/video/av21590910?from=search&seid=15815584021455347684)
-- [When We Build](https://vimeo.com/34017777) by Wilson Miner
-- [Using design to make ideas new](https://www.ted.com/talks/milton_glaser_using_design_to_make_ideas_new) by Milton Glaser
-
-Podcast
-
-- [Design Details](https://spec.fm/podcasts/design-details)
-
-Links
-
-- [Uncreative and pround](https://www.abccopywriting.com/2011/01/17/uncreative-and-proud) talks about how creativity is unnecessary in most occasions and as product designers we should focus on effectiveness.
-- [The boring designer](http://blog.capwatkins.com/the-boring-designer) by Cap Watkins
+[>> 关于设计的书、文章、演讲推荐 <<](/recommendations.html)
