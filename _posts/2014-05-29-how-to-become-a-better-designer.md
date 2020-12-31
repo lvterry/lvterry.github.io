@@ -77,6 +77,7 @@ Talks
 - [Ryan Singer's Product Development Tools](https://signalvnoise.com/posts/3914-video-ryan-teaches-product-management-at-mind-the-product-in-san-francisco)
 - [柳冠中谈设计：中国的设计徘徊不前，是因为设计师脑子里有道墙](http://www.bilibili.com/video/av21590910?from=search&seid=15815584021455347684)
 - [When We Build](https://vimeo.com/34017777) by Wilson Miner
+- [Using design to make ideas new](https://www.ted.com/talks/milton_glaser_using_design_to_make_ideas_new) by Milton Glaser
 
 Podcast
 
