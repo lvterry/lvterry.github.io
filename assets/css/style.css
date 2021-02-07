@@ -29,17 +29,13 @@ article {
   text-align: justify;
 }
 
-a {
+a, a:visited {
   color: #0095c5;
   text-decoration: none;
 }
 
 a:hover {
   text-decoration: underline;
-}
-
-a:visited {
-  color: #bd00bd;
 }
 
 p {
@@ -60,7 +56,6 @@ li {
 
 h1, h2 {
   margin: 48px 0 0 0;
-  color: #333;
 }
 
 h1 {
@@ -78,9 +73,8 @@ h2 {
 footer {
   text-align: center;
   font-size: 14px;
-  color: #666;
   padding: 24px;
-  margin-top: 48px;
+  margin: 48px 24px 0 24px;
   border-top: 1px solid #eee;
 }
 
@@ -98,7 +92,6 @@ blockquote {
   border-left: 7px solid #eee;
   margin-left: 12px;
   padding: 4px 0 4px 24px;
-  color: #666;
 }
 
 video {
@@ -120,4 +113,36 @@ video {
   text-align: center;
   border-radius: 4px;
   padding: 12px 16px;
+}
+
+@media (prefers-color-scheme: dark) {
+  body {
+    background: #15202b;
+    color: #eaeaea;
+  }
+  
+  a, a:visited {
+    color: #9be3fb;
+  }
+  
+  .recommendation {
+    border-color: #7d7d7d;
+  }
+  
+  img {
+    filter: brightness(.8) contrast(1.2);
+  }
+  
+  footer {
+    border-top-color: #333;
+  }
+  
+  p.note {
+    background: #0d161d;
+    color: #8c8c8c;
+  }
+  
+  blockquote {
+    border-left-color: #273846;
+  }
 }
