@@ -21,6 +21,7 @@ body {
   margin: 0;
   letter-spacing: 0.05em;
   box-sizing: border-box;
+  text-rendering: optimizeLegibility;
 }
 
 .container {
