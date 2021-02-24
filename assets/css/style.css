@@ -3,6 +3,7 @@
   --text-color: #454545;
   --gray-border: #ddd;
   --post-border-color: #e5e5e5;
+  --link-color: #50A2FF;
   
   --background-dark-mode: #15202b;
   --foreground-dark-mode: #eaeaea;
@@ -19,6 +20,7 @@ body {
   padding: 0;
   margin: 0;
   letter-spacing: 0.05em;
+  box-sizing: border-box;
 }
 
 .container {
@@ -46,6 +48,11 @@ footer {
   text-align: center;
   margin: 3rem 0 5rem 0;
   color: var(--weak-text-color);
+}
+
+a, a:visited {
+  text-decoration: underline;
+  color: var(--link-color);
 }
 
 a.plain, a.plain:visited {
