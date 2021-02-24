@@ -64,7 +64,7 @@ img {
 
 .post {
   display: block;
-  padding: 2rem 2rem 1.5rem 2rem;
+  padding: 1.5rem 2rem;
   border: 1px solid var(--post-border-color);
   border-radius: 0.5rem;
   margin-bottom: 2rem;
@@ -73,6 +73,10 @@ img {
 
 .text-center {
   text-align: center;
+}
+
+.text-small {
+  font-size: 0.8rem;
 }
 
 .weak {
@@ -111,7 +115,7 @@ blockquote {
   margin: 0;
 }
 
-@media (prefers-colo-scheme: dark) {
+@media (prefers-color-scheme: dark) {
   body {
     background: var(--background-dark-mode);
     color: var(--foreground-dark-mode);

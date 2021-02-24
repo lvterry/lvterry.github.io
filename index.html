@@ -5,7 +5,7 @@ title: Terry Wang
 <main class="container">
   {% for post in site.posts %}
       <a class="post plain" href="{{ post.url }}">
-        <div class="weak text-center">{{ post.date | date: "%Y-%m-%d" }}</div>
+        <div class="weak text-center text-small">{{ post.date | date: "%Y-%m-%d" }}</div>
         <h1 class="text-center">{{ post.title }}</h1>
 
         <p>{{ post.content | strip_html | truncate: 140 }}</p>
