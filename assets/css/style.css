@@ -51,6 +51,11 @@ footer {
   color: var(--weak-text-color);
 }
 
+footer a {
+  text-decoration: none;
+  color: var(--weak-text-color);
+}
+
 a, a:visited {
   text-decoration: underline;
   color: var(--link-color);
