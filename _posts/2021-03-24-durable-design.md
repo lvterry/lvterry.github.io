@@ -1,7 +1,6 @@
 ---
 layout: post
 title:  "多年生设计"
-date:   2021-03-24
 categories: work
 ---
 
