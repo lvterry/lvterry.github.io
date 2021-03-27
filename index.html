@@ -3,7 +3,7 @@ layout: default
 title: Terry Wang
 ---
 <main class="container">
-  {% for post in site.posts limit:10 %}
+  {% for post in paginator.posts %}
       <a class="post plain" href="{{ post.url }}">
         <div class="weak text-center text-small">{{ post.date | date: "%Y-%m-%d" }}</div>
         <h1 class="text-center">{{ post.title }}</h1>
@@ -15,3 +15,9 @@ title: Terry Wang
       </a>
   {% endfor %}
 </main>
+
+<div class="pagination">
+  {% if paginator.next_page %}
+    <a href="{{ paginator.next_page_path }}" class="button">查看更多文章 &raquo;</a>
+  {% endif %}
+</div>

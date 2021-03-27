@@ -132,6 +132,19 @@ blockquote {
   margin: 0;
 }
 
+.pagination {
+  text-align: center;
+}
+
+.pagination .button {
+  border-color: white;
+  font-size: 0.9rem;
+  font-weight: bold;
+  color: white;
+  text-decoration: none;
+  opacity: 0.8;
+}
+
 @media (prefers-color-scheme: dark) {
   body {
     background: var(--background-dark-mode);
