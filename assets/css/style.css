@@ -51,7 +51,7 @@ footer {
   color: var(--weak-text-color);
 }
 
-footer a {
+footer a, footer a:visited {
   text-decoration: none;
   color: var(--weak-text-color);
 }
