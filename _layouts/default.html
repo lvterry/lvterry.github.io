@@ -15,14 +15,10 @@
     <link rel="alternate" type="application/rss+xml" href="{{ site.url }}/feed.xml" />
   </head>
   <body>
-    <header>
-      <a class="plain" href="/" title="home">
-        <img src="/assets/8bit.png" width="50" height="50">
-        <div>Terry Wang</div>
-      </a>
-    </header>
+    {% include header.html %}
     
     {{ content }}
-    <footer class="weak"><a href="{{ site.url }}/feed.xml">RSS</a>  </footer>
+    
+    {% include footer.html %}
   </body>
 </html>

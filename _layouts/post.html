@@ -1,12 +1,28 @@
----
-layout: default
----
+<!doctype html>
+<html>
+  <head>
+    <title>{{ page.title }}</title>
+    <meta charset="utf-8" />
+    <meta http-equic="X-UA-Compatible" content="chrome=1">
+    <meta name="color-scheme" content="dark light">
+    <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
+    <meta name="description" content="Archive of Terry's thinkings and articles. 王三十九的想法和文章.">
+    <link rel="stylesheet" href="/assets/css/style.css?v=202102243" type="text/css" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="alternate" type="application/rss+xml" href="{{ site.url }}/feed.xml" />
+  </head>
+  <body>
+    {% include header.html %}
+    
+    <article class="container">
+      <div class="weak text-center text-small">{{ page.date | date: "%Y-%m-%d" }}</div>
+      <h1 class="text-center">{{ page.title }}</h1>
+      {{ content }}
+    </article>
 
-<article class="container">
-
-<div class="weak text-center text-small">{{ page.date | date: "%Y-%m-%d" }}</div>
-<h1 class="text-center">{{ page.title }}</h1>
-
-{{ content }}
-
-</article>
+    <footer class="weak text-center">- The End -</footer>
+  </body>
+</html>
