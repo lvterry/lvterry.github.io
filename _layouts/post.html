@@ -13,6 +13,13 @@
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
     <link rel="manifest" href="/site.webmanifest">
     <link rel="alternate" type="application/rss+xml" href="{{ site.url }}/feed.xml" />
+
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="{{ site.url }}{{ page.url }}">
+    <meta property="og:title" content="{{ page.title }}">
+    <meta property="og:description" content="{{ content | strip_html | truncate: 140 }}">
+    <meta property="og:image" content="https://wangyazhou.com/apple-touch-icon.png">
+
   </head>
   <body>
     {% include header.html %}
