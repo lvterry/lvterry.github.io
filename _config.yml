@@ -1,5 +1,14 @@
-name: Terry Wang
+---
 title: Terry Wang
+timezone: Asia/Shanghai
+collections:
+  posts:
+    title: Posts
+    output: true
+  uploads:
+    title: Uploads
+    output: true
+name: Terry Wang
 description: Terry Wang's Personal Website
 url: https://wangyazhou.com
 paginate: 10

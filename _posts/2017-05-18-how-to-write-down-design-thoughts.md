@@ -1,8 +1,9 @@
 ---
+title: 如何写设计类文章
+date: 2017-05-18 00:00:00 Z
+categories:
+- work
 layout: post
-title:  "如何写设计类文章"
-date:   2017-05-18
-categories: work
 ---
 
 ### 设计师为什么要写文章

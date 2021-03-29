@@ -1,8 +1,9 @@
 ---
+title: 疫情下的远程工作
+date: 2020-06-20 00:00:00 Z
+categories:
+- work
 layout: post
-title:  "疫情下的远程工作"
-date:   2020-06-20
-categories: work
 ---
 
 ### 理想的远程工作

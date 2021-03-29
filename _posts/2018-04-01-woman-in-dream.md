@@ -1,8 +1,9 @@
 ---
+title: 只存在于幻觉中的女子
+date: 2018-04-01 00:00:00 Z
+categories:
+- story
 layout: post
-title:  "只存在于幻觉中的女子"
-date:   2018-04-01
-categories: story
 ---
 
 去年冬天有段时间在早晨的 671 路公共汽车上经常遇到同一个女子。

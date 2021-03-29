@@ -1,7 +1,9 @@
 ---
+title: 多年生设计
+date: 2021-03-24 00:00:00 Z
+categories:
+- work
 layout: post
-title:  "多年生设计"
-categories: work
 ---
 
 题记：这篇文章翻译自 Wilson Miner 的 [Perennial Design](https://alwaysreadthemanual.com/read/issues/4/wilson-miner/article.html)，文章观点与我最近的思绪不谋而合。他写得太好了，我忍不住翻译出来。有些词句可能不准确，如果你英语够好，建议你阅读原文。

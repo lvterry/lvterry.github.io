@@ -1,8 +1,9 @@
 ---
+title: 寻杯
+date: 2019-06-04 00:00:00 Z
+categories:
+- story
 layout: post
-title:  "寻杯"
-date:   2019-06-04
-categories: story
 ---
 
 一、

@@ -1,8 +1,9 @@
 ---
+title: Founder's Vision Onboard Theory
+date: 2014-10-08 00:00:00 Z
+categories:
+- work
 layout: post
-title:  "Founder's Vision Onboard Theory"
-date:   2014-10-08
-categories: work
 ---
 
 Founders are important to a company in many ways. One of their most critical responsibilities is to define the company’s vision. The vision may change overtime. That’s fine. But a company needs to have a clearly defined vision at any time. All people in the team may not be 100% onboard with the vision. That’s fine too. 90% or 80% is good enough.
