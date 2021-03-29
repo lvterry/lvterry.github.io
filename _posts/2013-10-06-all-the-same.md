@@ -1,8 +1,9 @@
 ---
+title: 全世界的爱情都一样
+date: 2013-10-06 00:00:00 Z
+categories:
+- story
 layout: post
-title:  "全世界的爱情都一样"
-date:   2013-10-06
-categories: story
 ---
 
 老王正盯着窗外街对面一棵光秃秃的树发呆，女孩走了进来，在老王对面坐下来。

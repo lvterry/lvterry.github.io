@@ -1,8 +1,9 @@
 ---
+title: 钢琴之城
+date: 2018-10-12 00:00:00 Z
+categories:
+- story
 layout: post
-title:  "钢琴之城"
-date:   2018-10-12
-categories: story
 ---
 
 一.

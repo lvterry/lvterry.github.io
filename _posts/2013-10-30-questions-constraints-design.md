@@ -1,8 +1,9 @@
 ---
+title: Questions, Constraints and Design
+date: 2013-10-30 00:00:00 Z
+categories:
+- work
 layout: post
-title:  "Questions, Constraints and Design"
-date:   2013-10-30
-categories: work
 ---
 
 In his [Webstock talk](http://www.webstock.org.nz/talks/design-is-the-beauty-of-turning-constraints-into-advantages/), Aza Raskin shared his thoughts on design and constraints.

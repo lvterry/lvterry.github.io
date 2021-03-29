@@ -1,8 +1,9 @@
 ---
+title: 家里的向日葵
+date: 2017-12-31 00:00:00 Z
+categories:
+- story
 layout: post
-title:  "家里的向日葵"
-date:   2017-12-31
-categories: story
 ---
 
 我家门口有一棵生命力旺盛的向日葵，它在炎热的夏季里灿烂盛开，在寒冷的冬日里顽强生长，刮风下雨不曾见它低头。

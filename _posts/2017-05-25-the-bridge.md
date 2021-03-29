@@ -1,8 +1,9 @@
 ---
+title: 桥
+date: 2017-05-25 00:00:00 Z
+categories:
+- story
 layout: post
-title:  "桥"
-date:   2017-05-25
-categories: story
 ---
 
 ![](https://img3.doubanio.com/view/note/l/public/p42905152.webp)

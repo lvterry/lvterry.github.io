@@ -1,8 +1,9 @@
 ---
+title: 丢失的硬币
+date: 2018-10-28 00:00:00 Z
+categories:
+- story
 layout: post
-title:  "丢失的硬币"
-date:   2018-10-28
-categories: story
 ---
 
 ![](https://general-1258275882.cos.ap-chengdu.myqcloud.com/lost-and-found.jpg)
