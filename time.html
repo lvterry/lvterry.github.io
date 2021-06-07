@@ -1,0 +1,84 @@
+<!doctype html>
+<html>
+  <head>
+    <title>How much time left</title>
+    <meta charset="utf-8" />
+    <meta http-equic="X-UA-Compatible" content="chrome=1">
+    <meta name="color-scheme" content="dark light">
+    <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
+    <meta name="description" content="Check how much time is left in your life">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <style type="text/css">
+      body {
+        font-family: Georgia, Serif;
+        background-color: #2942FF;
+        background-image: -webkit-linear-gradient(top, #2942FF, rgba(0,0,0,0));
+        background-image:    -moz-linear-gradient(top, #2942FF, rgba(0,0,0,0));
+        background-image:      -o-linear-gradient(top, #2942FF, rgba(0,0,0,0));
+        background-image:         linear-gradient(to bottom, #2942FF, rgba(0,0,0,0));
+        color: white;
+      }
+      canvas {
+        width: 600px;
+        height: 600px;
+        display: block;
+      }
+      .container {
+        width: 800px;
+        margin: 0 auto;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>How much time left</h1>
+      <div>
+        <h2>Enter your age</h2>
+        <input id="age" type="text" name="age">
+        <button id="checkBtn">Check my time</button>
+      </div>
+      <canvas></canvas>
+      
+      <script>
+
+        var checkBtn = document.getElementById('checkBtn'),
+            ageInput = document.getElementById('age'),
+            canvas = document.querySelector('canvas'),
+            context = canvas.getContext('2d'),
+            totalMonths = 80 * 12;
+
+
+        var size = 600;
+        var radius = 8;
+        var gutter = 2;
+        var dpr = window.devicePixelRatio;
+        canvas.width = size * dpr;
+        canvas.height = size * dpr;
+        context.scale(dpr, dpr);
+        context.lineWidth = 2;
+
+        var counter = 0;
+
+        for (var i = 0; i < 32; i++) {
+          for (var j = 0; j < 30; j++){
+            centerX = gutter + radius + (2 * radius + gutter) * j;
+            centerY = (radius * 2 + gutter) * (i + 1);
+            context.beginPath();
+            context.arc(centerX, centerY, radius, 0, 2 * Math.PI, false);
+            if (counter < 40) {
+              context.fillStyle = 'black';  
+            } else {
+              context.fillStyle = 'white';
+            }
+            context.fill();
+            counter ++;
+          }
+        }
+
+      </script>
+
+    </div>
+  </body>
+</html>
