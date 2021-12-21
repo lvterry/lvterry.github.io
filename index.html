@@ -3,22 +3,29 @@ title: Terry Wang
 layout: default
 ---
 
-<main class="container">
-  {% for post in paginator.posts %}
-      <a class="post plain" href="{{ post.url }}">
-        <div class="weak text-center text-small">{{ post.date | date: "%Y-%m-%d" }}</div>
-        <h1 class="text-center">{{ post.title }}</h1>
-
-        <p>{{ post.content | strip_html | truncate: 140 }}</p>
-        <div class="text-center">
-          <span class="button">继续阅读</span>
-        </div>
-      </a>
-  {% endfor %}
-</main>
-
-<div class="pagination">
-  {% if paginator.next_page %}
-    <a href="{{ paginator.next_page_path }}" class="button">查看更多文章 &raquo;</a>
-  {% endif %}
+<div class="me">
+  <img src="/assets/8bit.png" width="50" height="50">
+  <div>Terry Wang</div>
+  <p>A collection of<br/> things I like</p>
 </div>
+
+<main>
+<h1>Nice talks</h1>
+<ul>
+  <li><a href="https://vimeo.com/38272912">Inventing on Principle</a> by Bret Victor</li>
+  <li><a href="https://vimeo.com/34017777">When we build</a> by Wilson Miner</li>
+  <li><a href="https://vimeo.com/345624545">Seeing through the net</a> by Wilson Miner</li>
+  <li><a href="https://www.youtube.com/watch?v=PlYJo5ggu_s">The Shape of Design</a> by Frank Chimero</li>
+</ul>
+<h1>Good reads</h1>
+<ul>
+  <li><a href="https://www.amazon.com/Understanding-Comics-Invisible-Scott-McCloud/dp/006097625X/">Understanding Comics</a> by Scott McCloud</li>
+  <li><a href="https://www.amazon.com/Designing-Visual-Interfaces-Communication-Techniques/dp/0133033899/">Designing Visual Interfaces: Communication Oriented Techniques</a> by Kevin Mullet, Darrell Sano</li>
+  <li><a href="https://www.amazon.com/Visual-Display-Quantitative-Information/dp/0961392142/">The Visual Display of Quantitative Information</a> by Edward Tufte</li>
+  <li><a href="https://www.amazon.com/Managing-Oneself-Harvard-Business-Classics/dp/142212312X/">Managing Oneself</a> by Peter F. Drucker</li>
+  <li><a href="https://www.amazon.com/Rework-Jason-Fried/dp/0307463745/">Rework</a> by Jason Fried and DHH</li>
+  <li><a href="https://www.amazon.com/Anything-You-Want-Derek-Sivers/dp/0241209048/">Anything You Want</a> by Derek Sivers</li>
+  <li><a href="https://www.amazon.com/Elements-Style-Fourth-William-Strunk/dp/020530902X/">The Elements of Style</a> by William Strunk Jr., E. B. White</li>
+  <li><a href="https://www.amazon.com/Several-Short-Sentences-About-Writing/dp/0307279413/">Several Short Sentences About Writing</a> by Verlyn Klinkenborg</li>
+</ul>
+</main>
