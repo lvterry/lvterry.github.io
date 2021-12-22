@@ -20,14 +20,13 @@ body {
 }
 
 .me {
-  position: fixed;
-  left: 0;
-  top: 0;
-  padding: 300px 50px 0 50px;
-  text-align: center;
-  width: 180px;
-  height: 100%;
   background: white;
+  text-align: center;
+  padding:  30px 0;
+}
+
+main {
+  padding: 24px;
 }
 
 .me img {
@@ -44,14 +43,26 @@ body {
   margin-top: 1rem;
 }
 
-main {
-  padding: 10px 40px 10px 340px;
-}
-
 a, a:active {
   color: var(--link-color);
 }
 
 a:visited {
   color: var(--link-visited-color);
+}
+
+@media screen and (min-width: 540px) { 
+  .me {
+    position: fixed;
+    left: 0;
+    top: 0;
+    padding: 300px 50px 0 50px;
+    width: 180px;
+    height: 100%;
+  }
+
+  main {
+    padding: 10px 40px 10px 340px;
+  }
+
 }
