@@ -1,9 +1,11 @@
 :root {
   --text-color: #454545;
+  --text-weak-color: #959595;
   --link-color: #db6e4d;
   --link-visited-color: #d28ee9;
 
   --body-background-color: #f5f5f5;
+
 }
 
 body {
@@ -49,6 +51,13 @@ a, a:active {
 
 a:visited {
   color: var(--link-visited-color);
+}
+
+dd {
+  margin-left: 0;
+  margin-bottom: 1em;
+  font-size: 90%;
+  color: var(--text-weak-color);
 }
 
 @media screen and (min-width: 540px) { 
