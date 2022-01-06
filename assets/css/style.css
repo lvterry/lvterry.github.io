@@ -73,4 +73,11 @@ dd {
   main {
     padding: 10px 40px 10px 340px;
   }
+
+  dd {
+    margin-bottom: 1em;
+    font-size: 90%;
+    color: var(--text-weak-color);
+  } 
+
 }
