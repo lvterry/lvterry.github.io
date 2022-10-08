@@ -17,6 +17,7 @@ body {
   padding: 32px 64px;
   margin: 0;
   box-sizing: border-box;
+  -moz-box-sizing: border-box;
   text-rendering: optimizeLegibility;
 }
 
@@ -45,24 +46,14 @@ a:visited {
   border-radius: 4px;
 }
 
-@media screen and (min-width: 540px) { 
-  .me {
-    position: fixed;
-    left: 0;
-    top: 0;
-    padding: 300px 50px 0 50px;
-    width: 180px;
-    height: 100%;
+@media screen and (max-width: 540px) { 
+
+  body {
+    padding: 12px 24px;
   }
 
-  main {
-    padding: 10px 40px 10px 340px;
+  header, .container {
+    width: auto;
   }
-
-  dd {
-    margin-bottom: 1em;
-    font-size: 90%;
-    color: var(--text-weak-color);
-  } 
 
 }
