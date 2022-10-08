@@ -2,7 +2,7 @@
 title: Founder's Vision Onboard Theory
 date: 2014-10-08 00:00:00 Z
 categories:
-- work
+- essay
 layout: post
 ---
 

@@ -2,7 +2,7 @@
 title: 如何写设计类文章
 date: 2017-05-18 00:00:00 Z
 categories:
-- work
+- essay
 layout: post
 ---
 

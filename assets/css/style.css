@@ -1,5 +1,5 @@
 :root {
-  --text-color: #454545;
+  --text-color: #333;
   --text-weak-color: #959595;
   --link-color: #db6e4d;
   --link-visited-color: #d28ee9;
@@ -9,40 +9,24 @@
 }
 
 body {
-  font-size: 16px;
-  font-family: system-ui, Verdana, sans-serif;
+  font-size: 13px;
+  font-family: Verdana, system-ui, sans-serif;
   line-height: 1.74;
   color: var(--text-color);
   background-color: var(--body-background-color);
-  padding: 0;
+  padding: 32px 64px;
   margin: 0;
-  letter-spacing: 0.05em;
   box-sizing: border-box;
   text-rendering: optimizeLegibility;
 }
 
-.me {
-  background: white;
-  text-align: center;
-  padding:  30px 0;
+header, .container {
+  width: 30rem;
+  margin: 0 auto;
 }
 
-main {
-  padding: 24px;
-}
-
-.me img {
-  border-radius: 8px;
-}
-
-.me p {
-  color: #989898;
-  font-size: 68%;
-  letter-spacing: 0;
-  line-height: 1.2;
-  text-transform: uppercase;
-  font-weight: bold;
-  margin-top: 1rem;
+img {
+  max-width: 100%;
 }
 
 a, a:active {
@@ -53,11 +37,12 @@ a:visited {
   color: var(--link-visited-color);
 }
 
-dd {
-  margin-left: 0;
-  margin-bottom: 1em;
-  font-size: 90%;
+.weak {
   color: var(--text-weak-color);
+}
+
+.avatar {
+  border-radius: 4px;
 }
 
 @media screen and (min-width: 540px) { 

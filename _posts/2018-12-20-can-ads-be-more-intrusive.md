@@ -2,7 +2,7 @@
 title: Can Ads be more intrusive
 date: 2018-12-20 00:00:00 Z
 categories:
-- work
+- essay
 layout: post
 ---
 

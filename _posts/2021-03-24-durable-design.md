@@ -2,7 +2,7 @@
 title: 多年生设计
 date: 2021-03-24 00:00:00 Z
 categories:
-- work
+- essay
 layout: post
 ---
 

@@ -25,11 +25,10 @@
     {% include header.html %}
     
     <article class="container">
-      <div class="weak text-center text-small">{{ page.date | date: "%Y-%m-%d" }}</div>
-      <h1 class="text-center">{{ page.title }}</h1>
+      <h1>{{ page.title }}</h1>
+      <div class="weak">{{ page.date | date: "%Y-%m-%d" }}</div>
       {{ content }}
     </article>
 
-    <footer class="weak text-center">- The End -</footer>
   </body>
 </html>

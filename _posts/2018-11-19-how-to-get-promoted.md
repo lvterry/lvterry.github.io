@@ -2,7 +2,7 @@
 title: 如何获得晋升的机会
 date: 2018-11-19 00:00:00 Z
 categories:
-- work
+- essay
 layout: post
 ---
 

@@ -2,42 +2,31 @@
 title: Terry Wang
 layout: default
 ---
+<div class="container">
+  {% include header.html %}
 
-<div class="me">
-  <img src="/assets/8bit.png" width="50" height="50">
-  <div>Terry Wang</div>
-  <p>A collection of<br/> things I like</p>
+  <h1>Terry Wang</h1>
+  <p>I am a designer, programmer and on my way to be a writer.</p>
+
+  <h2>Essays</h2>
+
+  <ul>
+    {% assign essays = site.posts | where:"categories", "essay" %}
+    {% for post in essays %}
+      <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+      </li>
+    {% endfor %}
+  </ul>
+
+  <h2>Stories</h2>
+
+  <ul>
+    {% assign stories = site.posts | where:"categories", "story" %}
+    {% for post in stories %}
+      <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+      </li>
+    {% endfor %}
+  </ul>
 </div>
-
-<main>
-<h1>Talks</h1>
-<ul>
-  <li><a href="https://vimeo.com/38272912">Inventing on Principle</a> by Bret Victor</li>
-  <li><a href="https://vimeo.com/34017777">When we build</a> by Wilson Miner</li>
-  <li><a href="https://vimeo.com/345624545">Seeing through the net</a> by Wilson Miner</li>
-  <li><a href="https://www.youtube.com/watch?v=PlYJo5ggu_s">The Shape of Design</a> by Frank Chimero</li>
-  <li><a href="https://vimeo.com/118146193">The Long Web</a> by Jeremy Keith</li>
-</ul>
-<h1>Books</h1>
-<ul>
-  <li><a href="https://www.amazon.com/Understanding-Comics-Invisible-Scott-McCloud/dp/006097625X/">Understanding Comics</a> by Scott McCloud</li>
-  <li><a href="https://www.amazon.com/Designing-Visual-Interfaces-Communication-Techniques/dp/0133033899/">Designing Visual Interfaces: Communication Oriented Techniques</a> by Kevin Mullet, Darrell Sano</li>
-  <li><a href="https://www.amazon.com/Visual-Display-Quantitative-Information/dp/0961392142/">The Visual Display of Quantitative Information</a> by Edward Tufte</li>
-  <li><a href="https://www.amazon.com/Managing-Oneself-Harvard-Business-Classics/dp/142212312X/">Managing Oneself</a> by Peter F. Drucker</li>
-  <li><a href="https://www.amazon.com/Rework-Jason-Fried/dp/0307463745/">Rework</a> by Jason Fried and DHH</li>
-  <li><a href="https://www.amazon.com/Anything-You-Want-Derek-Sivers/dp/0241209048/">Anything You Want</a> by Derek Sivers</li>
-  <li><a href="https://www.amazon.com/Elements-Style-Fourth-William-Strunk/dp/020530902X/">The Elements of Style</a> by William Strunk Jr., E. B. White</li>
-  <li><a href="https://www.amazon.com/Several-Short-Sentences-About-Writing/dp/0307279413/">Several Short Sentences About Writing</a> by Verlyn Klinkenborg</li>
-</ul>
-<h1>Essays</h1>
-<dl>
-  <dt><a href="https://vision.xitek.com/allpage/image/200906/09-306813.html">你老去西藏干什么</a> by 刘树勇</dt>
-  <dd>你的所有幸福与苦难都发生在你所依赖的文化与土地之中，你的问题也只能在这里得以最后的解决。在你的生活之外，不存在一个真正的使心有所驻留的自由之所。</dd>
-  
-  <dt><a href="https://capwatkins.com/blog/the-boring-designer">The Boring Designer</a> by Cap Watkins</dt>
-  <dd>The boring designer is capable of being one of the best leaders a team can have.</dd>
-  
-  <dt><a href="https://www.abccopywriting.com/2011/01/17/uncreative-and-proud">Uncreative and proud</a> by Tom Albrighton</dt>
-  <dd>Clients should think about why they demand creativity, or why they don’t, and whether they really need it. Marketing professionals should think about whether they really offer creativity, whether they should claim to and whether they need to. And maybe we should all consider whether the whole idea of ‘creativity’ is really that relevant or useful to the work we all have to do.</dd>
-</dl>
-</main>

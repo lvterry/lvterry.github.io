@@ -3,7 +3,7 @@ title: Julie Zhuo on Execution
 date: 2021-06-07 09:44:00 +08:00
 permalink: julie-on-execution
 categories:
-- work
+- essay
 layout: post
 ---
 

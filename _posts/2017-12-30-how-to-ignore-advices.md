@@ -2,7 +2,7 @@
 title: 如何忽略别人的建议
 date: 2017-12-30 00:00:00 Z
 categories:
-- work
+- essay
 layout: post
 ---
 

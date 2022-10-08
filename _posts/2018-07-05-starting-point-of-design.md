@@ -2,7 +2,7 @@
 title: 产品设计的起点
 date: 2018-07-05 00:00:00 Z
 categories:
-- work
+- essay
 layout: post
 ---
 

@@ -2,7 +2,7 @@
 title: 怎样成为好的设计师
 date: 2014-05-29 00:00:00 Z
 categories:
-- work
+- essay
 layout: post
 ---
 

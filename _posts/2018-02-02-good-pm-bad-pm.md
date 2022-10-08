@@ -2,7 +2,7 @@
 title: 好产品经理 / 差产品经理
 date: 2018-02-02 00:00:00 Z
 categories:
-- work
+- essay
 layout: post
 ---
 

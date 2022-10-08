@@ -1,8 +1,8 @@
 ---
-title: "「领域相关」和「领域无关」的用户体验"
+title: "两种 UX 知识"
 date: 2021-02-19 00:00:00 Z
 categories:
-- work
+- essay
 layout: post
 ---
 
