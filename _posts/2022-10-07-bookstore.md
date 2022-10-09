@@ -2,6 +2,7 @@
 title: 实体书店
 date: 2022-10-07 19:44:00 +08:00
 categories: essay
+permalink: bookstore
 layout: post
 ---
 
