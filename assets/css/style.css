@@ -61,6 +61,12 @@ a:visited {
   color: #959595;
 }
 
+hr {
+  border: none;
+  border-bottom: 1px solid #ddd;
+  margin: 2rem 0;
+}
+
 @media screen and (max-width: 540px) { 
 
   body {
