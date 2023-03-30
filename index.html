@@ -8,25 +8,12 @@ layout: default
   <h1>Terry Wang</h1>
   <p>I am a designer, programmer and on my way to be a writer.</p>
 
-  <h2>Essays</h2>
-
   <ul>
-    {% assign essays = site.posts | where:"categories", "essay" %}
-    {% for post in essays %}
+    {% for post in site.posts %}
       <li>
         <a href="{{ post.url }}">{{ post.title }}</a>
       </li>
     {% endfor %}
   </ul>
 
-  <h2>Stories</h2>
-
-  <ul>
-    {% assign stories = site.posts | where:"categories", "story" %}
-    {% for post in stories %}
-      <li>
-        <a href="{{ post.url }}">{{ post.title }}</a>
-      </li>
-    {% endfor %}
-  </ul>
 </div>
