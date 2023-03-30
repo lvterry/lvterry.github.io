@@ -6,14 +6,16 @@ layout: default
   {% include header.html %}
 
   <h1>Terry Wang</h1>
-  <p>I am a designer, programmer and on my way to be a writer.</p>
 
   <ul id="posts">
     {% for post in site.posts %}
       <li>
         <a href="{{ post.url }}">{{ post.title }}</a>
+        <div class="weak">{{ post.date | date: '%F' }}</div>
       </li>
     {% endfor %}
   </ul>
+
+  <p class="copyright">&copy; 2012 – 2023 Terry Wang</p>
 
 </div>
