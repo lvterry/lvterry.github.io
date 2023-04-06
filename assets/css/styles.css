@@ -41,6 +41,18 @@ a:visited {
   color: var(--link-visited-color);
 }
 
+blockquote {
+  border-left: 2px solid #ccc;
+  margin-left: 20px;
+  padding-left: 20px;
+}
+
+img + em {
+  font-size: 0.9rem;
+  color: var(--text-weak-color);
+  font-style: normal;
+}
+
 .weak {
   color: var(--text-weak-color);
 }
