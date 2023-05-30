@@ -273,4 +273,10 @@ a.back:hover {
     margin-bottom: 2.4rem;
   }
 
+  .lang {
+    display: block;
+    top: 12px;
+    right: 12px;
+  }
+
 }
