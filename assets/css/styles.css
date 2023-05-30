@@ -262,19 +262,7 @@ a.back:hover {
   }
 
   .portfolio section {
-    padding: 3rem 2rem 2rem 3rem;
-  }
-
-  .work {
-    gap: 2.4rem;
-  }
-
-}
-
-@media screen and (max-width: 375px) { 
-
-  .portfolio section {
-    padding: 3rem 2rem;
+    padding: 3rem 1.8rem;
   }
 
   .work {
