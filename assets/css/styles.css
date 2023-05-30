@@ -254,11 +254,35 @@ a.back:hover {
 @media screen and (max-width: 540px) { 
 
   body {
-    padding: 12px 24px;
+    padding: 24px;
   }
 
   header, .container {
     width: auto;
+  }
+
+  .portfolio section {
+    padding: 3rem 2rem 2rem 3rem;
+  }
+
+  .work {
+    gap: 2.4rem;
+  }
+
+}
+
+@media screen and (max-width: 375px) { 
+
+  .portfolio section {
+    padding: 3rem 2rem;
+  }
+
+  .work {
+    display: block;
+  }
+
+  .work a {
+    margin-bottom: 2.4rem;
   }
 
 }
