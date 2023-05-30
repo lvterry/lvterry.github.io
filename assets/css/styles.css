@@ -279,4 +279,8 @@ a.back:hover {
     right: 12px;
   }
 
+  .principles .wrapper {
+    display: block;
+  }
+
 }
