@@ -1,0 +1,46 @@
+<!doctype html>
+<html>
+  <head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-Y1WFFLTVGB"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-Y1WFFLTVGB');
+    </script>
+    <title>{{ page.title }}</title>
+    <meta charset="utf-8" />
+    <meta http-equic="X-UA-Compatible" content="chrome=1">
+    <meta name="color-scheme" content="dark light">
+    <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
+    <meta name="description" content="Archive of Terry's thinkings and articles. 王三十九的想法和文章.">
+    <link rel="stylesheet" href="/assets/css/inter.css" type="text/css" />
+    <link rel="stylesheet" href="/assets/css/styles.css" type="text/css" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="alternate" type="application/rss+xml" href="{{ site.url }}/feed.xml" />
+
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="{{ site.url }}{{ page.url }}">
+    <meta property="og:title" content="{{ page.title }}">
+    <meta property="og:description" content="{{ content | strip_html | truncate: 140 }}">
+    <meta property="og:image" content="https://wangyazhou.com/apple-touch-icon.png">
+
+  </head>
+  <body>
+    {% include header.html %}
+    
+    <article class="container">
+      <div class="weak" style="margin-top: 40px;">{{ page.date | date: "%Y-%m-%d" }}</div>
+      {{ content }}
+      <p class="copyright">&copy; 2012 – 2023 Terry Wang</p>
+    </article>
+
+    {% include open-embed.html %}
+
+  </body>
+</html>
