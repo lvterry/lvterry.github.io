@@ -6,14 +6,14 @@ layout: default
   {% include header.html %}
 
   <ul id="posts">
-    {% for post in site.posts %}
+    {% for post in paginator.posts %}
       <li>
         <div><a href="{{ post.url }}" style="color: #959595; text-decoration: underline;">{{ post.date | date: '%F' }}</a></div>
 
         {% if post.layout != 'no-title-post' %}
-          <p style="font-size:1.1rem;"><b>{{ post.title }}</b></p>
+          <p style="font-size: 1.2rem;"><b>{{ post.title }}</b></p>
           <div style="color: #545454">{{ post.excerpt }}</div>
-          <a class="read-more" href="{{ post.url }}">Read more</a>
+          <a class="read-more" href="{{ post.url }}">Read more &raquo;</a>
         {% else %}
           <div style="color: #545454">{{ post.content }}</div>
         {% endif %}
@@ -21,6 +21,25 @@ layout: default
       </li>
     {% endfor %}
   </ul>
+
+  <!-- Pagination links -->
+  <div class="pagination">
+    {% if paginator.previous_page %}
+      <a href="{{ paginator.previous_page_path }}" class="previous">
+        Previous
+      </a>
+    {% else %}
+      <span class="previous">Previous</span>
+    {% endif %}
+    <span class="page_number ">
+      Page {{ paginator.page }} of {{ paginator.total_pages }}
+    </span>
+    {% if paginator.next_page %}
+      <a href="{{ paginator.next_page_path }}" class="next">Next</a>
+    {% else %}
+      <span class="next">Next</span>
+    {% endif %}
+  </div>
 
   <p class="copyright">&copy; 2012 – 2023 Terry Wang</p>
 
