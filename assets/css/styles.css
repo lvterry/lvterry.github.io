@@ -111,10 +111,14 @@ img + em {
   padding-bottom: 2rem;
 }
 
-hr {
+.justify {
+  text-align: justify;
+}
+
+.post-content hr {
   border: none;
   border-bottom: 1px solid #ddd;
-  margin: 2rem 0;
+  margin: 2rem 4rem;
 }
 
 article ul, ol {
