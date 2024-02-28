@@ -8,7 +8,7 @@ layout: default
   <ul id="posts">
     {% for post in paginator.posts %}
       <li>
-        <div><a href="{{ post.url }}" style="color: #959595; text-decoration: underline;">{{ post.date | date: '%F' }}</a></div>
+        <div><a href="{{ post.url }}" style="color: #959595; font-size: 0.9rem">{{ post.date | date: '%F' }}</a></div>
 
         {% if post.layout != 'no-title-post' %}
           <p style="font-size: 1.2rem;"><b>{{ post.title }}</b></p>
@@ -41,6 +41,6 @@ layout: default
     {% endif %}
   </div>
 
-  <p class="copyright">&copy; 2012 – 2023 Terry Wang</p>
+  <p class="copyright">&copy; 2012 – 2024 Terry Wang</p>
 
 </div>
