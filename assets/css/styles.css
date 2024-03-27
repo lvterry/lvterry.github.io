@@ -3,9 +3,7 @@
   --text-weak-color: #959595;
   --link-color: #db6e4d;
   --link-visited-color: #d28ee9;
-
-  --body-background-color: #f5f5f5;
-
+  --border-color: #c5c5c5;
 }
 
 body {
@@ -13,7 +11,7 @@ body {
   color: var(--text-color);
   background-color: white;
   scroll-behavior: smooth;
-  padding: 32px 64px;
+  padding: 0;
   margin: 0;
   box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -26,17 +24,8 @@ h1 {
   font-weight: 500;
 }
 
-h1.title {
-  font-size: 2rem;
-}
-
 h2 {
   font-size: 1.2rem;
-}
-
-header, .container {
-  width: 40rem;
-  margin: 0 auto;
 }
 
 img {
@@ -66,11 +55,36 @@ img + em {
   color: var(--text-weak-color);
 }
 
-.avatar {
-  border-radius: 4px;
+.container {
+  width: 40rem;
+  margin: 0 auto;
 }
 
-#posts {
+header .container {
+  padding: 40px 0;
+  margin-bottom: 40px;
+  border-bottom: 1px solid var(--border-color);
+  /* box-shadow: 0 1px 2px rgba(0,0,0,.1); */
+}
+
+header a {
+  display: flex;
+  align-items: center;
+}
+
+.avatar {
+  border-radius: 4px;
+  width: 40px;
+  height: 40px;
+}
+
+.home article {
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 40px;
+  margin-bottom: 40px;
+}
+
+/* #posts {
   list-style: none;
   padding: 0;
 }
@@ -86,7 +100,7 @@ img + em {
 
 #posts > li:first-child {
   border-top: 1px solid #ddd;
-}
+} */
 
 .copyright {
   text-align: center;
@@ -115,10 +129,10 @@ img + em {
   text-align: justify;
 }
 
-.post-content hr {
+hr {
   border: none;
-  border-bottom: 1px solid #ddd;
-  margin: 2rem 4rem;
+  border-bottom: 1px solid var(--border-color);
+  margin: 2rem 6rem;
 }
 
 article ul, ol {
@@ -292,7 +306,11 @@ a.back:hover {
     padding: 24px;
   }
 
-  header, .container {
+  header .container {
+    padding-top: 16px;
+  }
+
+  .container {
     width: auto;
   }
 
