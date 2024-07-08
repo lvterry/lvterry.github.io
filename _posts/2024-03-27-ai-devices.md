@@ -1,5 +1,5 @@
 ---
-title: AI devices
+title: AI Pin & Rabbit R1
 date: 2024-03-27 19:44:00 +08:00
 categories: essay
 layout: post
