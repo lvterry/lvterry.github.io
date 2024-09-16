@@ -13,9 +13,9 @@ layout: default
         <a href="{{ post.url }}" style="color: var(--text-weak-color)">{{ post.date | date: '%F' }}</a>
       </div>
 
-      {% if post.layout != 'no-title-post' %}
+      {% unless post.hide_title_in_list %}
       <h1><a href="{{ post.url }}">{{ post.title }}</a></h1>
-      {% endif %}
+      {% endunless %}
 
       <div>{{ post.content }}</div>
     </article>
