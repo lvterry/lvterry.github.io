@@ -74,6 +74,12 @@ header a {
   align-items: center;
 }
 
+header .name {
+  color: var(--text-color);
+  font-size: 1.3rem;
+  margin-left: 16px;
+}
+
 .avatar {
   border-radius: 4px;
   width: 40px;
@@ -338,4 +344,25 @@ a.back:hover {
     display: block;
   }
 
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --text-color: #f0f0f0;
+    --text-weak-color: #959595;
+    --border-color: #959595;
+  }
+
+  body {
+    background-color: #1a1a1a;
+  }
+
+  blockquote {
+    border-left-color: #666;
+  }
+
+  .pagination {
+    background-color: #2a2a2a;
+  }
+  
 }
