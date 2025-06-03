@@ -170,7 +170,6 @@ article li {
   margin-bottom: 4rem;
 }
 
-
 .end {
   text-align: center;
   color: var(--text-weak-color);
@@ -305,6 +304,10 @@ a.back:hover {
 .read-more {
   color: var(--link-color);
   font-weight: bold;
+}
+
+.mb-4 {
+  margin-bottom: 4rem;
 }
 
 
