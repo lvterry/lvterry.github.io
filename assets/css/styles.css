@@ -369,3 +369,40 @@ a.back:hover {
   }
   
 }
+.recommendations section {
+  margin-bottom: 2rem;
+}
+
+.recommendations h2 {
+  font-size: 1.3rem;
+  background-color: #ffe680;
+  padding: 0.4rem 0.8rem;
+  border-radius: 0.5rem;
+  display: inline-block;
+}
+
+.recommendation-list {
+  list-style: none;
+  padding: 0;
+  margin-top: 1rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 0.8rem;
+}
+
+.recommendation-list li {
+  background-color: #fff4e6;
+  border-radius: 0.5rem;
+  border: 2px dashed #ffd366;
+  padding: 0.8rem;
+}
+
+.recommendation-list li:nth-child(even) {
+  background-color: #e6f7ff;
+  border-color: #b3e5ff;
+}
+
+.recommendation-list a:hover {
+  text-decoration: underline;
+}
+
