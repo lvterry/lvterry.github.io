@@ -12,7 +12,7 @@
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
     <style type="text/css">
       body {
-        font-family: Georgia, Serif;
+        font-family: Serif;
         background-color: #2942FF;
         background-image: -webkit-linear-gradient(top, #2942FF, rgba(0,0,0,0));
         background-image:    -moz-linear-gradient(top, #2942FF, rgba(0,0,0,0));
@@ -24,10 +24,36 @@
         width: 600px;
         height: 600px;
         display: block;
+        margin: 20px auto;
       }
       .container {
         width: 800px;
+        text-align: center;
         margin: 0 auto;
+      }
+      #age {
+        width: 400px;
+        height: 30px;
+        font-size: 16px;
+        padding: 5px;
+        border-radius: 5px;
+        background-color: white;
+        border: 1px solid #e5e5e5;
+        color: black;
+      }
+      #checkBtn {
+        background-color: orange;
+        color: white;
+        border: 1px solid #e5e5e5;
+        border-radius: 5px;
+        padding: 5px 10px;
+        display: block;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+      }
+      .checkBtn-container {
+        display: flex;
+        justify-content: center;
+        margin-top: 10px;
       }
     </style>
   </head>
@@ -37,18 +63,18 @@
       <div>
         <h2>Enter your age</h2>
         <input id="age" type="text" name="age">
-        <button id="checkBtn">Check my time</button>
+        <div class="checkBtn-container">
+          <button id="checkBtn">Check my time</button>
+        </div>
       </div>
       <canvas></canvas>
       
       <script>
-
         var checkBtn = document.getElementById('checkBtn'),
             ageInput = document.getElementById('age'),
             canvas = document.querySelector('canvas'),
             context = canvas.getContext('2d'),
             totalMonths = 80 * 12;
-
 
         var size = 600;
         var radius = 8;
@@ -59,24 +85,69 @@
         context.scale(dpr, dpr);
         context.lineWidth = 2;
 
-        var counter = 0;
+        // Animation state
+        var currentAnimation = null;
+        var animationProgress = 0;
 
-        for (var i = 0; i < 32; i++) {
-          for (var j = 0; j < 30; j++){
-            centerX = gutter + radius + (2 * radius + gutter) * j;
-            centerY = (radius * 2 + gutter) * (i + 1);
-            context.beginPath();
-            context.arc(centerX, centerY, radius, 0, 2 * Math.PI, false);
-            if (counter < 40) {
-              context.fillStyle = 'black';  
-            } else {
-              context.fillStyle = 'white';
-            }
-            context.fill();
-            counter ++;
-          }
+        function drawDot(x, y, filled) {
+          context.beginPath();
+          context.arc(x, y, radius, 0, 2 * Math.PI, false);
+          context.fillStyle = filled ? 'black' : 'white';
+          context.fill();
         }
 
+        function renderDotsAnimated(monthsLived) {
+          // Cancel any ongoing animation
+          if (currentAnimation) {
+            cancelAnimationFrame(currentAnimation);
+          }
+
+          // Reset animation state
+          animationProgress = 0;
+          
+          function animate() {
+            context.clearRect(0, 0, canvas.width, canvas.height);
+            var counter = 0;
+            var currentProgress = Math.floor(monthsLived * (animationProgress / 100));
+
+            for (var i = 0; i < 32; i++) {
+              for (var j = 0; j < 30; j++) {
+                var centerX = gutter + radius + (2 * radius + gutter) * j;
+                var centerY = (radius * 2 + gutter) * (i + 1);
+                drawDot(centerX, centerY, counter < currentProgress);
+                counter++;
+              }
+            }
+
+            if (animationProgress < 100) {
+              animationProgress += 2; // Adjust this value to control animation speed
+              currentAnimation = requestAnimationFrame(animate);
+            }
+          }
+
+          animate();
+        }
+
+        // Initial render
+        renderDotsAnimated(0);
+
+        // Add click handler
+        checkBtn.addEventListener('click', function() {
+          var age = parseInt(ageInput.value, 10);
+          if (isNaN(age) || age < 0 || age > 80) {
+            alert('Please enter a valid age between 0 and 80');
+            return;
+          }
+          var monthsLived = age * 12;
+          renderDotsAnimated(monthsLived);
+        });
+
+        // Add enter key handler
+        ageInput.addEventListener('keypress', function(e) {
+          if (e.key === 'Enter') {
+            checkBtn.click();
+          }
+        });
       </script>
 
     </div>
