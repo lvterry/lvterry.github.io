@@ -39,6 +39,11 @@ a, a:active, a:visited {
   text-decoration: none;
 }
 
+a:hover {
+  color: #ff5a27;
+  text-decoration: underline;
+}
+
 blockquote {
   color: var(--text-weak-color);
   border-left: 2px solid #ccc;
@@ -374,35 +379,24 @@ a.back:hover {
 }
 
 .recommendations h2 {
-  font-size: 1.3rem;
-  background-color: #ffe680;
-  padding: 0.4rem 0.8rem;
-  border-radius: 0.5rem;
-  display: inline-block;
+  font-size: 1.4rem;
+  color: var(--text-color);
+  margin-bottom: 0.4rem;
 }
 
+
 .recommendation-list {
-  list-style: none;
-  padding: 0;
+  list-style: disc;
+  padding-left: 1.2rem;
   margin-top: 1rem;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 0.8rem;
 }
 
 .recommendation-list li {
-  background-color: #fff4e6;
-  border-radius: 0.5rem;
-  border: 2px dashed #ffd366;
-  padding: 0.8rem;
-}
-
-.recommendation-list li:nth-child(even) {
-  background-color: #e6f7ff;
-  border-color: #b3e5ff;
+  margin-bottom: 0.5rem;
 }
 
 .recommendation-list a:hover {
   text-decoration: underline;
 }
+
 
