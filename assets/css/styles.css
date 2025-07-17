@@ -399,4 +399,16 @@ a.back:hover {
   text-decoration: underline;
 }
 
+.quotes-page blockquote {
+  padding: 1rem;
+  border-radius: 1rem 1rem 1rem 0;
+  border: 1px solid #e0e0e0;
+  margin-bottom: 1rem;
+  color: #454545;
+  box-shadow: 1px 1px 3px rgba(0,0,0,.05);
+}
 
+.quotes-page .quote p {
+  margin-bottom: 0;
+  color: #959595;
+}
