@@ -299,6 +299,7 @@ a.back:hover {
 
 .lang a:hover {
   background-color: #f5f5f5;
+  text-decoration: none;
 }
 
 .lang a.current {
@@ -373,6 +374,15 @@ a.back:hover {
     background-color: #2a2a2a;
   }
   
+}
+/* Dark mode text legibility for principles pages */
+@media (prefers-color-scheme: dark) {
+  .wrapper {
+    color: #232323; /* White text for better contrast */
+  }
+  .lang a {
+    color: #232323;
+  }
 }
 .recommendations section {
   margin-bottom: 2rem;
