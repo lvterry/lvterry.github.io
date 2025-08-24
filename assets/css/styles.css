@@ -304,7 +304,7 @@ a.back:hover {
 
 .lang a.current {
   background-color: #ff5a27;
-  color: white;
+  color: white !important;
 }
 
 .read-more {
@@ -375,12 +375,12 @@ a.back:hover {
   }
   
 }
-/* Dark mode text legibility for principles pages */
+/* Dark mode text legibility overrides scoped to principles pages */
 @media (prefers-color-scheme: dark) {
-  .wrapper {
-    color: #232323; /* White text for better contrast */
+  body.principles .wrapper {
+    color: #232323; /* Dark text to contrast on light tiles */
   }
-  .lang a {
+  body.principles .lang a {
     color: #232323;
   }
 }
