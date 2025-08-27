@@ -6,6 +6,14 @@
     - Agent
     - Legal
 
+- name: Granola
+  logo: assets/imgs/granola.jpg
+  url: https://granola.ai
+  intro: Granola, founded in 2023 by Chris Pedregal and Sam Stephenson, is a London-based AI-powered notepad app designed for professionals with back-to-back meetings. It transcribes audio directly from a Mac, blending user notes with AI-enhanced summaries to create polished, shareable meeting records without intrusive bots. With $63 million raised, including a $20 million Series A in 2024, Granola integrates with platforms like Zoom and Slack, serving thousands of users with its intuitive, privacy-focused note-taking solution.
+  tags:
+    - AI App
+    - Productivity
+
 - name: Manus
   logo: assets/imgs/manus.png
   url: https://manus.im
@@ -98,7 +106,7 @@
     - Infra
 
 - name: Nvidia
-  logo: assets/imgs/nvidia.png
+  logo: assets/imgs/nvidia.jpg
   url: https://nvidia.com
   intro: Nvidia, founded in 1993 by Jensen Huang, is a Santa Clara-based technology company renowned for its leadership in AI, graphics processing units (GPUs), and semiconductor innovation. Its GPUs power AI training, gaming, and data centers, with products like the H100 driving massive demand. Valued at over $3.2 trillion as of August 2025, Nvidia is a cornerstone of the AI ecosystem, serving enterprises, researchers, and consumers globally with cutting-edge hardware and software solutions.
   tags:
