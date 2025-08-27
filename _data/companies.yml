@@ -1,0 +1,105 @@
+- name: Harvey
+  logo: assets/imgs/harvey.png
+  url: https://harvey.ai
+  intro: Harvey AI, founded in 2022, is a generative AI platform revolutionizing the legal industry. Headquartered in San Francisco, it empowers law firms, professional services, and Fortune 500 companies with custom AI models for tasks like legal research, contract analysis, and due diligence. With $806 million raised, a $5 billion valuation, and $100 million in annual recurring revenue as of August 2025, Harvey serves 235 customers across 42 countries, driving efficiency and innovation in high-stakes workflows.
+  tags:
+    - Agent
+    - Legal
+
+- name: Manus
+  logo: assets/imgs/manus.png
+  url: https://manus.im
+  intro: Manus AI, launched in 2025 by Singapore-based startup Monica (also known as Butterfly Effect), is an autonomous AI agent platform designed for complex, multi-step tasks. Built to operate with minimal user input, it excels in enterprise-grade workflows like data analysis, content generation, and system integration. With $75 million raised at a $500 million valuation, Manus serves global users, leveraging integrations with platforms like Hugging Face and advanced models like Claude for versatile automation.
+  tags:
+    - Agent
+
+- name: Genspark
+  logo: assets/imgs/genspark.jpg
+  url: https://genspark.ai
+  intro: Genspark, founded in 2023 by former Baidu executives Eric Jing and Kay Zhu, is a Palo Alto-based AI agent engine focused on delivering real-time, synthesized results through custom “Sparkpages.” Backed by $160 million in funding, it offers a user-friendly platform for tasks like research, content creation, and multimedia generation. With over 2 million monthly active users by mid-2024, Genspark’s Mixture-of-Agents system and features like AI phone calls position it as a leader in accessible, autonomous AI solutions.
+  tags:
+    - Agent
+
+- name: Cursor
+  logo: assets/imgs/cursor.png
+  url: https://cursor.com
+  intro: Cursor, founded in 2022 and based in San Francisco, is an AI-powered code editor built on Visual Studio Code, designed for developers seeking precision and control. Leveraging Anthropic’s Claude 3.5 Sonnet, it offers advanced code completion, debugging, and multi-file editing. With a valuation of $400 million and $65 million in annual recurring revenue as of November 2024, Cursor serves professional developers and teams, enhancing productivity with seamless IDE integrations.
+  tags:
+    - Agent
+    - Coding
+
+- name: Lovable
+  logo: assets/imgs/lovable.jpg
+  url: https://lovable.ai
+  intro: Lovable, launched in June 2023 as GPT Engineer and rebranded in November 2024, is a Sweden-based AI app builder focused on no-code development for non-technical users. It generates full-stack web applications via natural language prompts, integrating with Supabase and GitHub. With $7 million in annual recurring revenue and 140,000 users by late 2024, Lovable’s intuitive interface and rapid prototyping capabilities empower entrepreneurs and startups.
+  tags:
+    - Agent
+    - Coding
+
+- name: Lovart
+  logo: assets/imgs/lovart.png
+  url: https://lovart.ai
+  intro: Lovart AI, launched in 2025 and based in San Francisco, is the world’s first AI design agent, transforming text prompts into professional-grade visual designs. Co-founded by Haofan Wang, it integrates advanced AI models like GPT-4o, Flux, and Stable Diffusion to create assets for branding, storyboards, and multimedia. With over 100,000 users across 70+ countries within days of its launch, Lovart’s infinite canvas and natural language interface streamline creative workflows for designers and businesses.
+  tags:
+    - Agent
+    - Design
+
+- name: Browserbase
+  logo: assets/imgs/browserbase.jpg
+  url: https://browserbase.com
+  intro: Browserbase, founded in 2023 and based in San Francisco, is a cloud platform specializing in scalable headless browser infrastructure for web automation and AI agents. It provides APIs and SDKs for seamless integration with frameworks like Playwright, Puppeteer, and its proprietary Stagehand, enabling tasks like web scraping, automated testing, and form submissions. With $40 million raised in a Series B round in 2025 at a $150 million valuation, Browserbase serves developers and enterprises with secure, high-performance browser automation solutions.
+  tags:
+    - Infra
+
+- name: OpenAI
+  logo: assets/imgs/openai.png
+  url: https://openai.com
+  intro: OpenAI, founded in 2015 by Elon Musk, Sam Altman, and others, is a leading AI research organization based in San Francisco. Known for developing ChatGPT and earlier GPT models, it specializes in generative AI and large language models, serving millions of users globally. With a valuation of $157 billion as of October 2024 and significant funding from investors like Microsoft, OpenAI drives innovation in AI applications across industries, from chatbots to enterprise solutions.
+  tags:
+    - Foundation model
+    - ChatGPT
+
+- name: Anthropic
+  logo: assets/imgs/anthropic.png
+  url: https://anthropic.com
+  intro: Anthropic, founded in 2021 by former OpenAI researchers Dario Amodei, Daniela Amodei, and others, is a San Francisco-based AI company focused on safe and interpretable AI systems. Its flagship model, Claude, competes with ChatGPT, emphasizing ethical AI deployment. Valued at $18.4 billion in 2024 with $750 million raised, Anthropic serves enterprises and researchers, prioritizing safety and alignment in AI development for global impact.
+  tags:
+    - Foundation model
+    - Claude
+    - Agent
+    - Coding
+
+- name: DeepSeek
+  logo: assets/imgs/DeepSeek.webp
+  url: https://deepseek.com
+  intro: DeepSeek, founded in July 2023 by Liang Wenfeng, is a Hangzhou-based Chinese AI company specializing in large language models (LLMs). Backed by High-Flyer, a quantitative hedge fund, it develops cost-efficient, open-source models like DeepSeek-R1 and V3, rivaling OpenAI’s GPT-4. With a focus on research over commercialization, DeepSeek serves global users through its chatbot, API, and mobile app, achieving significant adoption and sparking price wars in the AI industry.
+  tags:
+    - Foundation model
+
+- name: Together AI
+  logo: assets/imgs/together.png
+  url: https://together.ai
+  intro: Together AI, founded in 2022, is a San Francisco-based AI company focused on accelerating open-source AI development and deployment. It provides a cloud platform for building, fine-tuning, and scaling generative AI models, serving developers, startups, and enterprises. With $225 million raised by 2024 and a valuation of $1.25 billion, Together AI supports a wide range of applications, from LLMs to multimodal models, emphasizing accessibility and collaboration in AI innovation.
+  tags:
+    - Infra
+
+- name: Groq
+  logo: assets/imgs/groq.png
+  url: https://groq.com
+  intro: Groq, founded in 2016 by Jonathan Ross and based in Mountain View, California, is an AI hardware and software company specializing in high-performance AI inference. Its proprietary Language Processing Unit (LPU) accelerates large language model (LLM) workloads, offering up to 10x faster inference than traditional GPUs. With $1 billion raised at a $2.8 billion valuation as of August 2025, Groq powers enterprise and developer applications, delivering cost-efficient, low-latency AI solutions globally.
+  tags:
+    - Infra
+
+- name: CoreWeave
+  logo: assets/imgs/coreweave.jpg
+  url: https://coreweave.com
+  intro: CoreWeave, founded in 2017 by Michael Intrator, Brian Venturo, and Brannin McBee, is a Livingston, New Jersey-based AI cloud-computing company specializing in GPU infrastructure for artificial intelligence and high-performance computing. With a $48.8 billion market cap as of August 2025, it operates 32 data centers with 250,000 GPUs, serving clients like OpenAI and Microsoft. After raising $1.5 billion in its March 2025 IPO, CoreWeave drives innovation in AI model training and inference.
+  tags:
+    - Infra
+
+- name: Nvidia
+  logo: assets/imgs/nvidia.png
+  url: https://nvidia.com
+  intro: Nvidia, founded in 1993 by Jensen Huang, is a Santa Clara-based technology company renowned for its leadership in AI, graphics processing units (GPUs), and semiconductor innovation. Its GPUs power AI training, gaming, and data centers, with products like the H100 driving massive demand. Valued at over $3.2 trillion as of August 2025, Nvidia is a cornerstone of the AI ecosystem, serving enterprises, researchers, and consumers globally with cutting-edge hardware and software solutions.
+  tags:
+    - Infra

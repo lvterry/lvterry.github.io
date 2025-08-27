@@ -1,0 +1,27 @@
+---
+title: Company Profiles | Terry Wang
+layout: default
+bodyClass: recommendations
+---
+
+<div style="margin-top: 20px; margin-left: 20px;">
+    <a href="/" class="back">Back</a>
+</div>
+
+<h1 class="page-title">Companies</h1>
+
+<div class="company-grid">
+    {% for company in site.data.companies %}
+    <div class="company-card">
+        <img src="{{ company.logo }}" alt="{{ company.name }} Logo" class="company-logo">
+        <div class="company-name">{{ company.name }}</div>
+        <a href="{{ company.url }}" class="company-url" target="_blank">{{ company.url | remove: 'https://' }}</a>
+        <p class="company-intro">{{ company.intro }}</p>
+        <div class="company-tags">
+            {% for tag in company.tags %}
+            <span class="company-tag">{{ tag }}</span>
+            {% endfor %}
+        </div>
+    </div>
+    {% endfor %}
+</div>

@@ -316,6 +316,65 @@ a.back:hover {
   margin-bottom: 4rem;
 }
 
+.company-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+.company-card {
+    border: 1px solid #eaeaea;
+    border-radius: 8px;
+    padding: 1.5rem;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+.company-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+}
+.company-logo {
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
+    margin-bottom: 1rem;
+    border-radius: 4px;
+}
+.company-name {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+.company-url {
+    color: #0066cc;
+    text-decoration: none;
+    margin-bottom: 1rem;
+    display: inline-block;
+}
+.company-intro {
+    margin-bottom: 1rem;
+    line-height: 1.6;
+    font-size: 90%;
+}
+.company-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+.company-tag {
+    background-color: #f0f0f0;
+    padding: 0.25rem 0.75rem;
+    border-radius: 16px;
+    font-size: 0.8rem;
+}
+.page-title {
+    text-align: center;
+    font-size: 2rem;
+    margin: 2rem 0;
+    font-weight: 700;
+}
+
 
 @media screen and (max-width: 540px) { 
 
