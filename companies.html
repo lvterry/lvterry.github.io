@@ -10,18 +10,51 @@ bodyClass: recommendations
 
 <h1 class="page-title">Companies</h1>
 
-<div class="company-grid">
-    {% for company in site.data.companies %}
-    <div class="company-card">
-        <img src="{{ company.logo }}" alt="{{ company.name }} Logo" class="company-logo">
-        <div class="company-name">{{ company.name }}</div>
-        <a href="{{ company.url }}" class="company-url" target="_blank">{{ company.url | remove: 'https://' }}</a>
-        <p class="company-intro">{{ company.intro }}</p>
-        <div class="company-tags">
-            {% for tag in company.tags %}
-            <span class="company-tag">{{ tag }}</span>
-            {% endfor %}
-        </div>
-    </div>
+{% assign incumbents = site.data.companies | where: "group", "incumbent" | sort: "name" %}
+{% assign startups = site.data.companies | where: "group", "startup" | sort: "name" %}
+
+<div class="company-nav">
+  <a href="#incumbents">Incumbents ({{ incumbents | size }})</a>
+  <span class="sep">·</span>
+  <a href="#startups">Startups ({{ startups | size }})</a>
+  </div>
+
+<section id="incumbents" class="company-section">
+  <h2>Incumbents <span class="section-count">{{ incumbents | size }}</span></h2>
+  <div class="company-grid">
+    {% for company in incumbents %}
+      <div class="company-card">
+          <img src="{{ company.logo }}" alt="{{ company.name }} Logo" class="company-logo">
+          <div class="company-name">{{ company.name }}</div>
+          <a href="{{ company.url }}" class="company-url" target="_blank">{{ company.url | remove: 'https://' }}</a>
+          <p class="company-intro">{{ company.intro }}</p>
+          <div class="company-tags">
+              {% for tag in company.tags %}
+                <span class="company-tag">{{ tag }}</span>
+              {% endfor %}
+              <span class="company-chip company-chip--incumbent">Incumbent</span>
+          </div>
+      </div>
     {% endfor %}
-</div>
+  </div>
+</section>
+
+<section id="startups" class="company-section">
+  <h2>Startups <span class="section-count">{{ startups | size }}</span></h2>
+  <div class="company-grid">
+    {% for company in startups %}
+      <div class="company-card">
+          <img src="{{ company.logo }}" alt="{{ company.name }} Logo" class="company-logo">
+          <div class="company-name">{{ company.name }}</div>
+          <a href="{{ company.url }}" class="company-url" target="_blank">{{ company.url | remove: 'https://' }}</a>
+          <p class="company-intro">{{ company.intro }}</p>
+          <div class="company-tags">
+              {% for tag in company.tags %}
+                <span class="company-tag">{{ tag }}</span>
+              {% endfor %}
+              <span class="company-chip company-chip--startup">Startup</span>
+          </div>
+      </div>
+    {% endfor %}
+  </div>
+</section>

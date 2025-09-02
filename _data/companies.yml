@@ -5,6 +5,7 @@
   tags:
     - Agent
     - Legal
+  group: startup
 
 - name: Granola
   logo: assets/imgs/granola.jpg
@@ -13,6 +14,7 @@
   tags:
     - AI App
     - Productivity
+  group: startup
 
 - name: Manus
   logo: assets/imgs/manus.png
@@ -20,6 +22,7 @@
   intro: Manus AI, launched in 2025 by Singapore-based startup Monica (also known as Butterfly Effect), is an autonomous AI agent platform designed for complex, multi-step tasks. Built to operate with minimal user input, it excels in enterprise-grade workflows like data analysis, content generation, and system integration. With $75 million raised at a $500 million valuation, Manus serves global users, leveraging integrations with platforms like Hugging Face and advanced models like Claude for versatile automation.
   tags:
     - Agent
+  group: startup
 
 - name: Genspark
   logo: assets/imgs/genspark.jpg
@@ -27,6 +30,7 @@
   intro: Genspark, founded in 2023 by former Baidu executives Eric Jing and Kay Zhu, is a Palo Alto-based AI agent engine focused on delivering real-time, synthesized results through custom “Sparkpages.” Backed by $160 million in funding, it offers a user-friendly platform for tasks like research, content creation, and multimedia generation. With over 2 million monthly active users by mid-2024, Genspark’s Mixture-of-Agents system and features like AI phone calls position it as a leader in accessible, autonomous AI solutions.
   tags:
     - Agent
+  group: startup
 
 - name: Cursor
   logo: assets/imgs/cursor.png
@@ -35,6 +39,7 @@
   tags:
     - Agent
     - Coding
+  group: startup
 
 - name: Lovable
   logo: assets/imgs/lovable.jpg
@@ -43,6 +48,7 @@
   tags:
     - Agent
     - Coding
+  group: startup
 
 - name: Lovart
   logo: assets/imgs/lovart.png
@@ -51,6 +57,7 @@
   tags:
     - Agent
     - Design
+  group: startup
 
 - name: Browserbase
   logo: assets/imgs/browserbase.jpg
@@ -58,6 +65,7 @@
   intro: Browserbase, founded in 2023 and based in San Francisco, is a cloud platform specializing in scalable headless browser infrastructure for web automation and AI agents. It provides APIs and SDKs for seamless integration with frameworks like Playwright, Puppeteer, and its proprietary Stagehand, enabling tasks like web scraping, automated testing, and form submissions. With $40 million raised in a Series B round in 2025 at a $150 million valuation, Browserbase serves developers and enterprises with secure, high-performance browser automation solutions.
   tags:
     - Infra
+  group: startup
 
 - name: OpenAI
   logo: assets/imgs/openai.png
@@ -66,6 +74,7 @@
   tags:
     - Foundation model
     - ChatGPT
+  group: incumbent
 
 - name: Anthropic
   logo: assets/imgs/anthropic.png
@@ -76,6 +85,7 @@
     - Claude
     - Agent
     - Coding
+  group: startup
 
 - name: DeepSeek
   logo: assets/imgs/DeepSeek.webp
@@ -83,6 +93,7 @@
   intro: DeepSeek, founded in July 2023 by Liang Wenfeng, is a Hangzhou-based Chinese AI company specializing in large language models (LLMs). Backed by High-Flyer, a quantitative hedge fund, it develops cost-efficient, open-source models like DeepSeek-R1 and V3, rivaling OpenAI’s GPT-4. With a focus on research over commercialization, DeepSeek serves global users through its chatbot, API, and mobile app, achieving significant adoption and sparking price wars in the AI industry.
   tags:
     - Foundation model
+  group: startup
 
 - name: Together AI
   logo: assets/imgs/together.png
@@ -90,6 +101,7 @@
   intro: Together AI, founded in 2022, is a San Francisco-based AI company focused on accelerating open-source AI development and deployment. It provides a cloud platform for building, fine-tuning, and scaling generative AI models, serving developers, startups, and enterprises. With $225 million raised by 2024 and a valuation of $1.25 billion, Together AI supports a wide range of applications, from LLMs to multimodal models, emphasizing accessibility and collaboration in AI innovation.
   tags:
     - Infra
+  group: startup
 
 - name: Groq
   logo: assets/imgs/groq.png
@@ -97,6 +109,7 @@
   intro: Groq, founded in 2016 by Jonathan Ross and based in Mountain View, California, is an AI hardware and software company specializing in high-performance AI inference. Its proprietary Language Processing Unit (LPU) accelerates large language model (LLM) workloads, offering up to 10x faster inference than traditional GPUs. With $1 billion raised at a $2.8 billion valuation as of August 2025, Groq powers enterprise and developer applications, delivering cost-efficient, low-latency AI solutions globally.
   tags:
     - Infra
+  group: startup
 
 - name: CoreWeave
   logo: assets/imgs/coreweave.jpg
@@ -104,6 +117,7 @@
   intro: CoreWeave, founded in 2017 by Michael Intrator, Brian Venturo, and Brannin McBee, is a Livingston, New Jersey-based AI cloud-computing company specializing in GPU infrastructure for artificial intelligence and high-performance computing. With a $48.8 billion market cap as of August 2025, it operates 32 data centers with 250,000 GPUs, serving clients like OpenAI and Microsoft. After raising $1.5 billion in its March 2025 IPO, CoreWeave drives innovation in AI model training and inference.
   tags:
     - Infra
+  group: incumbent
 
 - name: Nvidia
   logo: assets/imgs/nvidia.jpg
@@ -111,3 +125,4 @@
   intro: Nvidia, founded in 1993 by Jensen Huang, is a Santa Clara-based technology company renowned for its leadership in AI, graphics processing units (GPUs), and semiconductor innovation. Its GPUs power AI training, gaming, and data centers, with products like the H100 driving massive demand. Valued at over $3.2 trillion as of August 2025, Nvidia is a cornerstone of the AI ecosystem, serving enterprises, researchers, and consumers globally with cutting-edge hardware and software solutions.
   tags:
     - Infra
+  group: incumbent
