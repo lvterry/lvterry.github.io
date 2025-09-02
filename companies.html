@@ -17,10 +17,10 @@ bodyClass: recommendations
   <a href="#incumbents">Incumbents ({{ incumbents | size }})</a>
   <span class="sep">·</span>
   <a href="#startups">Startups ({{ startups | size }})</a>
-  </div>
+</div>
 
 <section id="incumbents" class="company-section">
-  <h2>Incumbents <span class="section-count">{{ incumbents | size }}</span></h2>
+  <h2>Incumbents</h2>
   <div class="company-grid">
     {% for company in incumbents %}
       <div class="company-card">
@@ -32,7 +32,6 @@ bodyClass: recommendations
               {% for tag in company.tags %}
                 <span class="company-tag">{{ tag }}</span>
               {% endfor %}
-              <span class="company-chip company-chip--incumbent">Incumbent</span>
           </div>
       </div>
     {% endfor %}
@@ -40,7 +39,7 @@ bodyClass: recommendations
 </section>
 
 <section id="startups" class="company-section">
-  <h2>Startups <span class="section-count">{{ startups | size }}</span></h2>
+  <h2>Startups</h2>
   <div class="company-grid">
     {% for company in startups %}
       <div class="company-card">
@@ -52,7 +51,6 @@ bodyClass: recommendations
               {% for tag in company.tags %}
                 <span class="company-tag">{{ tag }}</span>
               {% endfor %}
-              <span class="company-chip company-chip--startup">Startup</span>
           </div>
       </div>
     {% endfor %}
