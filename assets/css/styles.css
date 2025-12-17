@@ -547,3 +547,13 @@ a.back:hover {
     color: #2d5be3;
     border-color: #c8d7ff;
 }
+
+.timeline-item {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.timeline-item .time {
+    font-family: 'Courier New', Courier, monospace;
+}
