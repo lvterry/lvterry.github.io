@@ -549,11 +549,8 @@ a.back:hover {
 }
 
 .timeline-item {
-    display: flex;
-    gap: 1rem;
-    margin-bottom: 1rem;
-}
-
-.timeline-item .time {
-    font-family: 'Courier New', Courier, monospace;
+    display: grid;
+    grid-template-columns: 100px 1fr;
+    gap: 16px;
+    margin-bottom: 10px;
 }
