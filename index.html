@@ -9,8 +9,8 @@ layout: default
   <div class="container">
     {% for post in paginator.posts %}
     <article>
-      <div>
-        <a href="{{ post.url }}" style="color: var(--text-weak-color)">{{ post.date | date: '%F' }}</a>
+      <div class="date">
+        <a href="{{ post.url }}">{{ post.date | date: '%F' }}</a>
       </div>
 
       {% unless post.hide_title_in_list %}

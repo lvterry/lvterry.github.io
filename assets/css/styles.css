@@ -1,44 +1,50 @@
+/* Font imports */
+@import url('https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,500;0,600;1,400&family=DM+Sans:wght@400;500;600&display=swap');
+
 :root {
-    --text-color: #333;
-    --text-weak-color: #959595;
-    --link-color: #db6e4d;
-    --link-visited-color: #d28ee9;
-    --border-color: #c5c5c5;
+    --text-color: #1a1a1a;
+    --text-weak-color: #71717a;
+    --link-color: #c2541e;
+    --link-visited-color: #8b5cf6;
+    --border-color: #e4e4e7;
+    --bg-color: #fafafa;
+    --card-bg: #ffffff;
+}
+
+* {
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    word-break: break-word;
+    overflow-wrap: break-word;
+    box-sizing: border-box;
 }
 
 body {
-    font-family:
-        -apple-system,
-        BlinkMacSystemFont,
-        Segoe UI,
-        Roboto,
-        PingFang SC,
-        Hiragino Sans GB,
-        Microsoft YaHei,
-        Helvetica Neue,
-        Helvetica,
-        Arial,
-        sans-serif;
-    font-size: 16px;
-    line-height: 1.67;
+    font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 17px;
+    line-height: 1.75;
     color: var(--text-color);
-    background-color: white;
+    background-color: var(--bg-color);
     scroll-behavior: smooth;
     padding: 0;
     margin: 0;
-    box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    text-rendering: optimizeLegibility;
 }
 
 h1 {
-    font-size: 1.6rem;
-    letter-spacing: -1px;
+    font-family: 'Newsreader', Georgia, 'Times New Roman', serif;
+    font-size: 2.4rem;
     font-weight: 500;
+    letter-spacing: -0.03em;
+    line-height: 1.2;
+    color: var(--text-color);
 }
 
 h2 {
-    font-size: 1.2rem;
+    font-family: 'Newsreader', Georgia, 'Times New Roman', serif;
+    font-size: 1.5rem;
+    font-weight: 500;
+    letter-spacing: -0.02em;
 }
 
 img {
@@ -50,77 +56,146 @@ a:active,
 a:visited {
     color: var(--link-color);
     text-decoration: none;
+    transition: color 0.2s ease;
 }
 
 a:hover {
-    color: #ff5a27;
+    color: #8b3a12;
     text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 2px;
 }
 
 blockquote {
     color: var(--text-weak-color);
-    border-left: 2px solid #ccc;
+    border-left: 2px solid var(--border-color);
     margin-left: 4px;
     margin-right: 20px;
-    padding-left: 20px;
+    padding-left: 24px;
+    font-family: 'Newsreader', Georgia, serif;
+    font-size: 1.15rem;
+    font-style: italic;
+    line-height: 1.7;
 }
 
 img + em {
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     color: var(--text-weak-color);
     font-style: normal;
 }
 
 .weak {
     color: var(--text-weak-color);
+    font-size: 0.85rem;
 }
 
 .container {
-    width: 40rem;
+    width: 48rem;
+    max-width: 90vw;
     margin: 0 auto;
+    padding: 0 1rem;
+}
+
+header {
+    padding: 48px 0 40px;
+    margin-bottom: 48px;
 }
 
 header .container {
-    padding-top: 40px;
-    margin-bottom: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 32px;
     border-bottom: 1px solid var(--border-color);
-    /* box-shadow: 0 1px 2px rgba(0,0,0,.1); */
 }
 
 header a {
     display: flex;
     align-items: center;
+    text-decoration: none;
+}
+
+header a:hover {
+    text-decoration: none;
 }
 
 header .name {
     color: var(--text-color);
-    font-size: 1.3rem;
+    font-family: 'Newsreader', Georgia, serif;
+    font-size: 1.4rem;
+    font-weight: 500;
     margin-left: 16px;
+    letter-spacing: -0.02em;
+}
+
+header a:hover .name {
+    color: var(--link-color);
 }
 
 nav {
-    padding: 16px 0;
-    margin-top: 16px;
-    border-top: 1px solid var(--border-color);
     display: flex;
-    gap: 20px;
+    gap: 32px;
+}
+
+nav a {
+    color: var(--text-weak-color);
+    font-size: 0.95rem;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+    transition: color 0.2s ease;
+}
+
+nav a:hover {
+    color: var(--text-color);
+    text-decoration: none;
 }
 
 .avatar {
-    border-radius: 4px;
-    width: 40px;
-    height: 40px;
+    border-radius: 8px;
+    width: 44px;
+    height: 44px;
 }
 
 .home article {
+    padding-bottom: 48px;
+    margin-bottom: 48px;
     border-bottom: 1px solid var(--border-color);
-    padding-bottom: 40px;
-    margin-bottom: 40px;
+}
+
+.home article:last-of-type {
+    border-bottom: none;
+}
+
+.home article h1 {
+    margin: 12px 0 16px;
+    font-size: 1.8rem;
+}
+
+.home article h1 a {
+    color: var(--text-color);
+}
+
+.home article h1 a:hover {
+    color: var(--link-color);
+}
+
+.home article .date {
+    color: var(--text-weak-color);
+    font-size: 0.85rem;
+    letter-spacing: 0.02em;
 }
 
 .back-button {
-    margin-top: 20px;
-    margin-left: 20px;
+    margin: 32px 0;
+}
+
+.back-button a {
+    color: var(--text-weak-color);
+    font-size: 0.9rem;
+}
+
+.back-button a:hover {
+    color: var(--link-color);
 }
 
 /* #posts {
@@ -143,25 +218,43 @@ nav {
 
 .copyright {
     text-align: center;
-    padding: 0.8rem 0;
-    color: #959595;
+    padding: 48px 0 32px;
+    color: var(--text-weak-color);
+    font-size: 0.85rem;
 }
 
 .pagination {
-    background-color: #f5f5f5;
-    padding: 4px 12px;
-    border-radius: 30px;
-    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    padding: 24px 0;
+    font-size: 0.9rem;
+}
+
+.pagination a {
+    color: var(--text-weak-color);
+    padding: 8px 16px;
+    border-radius: 6px;
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    transition: all 0.2s ease;
+}
+
+.pagination a:hover {
+    color: var(--link-color);
+    border-color: var(--link-color);
+    text-decoration: none;
 }
 
 .page_number {
-    margin-left: 24px;
-    margin-right: 24px;
+    color: var(--text-weak-color);
 }
 
 .post-content {
-    border-bottom: 1px solid #e5e5e5;
-    padding-bottom: 2rem;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 2.5rem;
+    margin-bottom: 2.5rem;
 }
 
 .justify {
@@ -171,7 +264,7 @@ nav {
 hr {
     border: none;
     border-bottom: 1px solid var(--border-color);
-    margin: 2rem 6rem;
+    margin: 3rem 0;
 }
 
 article ul,
@@ -395,23 +488,56 @@ a.back:hover {
     font-size: 0.8rem;
 }
 .page-title {
+    font-family: 'Newsreader', Georgia, serif;
     text-align: center;
-    font-size: 2rem;
-    margin: 2rem 0;
-    font-weight: 700;
+    font-size: 2.6rem;
+    margin: 2rem 0 3rem;
+    font-weight: 500;
+    letter-spacing: -0.03em;
 }
 
-@media screen and (max-width: 540px) {
+@media screen and (max-width: 640px) {
     body {
-        padding: 24px;
-    }
-
-    header .container {
-        padding-top: 16px;
+        padding: 0;
     }
 
     .container {
-        width: auto;
+        width: 100%;
+        max-width: 100%;
+        padding: 0 20px;
+    }
+
+    .timeline-item {
+        grid-template-columns: 80px 1fr;
+        gap: 12px;
+    }
+
+    .timeline-item > div:last-child {
+        overflow-wrap: break-word;
+    }
+
+    header {
+        padding: 24px 0;
+    }
+
+    header .container {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 24px;
+    }
+
+    nav {
+        gap: 20px;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    h1 {
+        font-size: 1.8rem;
+    }
+
+    .page-title {
+        font-size: 2rem;
     }
 
     .portfolio section {
@@ -437,74 +563,111 @@ a.back:hover {
     }
 
     .back-button {
-        margin: 0;
+        margin: 24px 0;
+    }
+
+    .home article h1 {
+        font-size: 1.5rem;
+    }
+
+    .pagination {
+        flex-wrap: wrap;
+        gap: 12px;
     }
 }
 
 @media (prefers-color-scheme: dark) {
     :root {
-        --text-color: #f0f0f0;
-        --text-weak-color: #959595;
-        --border-color: #959595;
+        --text-color: #e4e4e7;
+        --text-weak-color: #71717a;
+        --link-color: #f87171;
+        --link-visited-color: #a78bfa;
+        --border-color: #27272a;
+        --bg-color: #09090b;
+        --card-bg: #18181b;
     }
 
     body {
-        background-color: #1a1a1a;
+        background-color: var(--bg-color);
     }
 
     blockquote {
-        border-left-color: #666;
+        border-left-color: #3f3f46;
     }
 
-    .pagination {
-        background-color: #2a2a2a;
+    .pagination a {
+        background: var(--card-bg);
+        border-color: var(--border-color);
+    }
+
+    .quotes-page blockquote {
+        background: var(--card-bg);
+        border-color: var(--border-color);
     }
 }
+
 /* Dark mode text legibility overrides scoped to principles pages */
 @media (prefers-color-scheme: dark) {
     body.principles .wrapper {
-        color: #232323; /* Dark text to contrast on light tiles */
+        color: #232323;
     }
     body.principles .lang a {
         color: #232323;
     }
 }
 .recommendations section {
-    margin-bottom: 2rem;
+    margin-bottom: 3rem;
 }
 
 .recommendations h2 {
-    font-size: 1.4rem;
-    color: var(--text-color);
-    margin-bottom: 0.4rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-weak-color);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 1rem;
 }
 
 .recommendation-list {
-    list-style: disc;
-    padding-left: 1.2rem;
-    margin-top: 1rem;
+    list-style: none;
+    padding: 0;
+    margin: 0;
 }
 
 .recommendation-list li {
-    margin-bottom: 0.5rem;
+    margin-bottom: 1rem;
+    line-height: 1.6;
 }
 
-.recommendation-list a:hover {
-    text-decoration: underline;
+.recommendation-list a {
+    font-weight: 500;
+}
+
+.recommendation-list .weak {
+    display: block;
+    margin-top: 0.25rem;
 }
 
 .quotes-page blockquote {
-    padding: 1rem;
-    border-radius: 1rem 1rem 1rem 0;
-    border: 1px solid #e0e0e0;
-    margin-bottom: 1rem;
-    color: #454545;
-    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.05);
+    padding: 1.5rem 2rem;
+    background: var(--card-bg);
+    border-radius: 4px;
+    border: 1px solid var(--border-color);
+    margin-bottom: 1.5rem;
+    color: var(--text-color);
+    font-size: 1.1rem;
 }
 
 .quotes-page .quote p {
     margin-bottom: 0;
-    color: #959595;
+    color: var(--text-weak-color);
+    font-size: 0.9rem;
+    margin-top: 0.75rem;
+}
+
+.quotes-page .quote p em {
+    font-style: normal;
 }
 
 /* Companies page enhancements */
@@ -553,4 +716,10 @@ a.back:hover {
     grid-template-columns: 100px 1fr;
     gap: 16px;
     margin-bottom: 10px;
+    min-width: 0;
+}
+
+.timeline-item > div:last-child {
+    min-width: 0;
+    word-break: break-word;
 }
