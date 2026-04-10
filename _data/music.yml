@@ -1,0 +1,128 @@
+# _data/music.yml
+# cover: square image, min 600x600px, stored in assets/images/music/
+# audio: MP3 file stored in Cloudflare R2, with public URL
+# lyrics: optional, use | for multiline. Blank lines = stanza breaks.
+
+- id: snow
+  title: "三月的雪"
+  year: 2026
+  duration: "1:53"
+  description: "北京三月还在飘雪，不寻常的天气让我想写首歌来记录一下。"
+  cover: /assets/imgs/music/snow.png
+  audio: https://pub-9173ebfb78bc4cf292bc3d8878314a79.r2.dev/snow.mp3
+  lyrics: |
+    现在是三月了，北京还在飘雪呢，土地沉默的叹息升腾起来，缠绕在雪里。
+
+    星星跳出来又缩回去，它们不敢看我的眼睛，谁知我也有点害羞呢。
+
+    冷酷的人们，彼此交换纯洁的眼神，心照不宣的秘密，都随着脆弱的生命离去。
+
+    黎明并不明亮，温暖的潮水开始退缩，它畏手畏脚，不喜欢自己的样子。
+
+    风自远处吹来，掠过星星，飞往更远的地方。呼唤它也于事无补，只因它害怕雪的冰冷。
+
+- id: snake
+  title: "蛇结"
+  year: 2026
+  duration: "2:27"
+  description: "读完小说《蛇结》有感而发，写了这首歌。"
+  cover: /assets/imgs/music/snake.png
+  audio: https://pub-9173ebfb78bc4cf292bc3d8878314a79.r2.dev/snake.mp3
+  lyrics: |
+    仇恨已将我吞噬
+    它幻化成名利 欲望 金钱 爱情
+    它靠近我 嘲笑我 又将我推开
+    我报之以歌 不如报之以刀
+    我的心里
+    将要溢满鲜血
+
+    椴树开花啦
+    小河里的冰融化啦
+    葡萄园里的果子熟啦
+    青鸟鸣虫开始欢唱
+    我也有开心的时候呀
+    在那些不眠的夜晚
+    连风都是甜的
+
+    我的孩子都怕我
+    他们渴望我的遗产
+    唯有你 我的爱人
+    只是单纯的忽略我 鄙视我
+    也许是我的错觉
+    否则你走时 我为何心痛
+
+    风缓下来了
+    咖啡变凉了
+    神父离开了
+    我将要走了
+    我解不开这蛇结
+    只能带着它走了
+    走了
+
+- id: moon
+  title: "半个月亮"
+  year: 2026
+  duration: "3:10"
+  description: "冬日清晨去送孩子上学，看到半个月亮挂在天上，觉得很美，就写了这首歌。"
+  cover: /assets/imgs/music/moon.png
+  audio: https://pub-9173ebfb78bc4cf292bc3d8878314a79.r2.dev/moon.mp3
+  lyrics: |
+    半个月亮挂在天上
+    蓝雾从空中掠过
+    怪物鼻孔喷出白烟
+    水银坠落
+
+    为谁停留
+    为谁走
+
+    风吹过雪地不语
+    红叶在枝头叹息
+    热带雨林在燃烧
+    沙漠挖出宝藏
+
+    为谁停留
+    为谁走
+
+    盲人重获光明
+    祭坛下堆满旧草人
+    鲜花竞相开放
+    蚂蚁从镜面经过
+
+    为谁停留
+    为谁走
+
+- id: meeting
+  title: "战略会议"
+  year: 2026
+  duration: "2:44"
+  description: "每天都要开很多会议，感觉很浪费时间，就写了这首歌来吐槽一下。"
+  cover: /assets/imgs/music/meeting.png
+  audio: https://pub-9173ebfb78bc4cf292bc3d8878314a79.r2.dev/meeting.mp3
+  lyrics: |
+    他们教自己变成大象
+    也没有什么战略思想
+
+    借着暖和的阳光
+    晾晒不穿的衣裳
+    下雨了就在屋檐下躲藏
+    刮风了就关上门窗
+
+    他们不想做普通的大象
+    他们组织了战略会议
+    他们互相追问
+    什么是你的战略思想
+
+    我要邀请蚂蚁来吃饭
+    我要请老鼠做推广
+    好啊 好啊 不要停留 朝前走
+
+    我要在荷叶上办舞会
+    我要和青蛙手牵手
+    好啊 好啊
+    你们一起朝前走
+
+    大象还是大象
+    他们想多开几次会议
+    那时候他们不再像自己
+    而是比自己更有魅力
+    更有战略思想

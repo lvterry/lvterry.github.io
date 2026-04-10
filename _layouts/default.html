@@ -22,6 +22,9 @@
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
     <link rel="manifest" href="/site.webmanifest">
     <link rel="alternate" type="application/rss+xml" href="{{ site.url }}/feed.xml" />
+    {% if page.bodyClass == 'music' %}
+    <link rel="stylesheet" href="/assets/css/music.css">
+    {% endif %}
 
     <meta property="og:type" content="article">
     <meta property="og:url" content="{{ site.url }}">
