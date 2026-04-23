@@ -4,12 +4,15 @@ layout: default
 bodyClass: recommendations
 ---
 
-<div class="back-button">
-    <a href="/" class="back">Back</a>
-</div>
+{% include header.html %}
 
+<main class="page-shell">
 <div class="container recommendations">
-    <h1 class="page-title">Recommendations</h1>
+    <section class="page-banner">
+        <p class="section-kicker">Good things</p>
+        <h1 class="page-title">Recommendations</h1>
+        <p class="page-lead">Links, books, talks, and people that shaped how I think.</p>
+    </section>
 
     <section class="category">
         <h2>AI ✨</h2>
@@ -257,3 +260,4 @@ bodyClass: recommendations
         </p>
     </section>
 </div>
+</main>

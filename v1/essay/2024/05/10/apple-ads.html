@@ -1,0 +1,167 @@
+<!doctype html>
+<html>
+  <head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-Y1WFFLTVGB"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-Y1WFFLTVGB');
+    </script>
+    <title>Apple Ads</title>
+    <meta charset="utf-8" />
+    <meta http-equic="X-UA-Compatible" content="chrome=1">
+    <meta name="color-scheme" content="dark light">
+    <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
+    <meta name="description" content="Archive of Terry's thinkings and articles. 王三十九的想法和文章.">
+    <link rel="stylesheet" href="/v1/assets/css/styles.css" type="text/css" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/v1/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/v1/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/v1/favicon-16x16.png">
+    <link rel="manifest" href="/v1/site.webmanifest">
+    <link rel="alternate" type="application/rss+xml" href="https://www.wangyazhou.com/v1/feed.xml" />
+
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://www.wangyazhou.com/v1/essay/2024/05/10/apple-ads.html">
+    <meta property="og:title" content="Apple Ads">
+    <meta property="og:description" content="为了展现新 iPad Pro 的强大，Apple 发布了一个令人极度不适的广告片 Crush!。
+
+碾碎所有代表人类创意的美好事物换来一台 iPad 这样一个事实，明白无误地提醒了我们，在追求数字化、高科技的路上，我们失去了多少美好。
+
+有网友说 “iPad crushes...">
+    <meta property="og:image" content="https://wangyazhou.com/apple-touch-icon.png">
+
+  </head>
+  <body>
+    <header>
+    <div class="container">
+        <a href="/v1/" title="home">
+            <img src="/v1/assets/8bit.png" class="avatar" />
+            <span class="name">Terry Wang</span>
+        </a>
+        <nav>
+            <a href="/v1/">Posts</a>
+            <a href="/v1/quotes">Quotes</a>
+            <a href="/v1/music">Music</a>
+        </nav>
+    </div>
+</header>
+
+    
+    <article class="container">
+      <h1 class="title">Apple Ads</h1>
+      <div class="weak">2024-05-10</div>
+      <div class="post-content "><p>为了展现新 iPad Pro 的强大，Apple 发布了一个令人极度不适的广告片 <a href="https://www.youtube.com/watch?v=ntjkwIXWtrc">Crush!</a>。</p>
+
+<p>碾碎所有代表人类创意的美好事物换来一台 iPad 这样一个事实，明白无误地提醒了我们，在追求数字化、高科技的路上，我们失去了多少美好。</p>
+
+<p>有网友说 “iPad crushes the soul of humanity”，振聋发聩。</p>
+
+<p>几个月前，一支宣传 Apple “碳中和”成绩的广告片 <a href="https://www.youtube.com/watch?v=QNv9PRDIhes">Mother Nature</a> 也让人觉得非常诡异。</p>
+
+<p>所以你不禁会想，Apple 这是怎么了，这种变化是从什么时候开始的，当这个三万亿美金巨头跌倒的那天，这些诡异的广告是否会被当作一种前兆。</p>
+</div>
+      <p class="copyright">&copy; 2012 – 2025 Terry Wang</p>
+    </article>
+
+    <style>
+.videoWrapper {
+	position: relative;
+	padding-bottom: 56.333%;
+	height: 0;
+    background: black;
+}
+.videoWrapper iframe {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+    border: 0;
+}    
+</style>
+
+<script>
+function get_youtube_id(url) {
+    var p = /^(?:https?:\/\/)?(?:www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/;
+    return (url.match(p)) ? RegExp.$1 : false;
+}
+function vimeo_embed(url,el) {
+    var id = false;
+    $.ajax({
+      url: 'https://vimeo.com/api/oembed.json?url='+url,
+      async: true,
+      success: function(response) {
+        if(response.video_id) {
+          id = response.video_id;
+          if(url.indexOf('autoplay=1') !== -1) var autoplay=1; else var autoplay=0;
+          if(url.indexOf('loop=1') !== -1) var loop=1; else var loop=0;
+          var theInnerHTML = '<div class="videoWrapper"><iframe src="https://player.vimeo.com/video/'+id+'/?byline=0&title=0&portrait=0';
+          if(autoplay==1) theInnerHTML += '&autoplay=1';
+          if(loop==1) theInnerHTML += '&loop=1';
+          theInnerHTML += '" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>'; 
+          el.innerHTML = theInnerHTML;
+        }
+      }
+    });
+}
+function video_embed() {
+    var p = document.getElementsByTagName('p');
+    for(var i = 0; i < p.length; i++) {
+        //check if this is an external url (that starts with https:// or http://
+        if (p[i].innerHTML.indexOf("http://") == 0 ||
+            p[i].innerHTML.indexOf("https://") == 0) {
+            var youtube_id = get_youtube_id(p[i].innerHTML);
+            if(youtube_id) {
+                if(p[i].innerHTML.indexOf('autoplay=1') !== -1) var autoplay=1; else var autoplay=0;
+                if(p[i].innerHTML.indexOf('loop=1') !== -1) var loop=1; else var loop=0;
+                var theInnerHTML = '<div class="videoWrapper"><iframe width="720" height="420" src="https://www.youtube.com/embed/' + youtube_id + '?rel=0&showinfo=0';
+                if(autoplay==1) theInnerHTML += '&autoplay=1';
+                if(loop==1) theInnerHTML += '&loop=1&playlist='+youtube_id+'&version=3';
+                if(p[i].innerHTML.indexOf('start=') !== -1) theInnerHTML += '&start='+p[i].innerHTML.substring(p[i].innerHTML.indexOf('start=')+6);
+                theInnerHTML += '" frameborder="0" allowfullscreen></iframe></div>';
+                p[i].innerHTML = theInnerHTML;
+            }
+            if(p[i].innerHTML.indexOf('vimeo.com') !== -1) {
+                //ask vimeo for the id and place the embed
+                vimeo_embed(p[i].innerHTML,p[i]);
+            }
+        }
+    }
+}
+video_embed();
+
+function mp3_embed() {
+    var p = document.getElementsByTagName('p');
+    for(var i = 0; i < p.length; i++) {
+        if(p[i].innerHTML.indexOf('.mp3') !== -1) {
+            var str = p[i].innerHTML.split('?');
+            if(str.length == 1) str[1] = '';
+            var str1 = str[1];
+            str1 = str1.replace('&','').replace('&','');
+            str1 = str1.replace('autoplay=1','').replace('autoplay=0','');
+            str1 = str1.replace('loop=1','').replace('loop=0','');
+            str1 = str1.replace('controls=0','').replace('controls=1','');
+
+            if (str[0].lastIndexOf('.mp3', str[0].length - 4) === str[0].length - 4 && str1.length == 0) {
+                if(str[1].indexOf('autoplay=1') !== -1) var autoplay=1; else var autoplay=0;
+                if(str[1].indexOf('loop=1') !== -1) var loop=1; else var loop=0;
+                if(str[1].indexOf('controls=0') !== -1) var controls=0; else var controls=1;
+                var newInnerHTML = '<audio';
+                if(autoplay==1) newInnerHTML += ' autoplay';
+                if(loop==1) newInnerHTML += ' loop';
+                if(controls==1) newInnerHTML += ' controls';
+                newInnerHTML += '><source src="'+str[0]+'" type="audio/mpeg">Your browser does not support the audio element.</audio>';
+                p[i].innerHTML = newInnerHTML;
+            }
+        }
+    }
+}
+mp3_embed();
+</script>
+
+
+  </body>
+</html>

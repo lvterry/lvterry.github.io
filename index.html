@@ -1,45 +1,76 @@
 ---
 title: Terry Wang
 layout: default
+bodyClass: home-page
 ---
 
 {% include header.html %}
 
 <main class="home">
-  <div class="container">
+  <section class="container post-stream" id="latest-posts">
+    <div class="feature-grid feature-grid--compact">
+      <a href="/quotes" class="feature-card">
+        <span class="feature-label">Quotes</span>
+        <strong>Useful lines worth stealing.</strong>
+      </a>
+      <a href="/recommendations" class="feature-card">
+        <span class="feature-label">Recommendations</span>
+        <strong>Things I think are worth your time.</strong>
+      </a>
+      <a href="/music" class="feature-card">
+        <span class="feature-label">Music</span>
+        <strong>Lyrics by me, songs for your headphones.</strong>
+      </a>
+      <a href="/ai" class="feature-card">
+        <span class="feature-label">AI Usage</span>
+        <strong>How I use the tools without outsourcing myself.</strong>
+      </a>
+      <a href="/p/en/" class="feature-card">
+        <span class="feature-label">Work</span>
+        <strong>Selected projects and product design case studies.</strong>
+      </a>
+      <a href="/principles/en" class="feature-card">
+        <span class="feature-label">Principles</span>
+        <strong>A compact set of ideas I try to design by.</strong>
+      </a>
+    </div>
+
+    <div class="section-heading">
+      <div>
+        <p class="section-kicker">Latest posts</p>
+        <h2>Fresh notes, essays, and short sparks.</h2>
+      </div>
+    </div>
+
     {% for post in paginator.posts %}
-    <article>
-      <div class="date">
-        <a href="{{ post.url }}">{{ post.date | date: '%F' }}</a>
+    <article class="post-card">
+      <div class="post-card-meta">
+        <a href="{{ post.url }}" class="post-date">{{ post.date | date: '%F' }}</a>
       </div>
 
       {% unless post.hide_title_in_list %}
-      <h1><a href="{{ post.url }}">{{ post.title }}</a></h1>
+      <h2><a href="{{ post.url }}">{{ post.title }}</a></h2>
       {% endunless %}
 
-      <div>{{ post.content }}</div>
+      <div class="post-card-body">{{ post.excerpt }}</div>
+      <a href="{{ post.url }}" class="read-more">Keep reading</a>
     </article>
     {% endfor %}
 
-    <!-- Pagination links -->
     <div class="pagination">
       {% if paginator.previous_page %}
-      <a href="{{ paginator.previous_page_path }}" class="previous">
-        Previous
-      </a>
+      <a href="{{ paginator.previous_page_path }}" class="previous">Previous</a>
       {% else %}
-      <span class="previous">Previous</span>
+      <span class="previous disabled">Previous</span>
       {% endif %}
-      <span class="page_number">
-        Page {{ paginator.page }} of {{ paginator.total_pages }}
-      </span>
+      <span class="page_number">Page {{ paginator.page }} of {{ paginator.total_pages }}</span>
       {% if paginator.next_page %}
       <a href="{{ paginator.next_page_path }}" class="next">Next</a>
       {% else %}
-      <span class="next">Next</span>
+      <span class="next disabled">Next</span>
       {% endif %}
     </div>
 
-    <p class="copyright">&copy; 2012 – 2025 Terry Wang</p>
-  </div>
+    <p class="copyright">&copy; 2012 – 2026 Terry Wang</p>
+  </section>
 </main>

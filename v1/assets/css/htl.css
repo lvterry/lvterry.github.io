@@ -1,0 +1,30 @@
+body {
+    padding: 36px 0;
+    text-align: center;
+    background: linear-gradient(to bottom, #0074D9, #7FDBFF) no-repeat;
+    color: white;
+    min-height: 100vh;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    text-rendering: optimizeLegibility;
+}
+
+button {
+    padding: 12px 36px;
+    font-weight: bold;
+    background: #FFB347;
+    border: none;
+    border-radius: 8px;
+    box-shadow: 1px 1px 10px rgba(0,0,0,0.3);
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #ffa426;
+}
+
+h1 {
+    font-family: 'Big Caslon', sans-serif;
+    font-size: 400%;
+    font-style: italic;
+}

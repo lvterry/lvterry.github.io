@@ -1,24 +1,17 @@
 ---
 layout: default
+bodyClass: notfound-page
 ---
 
-<style type="text/css" media="screen">
-  .container {
-    margin: 10px auto;
-    max-width: 600px;
-    text-align: center;
-  }
-  h1 {
-    margin: 30px 0;
-    font-size: 4em;
-    line-height: 1;
-    letter-spacing: -1px;
-  }
-</style>
+{% include header.html %}
 
-<div class="container">
-  <h1>404</h1>
-
-  <p><strong>Page not found :(</strong></p>
-  <p>The requested page could not be found.</p>
-</div>
+<main class="page-shell">
+  <div class="container notfound-panel">
+    <h1>404</h1>
+    <p><strong>That page wandered off.</strong></p>
+    <p>The route you asked for does not exist. Try the latest posts instead.</p>
+    <p>
+      <a href="/" class="button button-primary">Go home</a>
+    </p>
+  </div>
+</main>

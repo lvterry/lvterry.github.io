@@ -30,15 +30,19 @@
     <meta property="og:image" content="https://wangyazhou.com/apple-touch-icon.png">
 
   </head>
-  <body>
+  <body class="site-body post-page">
     {% include header.html %}
-    
-    <article class="container">
-      <h1 class="title">{{ page.title }}</h1>
-      <div class="weak">{{ page.date | date: "%Y-%m-%d" }}</div>
-      <div class="post-content {{ page.content_class }}">{{ content }}</div>
-      <p class="copyright">&copy; 2012 – 2025 Terry Wang</p>
-    </article>
+
+    <main class="article-shell">
+      <article class="container post-panel">
+        <div class="article-meta-row">
+          <span class="article-date">{{ page.date | date: "%Y-%m-%d" }}</span>
+        </div>
+        <h1 class="article-title">{{ page.title }}</h1>
+        <div class="post-content {{ page.content_class }}">{{ content }}</div>
+        <p class="copyright">&copy; 2012 – 2026 Terry Wang</p>
+      </article>
+    </main>
 
     {% include open-embed.html %}
 

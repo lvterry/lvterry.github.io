@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>Terry Wang</title>
+        <description>Terry Wang's Personal Website</description>
+        <link>https://www.wangyazhou.com</link>
+        <atom:link href="https://www.wangyazhou.com/v1/feed.xml" rel="self" type="application/rss+xml" />
+        
+            <item>
+                <title>Anthropic 这招很聪明</title>
+                <description>&lt;p&gt;Anthropic 最近上线了一个叫 Advisor Tool 的功能。使用方式很简单：API 调用时增加一个参数，把 Opus 指定为顾问，Sonnet 或 Haiku 作为实际执行模型。每次 agent 需要做规划、决策或复杂推理时，系统会自动调用 Opus 介入，其余的执行步骤仍由小模型完成。&lt;/p&gt;
+
+&lt;p&gt;账单上大头还是调用 Sonnet 或 Haiku 的费用，但任务的关键环节 —— 例如做规划 —— 得到了更高级别的智能支持。官方的说法是“只需支付 Sonnet 的价格，即可享用接近 Opus 的智能”。&lt;/p&gt;
+
+&lt;p&gt;这个设计表面是架构优化，实则一套精心计算的定价心理学。它做的事情，和香水试用装类似 —— 先让你感受到什么是更好的，再问你要不要付钱拥有它。&lt;/p&gt;
+
+&lt;p&gt;Advisor Tool 比普通试用装聪明的地方在于，用户是在完成真实任务的过程中接触到 Opus 的能力，不会把它归类为广告推销。用了 Advisor Tool 之后，开发者大概率难再回到纯 Sonnet —— 他已经知道“更好”是什么感觉。开发者迟早会意识到，某些关键任务需要更高频次的 Opus 调用，或者希望 Opus 不只做顾问而是直接执行，这个时候升级就顺理成章了。&lt;/p&gt;
+
+&lt;p&gt;更关键的是，用户已经在为 Sonnet 或 Haiku 付费了，这个细节至关重要。免费试用唤起的是“占便宜”的心理，但这里唤起的是“超值”的心理。前者让人习惯性降低期待，后者则回让人开始重新思考自己愿意付多少钱。&lt;/p&gt;
+
+&lt;p&gt;对 Anthropic 来说，这也解决了 Opus 太贵，使用者少的问题。直接降价显然会伤害品牌认知，也会让已经付高价的用户不满。Advisor Tool 的解法更隐蔽，Opus 的调用量上涨，更多用户对 Opus 形成真实的价值认知，Anthropic 也可以维持 Opus 的定价体系不变。用户用到了一个更聪明的混合架构，感受到的只有满足感。&lt;/p&gt;
+
+&lt;p&gt;这真是个很聪明的设计。&lt;/p&gt;
+</description>
+                <pubDate>Fri, 10 Apr 2026 20:30:00 +0800</pubDate>
+                <link>https://www.wangyazhou.com/v1/essay/2026/04/10/advisor-tool.html</link>
+                <guid isPermaLink="true">https://www.wangyazhou.com/v1/essay/2026/04/10/advisor-tool.html</guid>
+            </item>
+        
+            <item>
+                <title>Certainty</title>
+                <description>&lt;p&gt;稳定的反面是一成不变。你享受着稳定生活带来的确定性，就要耐住日复一日的重复感。&lt;/p&gt;
+</description>
+                <pubDate>Sun, 07 Dec 2025 20:30:00 +0800</pubDate>
+                <link>https://www.wangyazhou.com/v1/essay/2025/12/07/certainty.html</link>
+                <guid isPermaLink="true">https://www.wangyazhou.com/v1/essay/2025/12/07/certainty.html</guid>
+            </item>
+        
+            <item>
+                <title>Joy</title>
+                <description>&lt;p&gt;突然意识到一个点，什么时候不想用 AI 生成内容呢？享受那个建造过程的时候。&lt;/p&gt;
+
+&lt;p&gt;比如你的成就感就来自于写出那段完美的代码、实现那个完美的界面、做出那张完美的海报、剪出那段完美的视频…… 使用 AI 就破坏了这种快乐。&lt;/p&gt;
+</description>
+                <pubDate>Fri, 10 Oct 2025 10:04:00 +0800</pubDate>
+                <link>https://www.wangyazhou.com/v1/essay/2025/10/10/joy.html</link>
+                <guid isPermaLink="true">https://www.wangyazhou.com/v1/essay/2025/10/10/joy.html</guid>
+            </item>
+        
+            <item>
+                <title>长度</title>
+                <description>&lt;p&gt;经常听到的祝福是，愿你做大做强。&lt;/p&gt;
+
+&lt;p&gt;很少有人说，愿你做精做久。&lt;/p&gt;
+</description>
+                <pubDate>Sun, 24 Aug 2025 20:41:00 +0800</pubDate>
+                <link>https://www.wangyazhou.com/v1/essay/2025/08/24/length.html</link>
+                <guid isPermaLink="true">https://www.wangyazhou.com/v1/essay/2025/08/24/length.html</guid>
+            </item>
+        
+            <item>
+                <title>过程</title>
+                <description>&lt;p&gt;目标本身是没有意义的，目标的一切意义在于创造过程。&lt;/p&gt;
+
+&lt;p&gt;过程和体验是全部的意义。&lt;/p&gt;
+</description>
+                <pubDate>Fri, 25 Jul 2025 09:10:00 +0800</pubDate>
+                <link>https://www.wangyazhou.com/v1/essay/2025/07/25/feature.html</link>
+                <guid isPermaLink="true">https://www.wangyazhou.com/v1/essay/2025/07/25/feature.html</guid>
+            </item>
+        
+            <item>
+                <title>人人都是 Agent Builder</title>
+                <description>&lt;p&gt;平时使用 AI 产品时，常常会遇到这样的问题：比如我想总结一篇文章，许多工具都会提供“总结网页”这个功能按钮。点击之后，系统确实给出一段话，但总觉得总结的长度、风格都不合适，却没法调整。如果实在想调，只能自己手动写一个很长的提示词，把要求解释清楚。这已经够麻烦了，更麻烦的是：就算调好了，这个产品也记不住。下一次还得重新来一遍。我们总不能把提示词记在小本本上，每次复制粘贴吧？&lt;/p&gt;
+
+&lt;p&gt;这个问题暴露了当下很多 AI 应用的设计盲区：提示词是被封装死的，控制权在开发者手中，而不在用户手中。&lt;/p&gt;
+
+&lt;h2 id=&quot;ai-功能还是-ai-工具&quot;&gt;AI 功能，还是 AI 工具&lt;/h2&gt;
+
+&lt;p&gt;在 AI Horseless Carriages 这篇文章中，Pete Koomen 提出了一个观点：真正强大的 AI 软件，应该让用户定义提示词，而不是开发者写死。尤其是那些“代表用户”执行任务的功能，比如写邮件、总结文章，如果提示词不能定制，产品就只能提供一种“通用平均值”的体验，难以真正贴合个体。&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Most AI apps should be agent builders, not agents.&lt;/p&gt;
+
+  &lt;p&gt;— Pete Koomen&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;他的建议是：与其封装几个按钮，不如把时间花在帮助用户写好提示词、构建清晰上下文、完善可调用工具链上。&lt;/p&gt;
+
+&lt;p&gt;这一点，正在越来越多优秀产品的设计中得到验证。&lt;/p&gt;
+
+&lt;h2 id=&quot;让用户定义自己的小-ai-工具&quot;&gt;让用户定义自己的“小 AI 工具”&lt;/h2&gt;
+
+&lt;p&gt;在 WWDC 2025 上，苹果展示了一项很有启发性的功能：用户可以自己定义 AI 要完成的任务，例如“总结网页内容”、“检查笔记”、“润色邮件”等，把它保存为一个可复用的小工具，并通过 Spotlight、Shortcuts 等系统级方式快速调用。&lt;/p&gt;
+
+&lt;p&gt;这是一个重要的思路：不再是开发者提供封闭的 AI 功能，而是让用户用平台提供的能力构建属于自己的 AI 使用方式。&lt;/p&gt;
+
+&lt;h2 id=&quot;实时互动强调主控权的-ai-体验&quot;&gt;实时互动、强调主控权的 AI 体验&lt;/h2&gt;
+
+&lt;p&gt;NotebookLM 团队离职创业，新产品 Huxe 提供了一种有趣的体验：你可以以语音的方式“听”电子邮件、新闻、播客摘要等内容，并在过程中随时打断，与 AI 实时对话讨论。&lt;/p&gt;
+
+&lt;p&gt;这种方式并不强调“一次性生成答案”，而是将生成式 AI 看作一个动态工具，为用户个性化服务、即时反馈，真正体现出“人是主导者，AI 是工具”和“内容极度个性化”的理念。&lt;/p&gt;
+
+&lt;h2 id=&quot;构建智能体--写死智能体&quot;&gt;构建智能体 ≠ 写死智能体&lt;/h2&gt;
+
+&lt;p&gt;这几个案例来自不同方向，却指向一个共同趋势：AI 的控制权，正在从开发者手中转向用户。&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Koomen 强调提示词的可定义性；&lt;/li&gt;
+  &lt;li&gt;苹果在系统层面释放 AI 的组合能力；&lt;/li&gt;
+  &lt;li&gt;Huxe 在交互上强化用户主导的节奏。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;它们共同提示我们：与其追求“更智能的 AI 功能”，不如思考怎么让用户拥有“构建智能体”的能力。&lt;/p&gt;
+
+&lt;h2 id=&quot;每个用户都是-agent-builder&quot;&gt;每个用户，都是 Agent Builder&lt;/h2&gt;
+
+&lt;p&gt;所以，如果我们把“智能体”理解为能自动执行任务、代表用户行动的系统，那么除了构建智能体本身之外，还有一个不同的产品思路：构建支持用户自行构建智能体的环境。&lt;/p&gt;
+
+&lt;p&gt;从提示词管理、上下文记忆、技能调度，到个性化交互方式……这些都是智能体“之下”的基础设施。而这些基础设施，正逐渐变得易用、开放、可分享。&lt;/p&gt;
+
+&lt;p&gt;我们可以想象一个不远的未来：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;写一个提示词，就能保存为个人工具；&lt;/li&gt;
+  &lt;li&gt;工具可以在个人熟悉和喜欢的环境中使用；&lt;/li&gt;
+  &lt;li&gt;使用方式可能是文字、语音、自动化；&lt;/li&gt;
+  &lt;li&gt;内容是动态生成的，完全符合个人需求的，可交互的。&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;人人都是 Agent Builder，这或许才是生成式 AI 应用真正的下一个时代。&lt;/p&gt;
+
+&lt;p&gt;感谢@苏奇分享 Huxe 的案例，并和我讨论了很多这方面的想法。&lt;/p&gt;
+</description>
+                <pubDate>Fri, 20 Jun 2025 09:01:00 +0800</pubDate>
+                <link>https://www.wangyazhou.com/v1/essay/2025/06/20/agent-builder.html</link>
+                <guid isPermaLink="true">https://www.wangyazhou.com/v1/essay/2025/06/20/agent-builder.html</guid>
+            </item>
+        
+            <item>
+                <title>具体与抽象</title>
+                <description>&lt;p&gt;和别人讨论产品时，很难受的一种情况是你聊具体的时候他聊抽象，你聊抽象的时候他聊具体。&lt;/p&gt;
+
+&lt;p&gt;比如，你说你觉得这功能怎么样，他说你是想做个 Google 吗？你说我们的产品核心应该是 XYZ，他说但我觉得这个图标不好看。&lt;/p&gt;
+
+&lt;p&gt;这一般发生在不太默契的两人之间，可能是初次合作，对彼此的思考方式了解得不深，就容易陷入这样一种怪圈。&lt;/p&gt;
+
+&lt;p&gt;这种讨论效率很低，经常得不到结论，因而很有挫败感。&lt;/p&gt;
+
+&lt;p&gt;有的时候磨合一下能慢慢缓解。两人逐渐在同样的抽象层面上讨论问题。也有时候，永远聊不到具体，始终围绕着抽象和类比兜圈子。&lt;/p&gt;
+
+&lt;p&gt;这很危险。&lt;/p&gt;
+
+&lt;p&gt;有抽象的原则作为指导是好的，甚至是必须的。但也要务实。&lt;/p&gt;
+
+&lt;p&gt;聊高瞻远瞩的东西自有它的乐趣，但是脚踏实地的日拱一卒才是实现目标的唯一方式。&lt;/p&gt;
+</description>
+                <pubDate>Thu, 28 Nov 2024 09:01:00 +0800</pubDate>
+                <link>https://www.wangyazhou.com/v1/essay/2024/11/28/ab-vs-co.html</link>
+                <guid isPermaLink="true">https://www.wangyazhou.com/v1/essay/2024/11/28/ab-vs-co.html</guid>
+            </item>
+        
+            <item>
+                <title>划词工具栏</title>
+                <description>&lt;p&gt;这些划词工具栏的问题是，&lt;br /&gt;
+它们最终侵入到任何有文字的地方。&lt;/p&gt;
+
+&lt;p&gt;然后它影响了你正常使用软件。&lt;/p&gt;
+
+&lt;p&gt;然后你一气之下关掉了它。&lt;/p&gt;
+
+&lt;p&gt;然后你就把它遗忘了。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://objectstorageapi.bja.sealos.run/nvkj4xo6-wangyazhou.com/blog/toolbar-1.png&quot; alt=&quot;Toolbar1&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://objectstorageapi.bja.sealos.run/nvkj4xo6-wangyazhou.com/blog/toolbar-2.png&quot; alt=&quot;Toolbar2&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://objectstorageapi.bja.sealos.run/nvkj4xo6-wangyazhou.com/blog/toolbar-3.png&quot; alt=&quot;Toolbar3&quot; /&gt;&lt;/p&gt;
+</description>
+                <pubDate>Sat, 02 Nov 2024 12:01:00 +0800</pubDate>
+                <link>https://www.wangyazhou.com/v1/essay/2024/11/02/toolbar.html</link>
+                <guid isPermaLink="true">https://www.wangyazhou.com/v1/essay/2024/11/02/toolbar.html</guid>
+            </item>
+        
+            <item>
+                <title>简化与进步</title>
+                <description>&lt;p&gt;在一篇&lt;a href=&quot;https://collabfund.com/blog/take-something-away/&quot;&gt;博客文章&lt;/a&gt;中读到一段话：&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;People are biased towards solving problems through addition rather than subtraction.&lt;/p&gt;
+
+  &lt;p&gt;Because adding something makes you feel like you are advancing, while taking something away makes you feel like you are retreating.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;今年 RailsWorld 的&lt;a href=&quot;https://www.youtube.com/watch?v=-cEn_83zRFw&quot;&gt;主题演讲&lt;/a&gt;里，DHH 作了一首俳句：&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Progress is our path,&lt;br /&gt;
+Complexity builds the bridge,&lt;br /&gt;
+Simplicity waits.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;在追求进步的道路上，复杂性是不可避免的，但我们不能停留在把问题解决了的程度，而是不断追求让解决方案从根本上&lt;strong&gt;更简单&lt;/strong&gt;。&lt;/p&gt;
+
+&lt;p&gt;言出必行，Rails 8 今年全力推广 NoBuild 和 NoPaaS，把多余的东西从开发者的技术栈里移除，回归开发和部署 web 应用的本质。&lt;/p&gt;
+
+&lt;p&gt;Rails 的迭代一直很大胆地舍弃旧东西，添加新东西。时代不同，技术发展阶段不同，它始终能以最好的方式实现它的使命 — 做最好的 One Person Framework.&lt;/p&gt;
+
+&lt;p&gt;顺便提一句，Elon Musk 对猛禽发动机的迭代可太酷了。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://objectstorageapi.bja.sealos.run/nvkj4xo6-wangyazhou.com/blog/raptor.png&quot; alt=&quot;Raptor rocket engine&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;不能光说删减，而是删减后仍能提供相同甚至更好的效果。&lt;/p&gt;
+
+&lt;p&gt;不能光说 less is more，而是 do more with less.&lt;/p&gt;
+</description>
+                <pubDate>Fri, 27 Sep 2024 22:12:00 +0800</pubDate>
+                <link>https://www.wangyazhou.com/v1/essay/2024/09/27/progress.html</link>
+                <guid isPermaLink="true">https://www.wangyazhou.com/v1/essay/2024/09/27/progress.html</guid>
+            </item>
+        
+            <item>
+                <title>确定性</title>
+                <description>&lt;p&gt;我们现在对于大模型的输出有一种很强的控制欲，希望它是确定的，希望它是可控的。&lt;/p&gt;
+
+&lt;p&gt;这很像 Web Design 刚兴起的时候平面设计师的感受，总想要做到像素级完美。&lt;/p&gt;
+
+&lt;p&gt;但 Web 是一种新媒介，最终设计师们学会了如何与这种不确定性共存。&lt;/p&gt;
+
+&lt;p&gt;他们发明了响应式设计，发明了渐进增强，发明了各种工具来确保在各种情况下都能提供良好的用户体验。&lt;/p&gt;
+
+&lt;p&gt;大模型也是一种&lt;strong&gt;新的媒介&lt;/strong&gt;，最终我们可能需要学会与这种不确定性共存。&lt;/p&gt;
+</description>
+                <pubDate>Fri, 27 Sep 2024 08:40:00 +0800</pubDate>
+                <link>https://www.wangyazhou.com/v1/essay/2024/09/27/control.html</link>
+                <guid isPermaLink="true">https://www.wangyazhou.com/v1/essay/2024/09/27/control.html</guid>
+            </item>
+        
+    </channel>
+</rss>
