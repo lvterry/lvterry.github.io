@@ -1063,6 +1063,23 @@ a.back {
             linear-gradient(180deg, #171224 0%, #0f0b18 100%);
     }
 
+    /* ---- header & nav ---- */
+    .header-band {
+        background: rgba(26, 22, 40, 0.85);
+        border-color: rgba(255, 255, 255, 0.1);
+    }
+
+    .main-nav a:hover {
+        border-color: rgba(255, 255, 255, 0.12);
+        background: rgba(255, 255, 255, 0.06);
+    }
+
+    /* ---- buttons ---- */
+    .button-primary {
+        background: var(--text-color);
+        color: var(--bg-color) !important;
+    }
+
     .button-secondary,
     .pagination a,
     .pagination span,
@@ -1071,13 +1088,18 @@ a.back {
         background: rgba(255, 255, 255, 0.06);
     }
 
+    .button-secondary {
+        color: var(--text-color) !important;
+    }
+
+    /* ---- feature cards — need !important to beat the base link override ---- */
     .feature-card:nth-child(1),
     .feature-card:nth-child(2),
     .feature-card:nth-child(3),
     .feature-card:nth-child(4),
     .feature-card:nth-child(5),
     .feature-card:nth-child(6) {
-        color: #1b1230;
+        color: #1b1230 !important;
     }
 
     .feature-card:nth-child(1) {
@@ -1102,5 +1124,80 @@ a.back {
 
     .feature-card:nth-child(6) {
         background: #b8c1ff;
+    }
+
+    /* ---- article excerpt on homepage ---- */
+    .post-card-body {
+        color: rgba(247, 241, 255, 0.78);
+    }
+
+    /* ---- page lead / intro text ---- */
+    .page-lead {
+        color: rgba(247, 241, 255, 0.72);
+    }
+
+    /* ---- article content ---- */
+    .post-content blockquote,
+    .quotes-grid blockquote {
+        background: rgba(255, 255, 255, 0.05);
+        color: rgba(247, 241, 255, 0.82);
+        border-color: rgba(255, 255, 255, 0.1);
+    }
+
+    .post-content img,
+    .post-content iframe {
+        background: rgba(255, 255, 255, 0.04);
+        border-color: rgba(255, 255, 255, 0.1);
+    }
+
+    /* ---- company cards ---- */
+    .company-intro {
+        color: rgba(247, 241, 255, 0.78);
+    }
+
+    .company-logo {
+        background: rgba(255, 255, 255, 0.06);
+    }
+
+    .company-tag {
+        border-color: rgba(255, 255, 255, 0.1);
+    }
+
+    /* ---- borders & separators ---- */
+    hr {
+        border-bottom-color: rgba(255, 255, 255, 0.1);
+    }
+
+    .recommendation-list li {
+        border-top-color: rgba(255, 255, 255, 0.1);
+    }
+
+    .timeline-item + .timeline-item {
+        border-top-color: rgba(255, 255, 255, 0.1);
+    }
+
+    .pagination a,
+    .pagination span {
+        border-color: rgba(255, 255, 255, 0.12);
+    }
+
+    a.back {
+        border-color: rgba(255, 255, 255, 0.12);
+        background: rgba(255, 255, 255, 0.06);
+    }
+
+    .section-count {
+        background: rgba(255, 255, 255, 0.08);
+    }
+
+    /* ---- portfolio / work ---- */
+    .portfolio section {
+        background: rgba(26, 22, 40, 0.75);
+        border-color: rgba(255, 255, 255, 0.1);
+    }
+
+    .work a {
+        background: rgba(26, 22, 40, 0.75);
+        border-color: rgba(255, 255, 255, 0.1);
     }
 }
