@@ -8,32 +8,6 @@ bodyClass: home-page
 
 <main class="home">
   <section class="container post-stream" id="latest-posts">
-    <div class="feature-grid feature-grid--compact">
-      <a href="/quotes" class="feature-card">
-        <span class="feature-label">Quotes</span>
-        <strong>Useful lines worth stealing.</strong>
-      </a>
-      <a href="/recommendations" class="feature-card">
-        <span class="feature-label">Recommendations</span>
-        <strong>Things I think are worth your time.</strong>
-      </a>
-      <a href="/music" class="feature-card">
-        <span class="feature-label">Music</span>
-        <strong>Lyrics by me, songs for your headphones.</strong>
-      </a>
-      <a href="/ai" class="feature-card">
-        <span class="feature-label">AI Usage</span>
-        <strong>How I use the tools without outsourcing myself.</strong>
-      </a>
-    </div>
-
-    <div class="section-heading">
-      <div>
-        <p class="section-kicker">Latest posts</p>
-        <h2>Fresh notes, essays, and short sparks.</h2>
-      </div>
-    </div>
-
     {% for post in paginator.posts %}
     <article class="post-card">
       <div class="post-card-meta">
@@ -44,13 +18,7 @@ bodyClass: home-page
       <h2><a href="{{ post.url }}">{{ post.title }}</a></h2>
       {% endunless %}
 
-      {% assign post_size = post.content | strip_html | size %}
-      {% if post_size <= 300 %}
       <div class="post-card-body">{{ post.content }}</div>
-      {% else %}
-      <div class="post-card-body">{{ post.excerpt }}</div>
-      <a href="{{ post.url }}" class="read-more">Keep reading</a>
-      {% endif %}
     </article>
     {% endfor %}
 
