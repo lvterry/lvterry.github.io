@@ -2,8 +2,8 @@
   --bg-color: #fdfdfc;
   --text-color: #1c1c1c;
   --muted-color: #777;
-  --link-color: #3b37ff;
-  --link-hover-color: #1a14d6;
+  --link-color: #1c1c1c;
+  --link-hover-color: #ff0028;
   --border-color: #e6e3df;
   --code-bg: #f3f1ee;
   --selection-bg: #ffe9b3;
@@ -38,24 +38,21 @@ body {
 
 ::selection { background: var(--selection-bg); }
 
-.container,
-main,
-.site-header {
+.container, main, .site-header {
   max-width: 680px;
   margin: 0 auto;
   padding: 0 1.25rem;
 }
 
-main { padding-top: 1rem; padding-bottom: 4rem; }
-
 a {
   color: var(--link-color);
-  text-decoration: underline;
-  text-underline-offset: 2px;
-  text-decoration-thickness: 1px;
+  text-decoration: none;
 }
 
-a:hover { color: var(--link-hover-color); }
+a:hover {
+  color: var(--link-hover-color);
+  text-decoration: none;
+}
 
 /* Header */
 .site-header {
@@ -84,7 +81,11 @@ a:hover { color: var(--link-hover-color); }
   flex-shrink: 0;
 }
 
-.brand-copy { display: flex; flex-direction: column; }
+.brand-copy { 
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
 
 .brand-mark .name {
   font-weight: 600;
@@ -104,16 +105,9 @@ a:hover { color: var(--link-hover-color); }
   font-size: 0.95rem;
 }
 
-.main-nav a {
-  color: var(--muted-color);
-  text-decoration: none;
-}
-
-.main-nav a:hover { color: var(--text-color); text-decoration: underline; }
-
 /* Home post list */
 .post-card {
-  padding: 1.25rem 0;
+  padding: 1.5rem 0;
   border-bottom: 1px solid var(--border-color);
 }
 
@@ -134,12 +128,14 @@ a:hover { color: var(--link-hover-color); }
   line-height: 1.3;
 }
 
-.post-card h2 a {
+.post-title a {
   color: var(--text-color);
   text-decoration: none;
 }
-
-.post-card h2 a:hover { text-decoration: underline; }
+.post-title a:hover {
+  color: var(--link-hover-color);
+  text-decoration: none;
+}
 
 .post-card-body {
   color: var(--text-color);
@@ -177,16 +173,14 @@ a:hover { color: var(--link-hover-color); }
 .post-content h3 { font-size: 1.15rem; }
 .post-content h4 { font-size: 1rem; }
 
-.post-content img,
-.post-content video,
-.post-content iframe {
+img, video, iframe {
   max-width: 100%;
   height: auto;
   display: block;
   margin: 1.5rem auto;
 }
 
-.post-content blockquote {
+blockquote {
   border-left: 3px solid var(--border-color);
   margin: 1.5rem 0;
   padding: 0.1rem 0 0.1rem 1rem;
@@ -235,9 +229,6 @@ a:hover { color: var(--link-hover-color); }
   align-items: center;
   font-size: 0.95rem;
 }
-
-.pagination a { text-decoration: none; color: var(--link-color); }
-.pagination a:hover { text-decoration: underline; }
 
 .pagination .disabled { color: var(--muted-color); opacity: 0.5; }
 
