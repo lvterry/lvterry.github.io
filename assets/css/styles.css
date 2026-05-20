@@ -310,6 +310,60 @@ blockquote {
 footer { max-width: 680px; margin: 0 auto; padding: 1rem 1.25rem 3rem; }
 footer a { color: var(--muted-color); }
 
+/* Principles */
+.site-body.principles {
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  line-height: 1.75;
+  background: var(--bg-color);
+}
+
+.principles .wrapper {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-auto-rows: minmax(100px, auto);
+  max-width: none;
+  margin: 0;
+  padding: 0;
+  color: #1a1a1a;
+}
+
+.principles .wrapper > div {
+  padding: 3.2rem;
+}
+
+.principles .wrapper h1 {
+  margin: 0.67em 0;
+  color: #1a1a1a;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-size: 2.4rem;
+  font-weight: 500;
+  letter-spacing: -0.03em;
+  line-height: 1.2;
+}
+
+.principles .wrapper p {
+  margin: 0 0 10px;
+  color: #1a1a1a;
+  font-size: 1.3rem;
+}
+
+.principles .wrapper .weak {
+  color: #71717a;
+  font-size: 0.85rem;
+}
+
+.principles .one {
+  background-color: #fde2bc;
+  font-size: 4rem;
+}
+
+.principles .two { background-color: #ffdfd6; }
+.principles .three { background-color: #d9e9ec; }
+.principles .four { background-color: #daebd1; }
+.principles .five { background-color: #e1eefb; }
+.principles .six { background-color: #ebe3f3; }
+
 /* Feature pages (quotes, recommendations, ai) */
 .page-banner {
   margin: 1rem 0 2rem;
@@ -373,6 +427,7 @@ footer a { color: var(--muted-color); }
   .container, main, .site-header { padding-inline: 1rem; }
   .article-title, .page-title { font-size: 1.45rem; }
   .post-card h2 { font-size: 1.15rem; }
+  .principles .wrapper { display: block; }
   .main-nav {
     column-gap: 0.8rem;
     row-gap: 0.45rem;
