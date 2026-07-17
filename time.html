@@ -178,6 +178,28 @@
 
         var WAVE_DOTS = 8; // how many dots make up the soft filling edge
 
+        // Baby sprite (6 crawling poses, transparent background).
+        // The baby natively faces right, so it is mirrored when crawling back.
+        var BABY_FRAMES = 6;
+        var BABY_CELL_W = 142;
+        var BABY_CELL_H = 144;
+        var BABY_H = 46; // display height in px
+        var babyImg = new Image();
+        var babyReady = false;
+        var babyFrame = 0;
+        var babyForward = true;
+        // Baby position in canvas coords: it crawls in a straight line
+        // from its current spot to the destination dot.
+        var babyX = offsetX + radius; // dot 0 center
+        var babyY = offsetY + radius;
+        var babyFromX = babyX, babyFromY = babyY;
+        var babyToX = babyX, babyToY = babyY;
+        babyImg.onload = function() {
+          babyReady = true;
+          render();
+        };
+        babyImg.src = '/assets/imgs/baby-sprite.png';
+
         function easeInOutCubic(t) {
           return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
         }
@@ -205,6 +227,32 @@
           }
         }
 
+        function drawBaby() {
+          if (!babyReady) return;
+          var cx = babyX;
+          var cy = babyY;
+          var h = BABY_H;
+          var w = h * BABY_CELL_W / BABY_CELL_H;
+          var x = cx - w / 2;
+          var y = cy + radius - h; // feet resting on the frontier dot
+          if (y < 2) y = 2;
+          if (x < 2) x = 2;
+          if (x + w > size - 2) x = size - 2 - w;
+          context.save();
+          if (!babyForward) {
+            // mirror around cx so the baby faces left
+            context.translate(cx, 0);
+            context.scale(-1, 1);
+            context.translate(-cx, 0);
+          }
+          context.drawImage(
+            babyImg,
+            babyFrame * BABY_CELL_W, 0, BABY_CELL_W, BABY_CELL_H,
+            x, y, w, h
+          );
+          context.restore();
+        }
+
         function render() {
           context.clearRect(0, 0, size, size);
           var idx = 0;
@@ -216,6 +264,7 @@
               idx++;
             }
           }
+          drawBaby();
         }
 
         function animateTo(months) {
@@ -226,6 +275,15 @@
 
           var from = displayedMonths;
           var forward = months >= from;
+          babyForward = forward;
+
+          // The baby crawls in a straight line to the destination dot,
+          // in sync with the dot animation below.
+          var targetIdx = months > 0 ? months - 1 : 0;
+          babyFromX = babyX;
+          babyFromY = babyY;
+          babyToX = offsetX + radius + cell * (targetIdx % cols);
+          babyToY = offsetY + radius + cell * Math.floor(targetIdx / cols);
 
           // Find the range of dots that are not yet at their target state
           var targets = new Uint8Array(totalDots);
@@ -239,6 +297,8 @@
           }
           if (first === -1) {
             displayedMonths = months;
+            babyX = babyToX;
+            babyY = babyToY;
             render();
             return;
           }
@@ -266,6 +326,8 @@
             }
 
             displayedMonths = from + (months - from) * p;
+            babyX = babyFromX + (babyToX - babyFromX) * p;
+            babyY = babyFromY + (babyToY - babyFromY) * p;
             render();
 
             if (t < 1) {
@@ -276,6 +338,8 @@
                 fills[k2] = targets[k2];
               }
               displayedMonths = months;
+              babyX = babyToX;
+              babyY = babyToY;
               render();
               currentAnimation = null;
             }
@@ -284,8 +348,31 @@
           currentAnimation = requestAnimationFrame(frame);
         }
 
+        // Crawl cycle: fast while moving, a slow wiggle when idle.
+        // During dot animations render() is driven by the rAF loop;
+        // when idle the ticker repaints on each pose change.
+        var tickCount = 0;
+        setInterval(function() {
+          tickCount++;
+          if (currentAnimation) {
+            babyFrame = (babyFrame + 1) % BABY_FRAMES;
+          } else if (tickCount % 4 === 0) {
+            babyFrame = (babyFrame + 1) % BABY_FRAMES;
+            render();
+          }
+        }, 110);
+
         // Initial render
         render();
+
+        // Reset everything to the beginning: all dots empty, baby at the start
+        function resetToStart() {
+          fills.fill(0);
+          displayedMonths = 0;
+          babyForward = true;
+          babyX = babyFromX = babyToX = offsetX + radius;
+          babyY = babyFromY = babyToY = offsetY + radius;
+        }
 
         // Add click handler
         checkBtn.addEventListener('click', function() {
@@ -294,6 +381,7 @@
             alert('Please enter a valid age between 0 and 90');
             return;
           }
+          resetToStart();
           animateTo(age * 12);
         });
 
