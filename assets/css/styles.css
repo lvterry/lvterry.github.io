@@ -50,14 +50,15 @@ body {
 }
 
 a {
-  color: var(--link-color);
-  text-decoration: none;
+  color: var(--text-color);
+  text-decoration: underline 0.08em;
+  text-decoration-color: var(--border-color);
   text-underline-offset: 0.18em;
+  transition: color 100ms ease-out, text-decoration-color 100ms ease-out;
 }
 
 a:hover {
-  color: var(--link-hover-color);
-  text-decoration: none;
+  color: var(--muted-color);
 }
 
 a:focus-visible,
