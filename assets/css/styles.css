@@ -253,10 +253,11 @@ blockquote {
   padding: 0;
 }
 
-.post-content hr {
+.post-content hr,
+.post-card-body hr {
   border: none;
-  border-top: 1px solid var(--border-color);
-  margin: 2rem 0;
+  border-top: 1px dashed var(--border-color);
+  margin: 2rem 20px;
 }
 
 .post-content ul,
