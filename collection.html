@@ -12,19 +12,15 @@ bodyClass: collection-page
     <p class="page-lead">和 AI 一起探索艺术，收藏途中喜欢的作品。</p>
   </section>
 
-  {% for artwork in site.data.artworks %}
-  <figure class="collection-artwork">
-    <a class="collection-image" href="{{ artwork.image | relative_url }}" aria-label="查看《{{ artwork.title | escape }}》原图">
-      <img src="{{ artwork.image | relative_url }}" alt="{{ artwork.alt | escape }}" width="{{ artwork.width }}" height="{{ artwork.height }}" decoding="async"{% unless forloop.first %} loading="lazy"{% endunless %}>
-    </a>
-    <figcaption>
-      <h2>{{ artwork.title | escape }}</h2>
-      <time datetime="{{ artwork.date }}">{{ artwork.date }}</time>
-      <p>{{ artwork.description | escape }}</p>
-      <p class="weak">{{ artwork.medium | escape }} · AI 生成</p>
-    </figcaption>
-  </figure>
-  {% endfor %}
+  <ul class="collection-grid">
+    {% for artwork in site.data.artworks %}
+    <li>
+      <a class="collection-image" href="{{ artwork.image | relative_url }}" aria-label="查看《{{ artwork.title | escape }}》原图">
+        <img src="{{ artwork.image | relative_url }}" alt="{{ artwork.alt | escape }}" width="{{ artwork.width }}" height="{{ artwork.height }}" decoding="async"{% unless forloop.first %} loading="lazy"{% endunless %}>
+      </a>
+    </li>
+    {% endfor %}
+  </ul>
 </main>
 
 <dialog class="collection-lightbox" aria-label="查看原图">
@@ -38,25 +34,29 @@ bodyClass: collection-page
 </dialog>
 
 <style>
-  .collection-artwork { margin: 0 0 4rem; }
+  .collection-grid {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 1rem;
+  }
+  .collection-grid li { margin: 0; }
   .collection-image {
     display: block;
-    width: fit-content;
+    aspect-ratio: 1;
+    overflow: hidden;
     cursor: zoom-in;
     touch-action: manipulation;
     text-decoration: none;
   }
   .collection-image img {
     display: block;
-    width: 220px;
-    max-width: 100%;
-    height: auto;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
-  .collection-artwork figcaption { padding-top: 1.25rem; }
-  .collection-artwork h2 { margin: 0 0 .25rem; font-size: 1.25rem; font-weight: 500; }
-  .collection-artwork time { color: var(--muted-color); font: .875rem ui-monospace, monospace; }
-  .collection-artwork p { margin: .75rem 0 0; }
-  .collection-artwork .weak { font-size: .875rem; }
 
   @media (hover: hover) and (pointer: fine) {
     .collection-image:hover img { opacity: .88; }
@@ -129,11 +129,19 @@ bodyClass: collection-page
     const dialog = document.querySelector(".collection-lightbox");
     const fullImg = dialog.querySelector("img");
     const closeBtn = dialog.querySelector(".collection-lightbox-close");
+    const links = Array.prototype.slice.call(document.querySelectorAll(".collection-image"));
+    let currentIndex = -1;
 
-    function openLightbox(link) {
+    function showAt(index) {
+      currentIndex = (index + links.length) % links.length;
+      const link = links[currentIndex];
       const thumb = link.querySelector("img");
       fullImg.src = link.href;
       fullImg.alt = thumb ? thumb.alt : "";
+    }
+
+    function openLightbox(link) {
+      showAt(links.indexOf(link));
       dialog.showModal();
       document.body.style.overflow = "hidden";
     }
@@ -153,7 +161,16 @@ bodyClass: collection-page
       if (e.target === dialog || e.target === fullImg) closeLightbox();
     });
 
-    document.querySelectorAll(".collection-image").forEach(function (link) {
+    document.addEventListener("keydown", function (e) {
+      if (!dialog.open) return;
+      if (e.key === "ArrowRight") {
+        showAt(currentIndex + 1);
+      } else if (e.key === "ArrowLeft") {
+        showAt(currentIndex - 1);
+      }
+    });
+
+    links.forEach(function (link) {
       link.addEventListener("click", function (e) {
         e.preventDefault();
         openLightbox(link);
