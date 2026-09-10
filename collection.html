@@ -44,14 +44,32 @@ bodyClass: collection-page
   }
   .collection-grid li { margin: 0; }
   .collection-image {
+    position: relative;
     display: block;
     aspect-ratio: 1;
     overflow: hidden;
+    background: var(--border-color);
     cursor: zoom-in;
     touch-action: manipulation;
     text-decoration: none;
   }
+  .collection-image::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: var(--bg-color);
+    animation: collection-placeholder-pulse 1.1s ease-in-out infinite alternate;
+  }
+  .collection-image.is-loaded::before {
+    animation: none;
+    opacity: 0;
+  }
+  @keyframes collection-placeholder-pulse {
+    from { opacity: 0; }
+    to { opacity: .6; }
+  }
   .collection-image img {
+    position: relative;
     display: block;
     width: 100%;
     height: 100%;
@@ -121,6 +139,7 @@ bodyClass: collection-page
   @media (prefers-reduced-motion: reduce) {
     .collection-lightbox[open] { animation: none; }
     .collection-image img { transition: none; }
+    .collection-image::before { animation: none; }
   }
 </style>
 
@@ -201,6 +220,14 @@ bodyClass: collection-page
         e.preventDefault();
         openLightbox(link);
       });
+
+      const thumb = link.querySelector("img");
+      const markLoaded = function () { link.classList.add("is-loaded"); };
+      if (thumb.complete) {
+        markLoaded();
+      } else {
+        thumb.addEventListener("load", markLoaded);
+      }
     });
   })();
 </script>
