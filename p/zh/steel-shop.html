@@ -1,18 +1,23 @@
 ---
 title: 小钢店 · Terry Wang
 layout: default
+bodyClass: portfolio
 ---
 
-<div class="lang">
-  <a href="/p/en/steel-shop">EN</a>
-  <a href="#" class="current">中文</a>
-</div>
+{% include header.html %}
 
-<div class="p-container">
+<main class="p-container">
+
+  <div class="lang">
+    <a href="/p/en/steel-shop">EN</a>
+    <a href="#" class="current">中文</a>
+  </div>
 
   <a href="/p/zh" class="back">回到全部作品</a>
 
-  <h1>小钢店</h1>
+  <section class="page-banner">
+    <h1 class="page-title">小钢店</h1>
+  </section>
 
   <p>小钢店是一款基于微信小程序平台的产品，它帮助钢贸商在不需要了解技术知识的情况下开设自己的小程序商店。</p>
 
@@ -93,4 +98,6 @@ layout: default
 
   <p class="end">- 完 - </p>
 
-</div>
+</main>
+
+{% include footer.html %}

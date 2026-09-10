@@ -423,6 +423,107 @@ footer a { color: var(--muted-color); }
   margin: 1.5rem 0 0.5rem;
 }
 
+/* Portfolio (/p) */
+.portfolio .lang {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  margin: 0 0 2.5rem;
+  font-size: 0.85rem;
+}
+
+.portfolio .lang a {
+  color: var(--muted-color);
+  text-decoration: none;
+}
+
+.portfolio .lang a:hover { color: var(--link-hover-color); }
+
+.portfolio .lang a.current {
+  color: var(--text-color);
+  font-weight: 600;
+}
+
+.portfolio .back {
+  display: inline-block;
+  margin: 0 0 1.5rem;
+  color: var(--muted-color);
+  font-size: 0.9rem;
+  text-decoration: none;
+}
+
+.portfolio .back:hover { color: var(--link-hover-color); }
+
+.portfolio .page-banner .page-title { margin-bottom: 0; }
+
+/* Case studies and intros read as one long-form column. */
+.portfolio .p-container h2 {
+  font-size: 1.25rem;
+  line-height: 1.3;
+  margin: 2.25rem 0 0.75rem;
+}
+
+.portfolio .p-container p { margin: 1rem 0; }
+
+.portfolio .p-container ul,
+.portfolio .p-container ol { padding-left: 1.5rem; }
+
+.portfolio .p-container li { margin: 0.25rem 0; }
+
+.portfolio .p-container img {
+  display: block;
+  margin: 1.75rem auto;
+}
+
+.portfolio .p-container blockquote {
+  border-left: 3px solid var(--border-color);
+  margin: 1.5rem 0;
+  padding: 0.1rem 0 0.1rem 1rem;
+  color: var(--muted-color);
+}
+
+.portfolio .p-intro p:first-child { margin-top: 0; }
+.portfolio .p-intro p:last-child { margin-bottom: 0; }
+
+/* Selected work: stacked rows, not a grid. */
+.portfolio .work {
+  margin: 1.5rem 0 0;
+  border-top: 1px solid var(--border-color);
+}
+
+.portfolio .work a {
+  display: block;
+  padding: 1.1rem 0;
+  border-bottom: 1px solid var(--border-color);
+  color: var(--text-color);
+  line-height: 1.6;
+  text-decoration: none;
+}
+
+.portfolio .work a strong {
+  display: block;
+  margin-bottom: 0.15rem;
+}
+
+.portfolio .work a u {
+  text-decoration: underline 0.08em;
+  text-decoration-color: var(--border-color);
+  text-underline-offset: 0.18em;
+}
+
+.portfolio .work a:hover u {
+  color: var(--link-hover-color);
+  text-decoration-color: currentColor;
+}
+
+/* More specific than `.p-container p`, which would flatten the margin. */
+.portfolio .p-container .end {
+  margin: 3rem 0 1rem;
+  text-align: center;
+  color: var(--muted-color);
+  font-size: 0.85rem;
+}
+
 /* Responsive */
 @media (max-width: 520px) {
   body { font-size: 16px; }
