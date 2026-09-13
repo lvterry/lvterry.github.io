@@ -456,6 +456,9 @@ footer a { color: var(--muted-color); }
 
 .portfolio .page-banner .page-title { margin-bottom: 0; }
 
+/* Portfolio pages have no footer, so keep the content off the bottom edge. */
+.portfolio .p-container { padding-bottom: 2.5rem; }
+
 /* Case studies and intros read as one long-form column. */
 .portfolio .p-container h2 {
   font-size: 1.25rem;
