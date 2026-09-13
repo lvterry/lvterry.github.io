@@ -1,6 +1,7 @@
 ---
 title: 判断力从哪来
-layout: no-title-post
+layout: post
+hide_title: true
 categories: essay
 hide_title_in_list: true
 ---

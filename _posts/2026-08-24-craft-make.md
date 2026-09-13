@@ -2,7 +2,8 @@
 title: Craft / Make
 date: 2026-08-24 15:30:00 +08:00
 categories: essay
-layout: no-title-post
+layout: post
+hide_title: true
 hide_title_in_list: true
 ---
 

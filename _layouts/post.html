@@ -17,11 +17,11 @@
         <div class="article-meta-row">
           <span class="article-date">{{ page.date | date: "%Y-%m-%d" }}</span>
         </div>
-        {% unless page.hide_title_in_list %}
+        {% unless page.hide_title %}
         <h1 class="article-title">{{ page.title }}</h1>
         {% endunless %}
         <div class="post-content {{ page.content_class }}">{{ content }}</div>
-        <p class="copyright">&copy; 2012 – 2026 Terry Wang</p>
+        <p class="copyright">&copy; {{ site.copyright_start }} – {{ site.time | date: "%Y" }} Terry Wang</p>
       </article>
     </main>
 

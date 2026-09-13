@@ -12,6 +12,8 @@ name: Terry Wang
 description: Terry Wang's Personal Website
 url: https://www.wangyazhou.com
 paginate: 20
+# First year of the site; the copyright notice shows this through the build year.
+copyright_start: 2012
 # jekyll-commonmark-ghpages injects empty front matter into every .md file,
 # which would otherwise publish these as /AGENTS.html and /DESIGN.html.
 exclude:

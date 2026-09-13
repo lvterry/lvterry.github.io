@@ -1,6 +1,7 @@
 ---
 title: AI 到底能让我们获得什么
-layout: no-title-post
+layout: post
+hide_title: true
 categories: essay
 hide_title_in_list: true
 ---
