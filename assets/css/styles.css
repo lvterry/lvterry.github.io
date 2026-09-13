@@ -2,7 +2,6 @@
   --bg-color: #fdfdfc;
   --text-color: #1c1c1c;
   --muted-color: #777;
-  --link-color: #1c1c1c;
   --link-hover-color: #ff0028;
   --border-color: #e6e3df;
   --code-bg: #f3f1ee;
@@ -14,7 +13,6 @@
     --bg-color: #161616;
     --text-color: #e9e6e1;
     --muted-color: #8a8780;
-    --link-color: #87c4ff;
     --link-hover-color: #b8dcff;
     --border-color: #2a2a2a;
     --code-bg: #1f1f1f;
@@ -72,11 +70,6 @@ input:focus-visible {
 .site-header {
   padding-top: 2.5rem;
   padding-bottom: 1.5rem;
-}
-
-.site-header .header-band {
-  max-width: none;
-  padding: 0;
 }
 
 .brand-mark {
@@ -366,19 +359,28 @@ footer a { color: var(--muted-color); }
 .principles .five { background-color: #e1eefb; }
 .principles .six { background-color: #ebe3f3; }
 
+/* The tiles are hardcoded pastels with dark text, so they need their own
+   dark-mode values rather than the page tokens alone. */
+@media (prefers-color-scheme: dark) {
+  .principles .wrapper,
+  .principles .wrapper h1,
+  .principles .wrapper p { color: #f2efe9; }
+
+  .principles .wrapper .weak { color: #b8b2a8; }
+
+  .principles .one { background-color: #4a3a22; }
+  .principles .two { background-color: #4a2b25; }
+  .principles .three { background-color: #1b3a41; }
+  .principles .four { background-color: #26401f; }
+  .principles .five { background-color: #1f3550; }
+  .principles .six { background-color: #33284a; }
+}
+
 /* Feature pages (quotes, recommendations, ai) */
 .page-banner {
   margin: 1rem 0 2rem;
   padding-bottom: 1.5rem;
   border-bottom: 1px solid var(--border-color);
-}
-
-.section-kicker {
-  color: var(--muted-color);
-  font-size: 0.8rem;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  margin: 0 0 0.4rem;
 }
 
 .page-title {
@@ -537,7 +539,11 @@ footer a { color: var(--muted-color); }
   .container, main, .site-header { padding-inline: 1rem; }
   .article-title, .page-title { font-size: 1.45rem; }
   .post-card h2 { font-size: 1.15rem; }
-  .principles .wrapper { display: block; }
+  .principles .wrapper {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+  .principles .wrapper > div { padding: 2rem 1.25rem; }
   .main-nav {
     column-gap: 0.8rem;
     row-gap: 0.45rem;
