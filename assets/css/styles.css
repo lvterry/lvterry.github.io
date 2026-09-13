@@ -393,19 +393,23 @@ footer a { color: var(--muted-color); }
 }
 
 .quote {
-  margin: 0 0 1.75rem;
+  margin: 0 0 2.4rem;
 }
 
 .quote blockquote {
-  border-left: 3px solid var(--border-color);
+  border-radius: 12px 12px 12px 0;
+  border-left: 0;
+  border: 1px solid var(--border-color);
+  border-bottom: 3px solid var(--border-color);
   margin: 0;
-  padding: 0.1rem 0 0.1rem 1rem;
+  padding: 1.1rem 1.25rem;
+  color: var(--text-color);
 }
 
 .quote p {
   color: var(--muted-color);
   font-size: 0.9rem;
-  margin: 0.4rem 0 0 1rem;
+  margin: 0.6rem 0 0 1.25rem;
 }
 
 .recommendation-list,
