@@ -6,7 +6,7 @@
     {% assign head_og_url = site.url | append: page.url %}
     {% assign head_og_title = page.title %}
     {% assign head_og_desc = content | strip_html | truncate: 140 %}
-    {% assign head_og_image = site.url | append: "/apple-touch-icon.png" %}
+    {% assign head_og_image = site.url | append: "/assets/imgs/og-default.png" %}
     {% include head.html %}
   </head>
   <body class="site-body post-page">
