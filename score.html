@@ -104,7 +104,7 @@
         display: grid;
         grid-template-columns: repeat(2, 1fr);
         gap: 0.75rem;
-        margin-bottom: 2rem;
+        margin: 2rem 0;
       }
       @media (min-width: 640px) {
         .stats { grid-template-columns: repeat(4, 1fr); }
@@ -171,6 +171,7 @@
         -webkit-overflow-scrolling: touch;
         border: 1px solid var(--border);
         border-radius: 12px;
+        margin-bottom: 3rem;
       }
       table {
         width: 100%;
@@ -206,31 +207,8 @@
   </head>
   <body>
     <div class="wrap">
-      <header>
-        <a class="brand" href="/">
-          <img class="avatar" src="/apple-touch-icon.png" alt="" width="40" height="40" />
-          <span>
-            <span class="name" style="display:block">Terry Wang</span>
-            <span class="brand-note">Notes on design, AI, products, and the occasional personal detour.</span>
-          </span>
-        </a>
-        <nav class="main-nav">
-          <a href="/">Posts</a>
-          <a href="/quotes.html">Quotes</a>
-          <a href="/music.html">Music</a>
-          <a href="/collection.html">Collection</a>
-          <a href="/recommendations.html">Recs</a>
-          <a href="/ai.html">AI Usage</a>
-          <span class="current">成绩</span>
-        </nav>
-      </header>
 
       <main>
-        <section class="banner">
-          <p class="kicker">当前为样例数据，真实成绩稍后更新。</p>
-          <h1>成绩</h1>
-          <p class="lead">语文、数学、英语、历史、生物、地理、道法。每科满分 100。G8 代表年级前 20%。</p>
-        </section>
 
         <section class="stats" id="stats"></section>
 
@@ -243,8 +221,6 @@
 
         <h2>历次考试</h2>
         <div class="table-wrap" id="table"></div>
-
-        <p class="copyright">&copy; 2012 – 2026 Terry Wang</p>
       </main>
     </div>
 
@@ -297,12 +273,12 @@
       const latest7 = totalOf(latest);
       const latest3 = totalOf(latest, CORE3);
       const d7 = prev ? latest7 - totalOf(prev) : null;
-      const d3 = prev ? latest3 - totalOf(prev, CORE3) : null;
+      const core3Delta = prev ? latest3 - totalOf(prev, CORE3) : null;
 
       document.getElementById("stats").innerHTML = [
         stat("最近一次", latest.name, formatDate(latest.date)),
         stat("七门总分", latest7, formatDelta(d7), d7 > 0 ? "up" : d7 < 0 ? "down" : ""),
-        stat("语数英", latest3, formatDelta(d3), d3 > 0 ? "up" : d3 < 0 ? "down" : ""),
+        stat("语数英", latest3, formatDelta(core3Delta), core3Delta > 0 ? "up" : core3Delta < 0 ? "down" : ""),
         stat("年级排名", latest.grade, gradeLabel(latest.grade)),
       ].join("");
 
