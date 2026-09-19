@@ -98,6 +98,34 @@
       h2 { font-size: 1.15rem; margin: 0; }
       h3 { font-size: 0.95rem; margin: 2rem 0 0.6rem; font-weight: 600; }
 
+      /* 上课记录 / 缴费记录：默认折叠，点标题或小箭头展开明细表 */
+      .fold { border-top: 1px solid var(--border); margin-top: 1.75rem; }
+      .fold > summary {
+        display: flex; align-items: center; gap: 0.5rem;
+        padding: 0.75rem 0;
+        cursor: pointer;
+        font-size: 0.95rem; font-weight: 600;
+        list-style: none;
+      }
+      /* 去掉浏览器自带的三角，只保留自己画的那个 */
+      .fold > summary::-webkit-details-marker { display: none; }
+      .fold > summary::marker { content: ""; }
+      .fold > summary:hover { color: var(--muted); }
+      .arrow {
+        width: 0; height: 0; flex-shrink: 0;
+        border-left: 5px solid currentColor;
+        border-top: 4px solid transparent;
+        border-bottom: 4px solid transparent;
+        color: var(--muted);
+        transition: transform 0.15s ease;
+      }
+      .fold > summary:hover .arrow { color: var(--fg); }
+      .fold[open] > summary .arrow { transform: rotate(90deg); }
+      .fold > .table-wrap { margin-bottom: 1.5rem; }
+      @media (prefers-reduced-motion: reduce) {
+        .arrow { transition: none; }
+      }
+
       /* 顶部并排概览：两门课的关键指标同屏可见，点按跳到下方明细。 */
       .glance { display: grid; grid-template-columns: 1fr; gap: 0.75rem; margin-top: 1.25rem; }
       @media (min-width: 720px) { .glance { grid-template-columns: repeat(2, 1fr); } }
@@ -413,10 +441,12 @@
           progress +
           '<div class="chart-panel"><div class="chart-canvas" id="chart-' + course.key + '"></div></div>' +
           '<p class="hint" id="hint-' + course.key + '">横轴为月份，纵轴为该月上课次数。悬停或点按查看当月日期。</p>' +
-          "<h3>上课记录</h3>" +
+          '<details class="fold"><summary><span class="arrow"></span>上课记录</summary>' +
           '<div class="table-wrap" id="sessions-' + course.key + '"></div>' +
-          "<h3>缴费记录</h3>" +
-          '<div class="table-wrap" id="payments-' + course.key + '"></div>';
+          "</details>" +
+          '<details class="fold"><summary><span class="arrow"></span>缴费记录</summary>' +
+          '<div class="table-wrap" id="payments-' + course.key + '"></div>' +
+          "</details>";
 
         document.getElementById("courses").append(section);
 
