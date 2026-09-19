@@ -146,6 +146,8 @@
       .chart-panel { border: 1px solid var(--border); border-radius: 12px; padding: 0.5rem 0.5rem 0.25rem; }
       @media (min-width: 640px) { .chart-panel { padding: 1rem; } }
       .chart-canvas { position: relative; width: 100%; min-height: 280px; }
+      #grade-chart { min-height: 240px; }
+      .bar { cursor: pointer; }
       .chart-empty { margin: 0; padding: 4rem 1rem; text-align: center; color: var(--muted); }
       .chart-tooltip {
         position: absolute; z-index: 2;
@@ -218,6 +220,12 @@
           <div class="chart-canvas" id="chart"></div>
         </div>
         <p class="hint">横轴为考试时间，纵轴为分数。悬停或点按查看明细。</p>
+
+        <h2>年级排名</h2>
+        <div class="chart-panel">
+          <div class="chart-canvas" id="grade-chart"></div>
+        </div>
+        <p class="hint">横轴为考试时间，纵轴为排名档位（G6 = 6、G7 = 7、G8 = 8），柱越高名次越靠前。悬停或点按查看明细。</p>
 
         <h2>历次考试</h2>
         <div class="table-wrap" id="table"></div>
@@ -444,9 +452,79 @@
           .on("touchmove", (event) => showAt(d3.pointer(event, g.node())[0]));
       }
 
-      draw();
-      window.addEventListener("resize", draw);
-      window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", draw);
+      /* ===== 年级排名柱状图：G6 = 6、G7 = 7、G8 = 8，柱越高名次越靠前 ===== */
+      const gradeWrap = document.getElementById("grade-chart");
+      function gradeValue(g) {
+        const m = /^G(\d{1,2})$/.exec(String(g === null || g === undefined ? "" : g));
+        return m ? Number(m[1]) : null;
+      }
+
+      function drawGrades() {
+        if (!gradeWrap) return;
+        gradeWrap.innerHTML = "";
+        const points = EXAMS.map((exam) => ({ exam, value: gradeValue(exam.grade) }));
+        const known = points.filter((p) => p.value !== null);
+        if (!known.length) {
+          gradeWrap.innerHTML = '<p class="chart-empty">暂无排名数据。</p>';
+          return;
+        }
+        const width = Math.max(gradeWrap.clientWidth, 280);
+        const height = width < 520 ? 240 : 280;
+        const margin = { top: 24, right: 16, bottom: 36, left: 44 };
+        const innerW = width - margin.left - margin.right;
+        const innerH = height - margin.top - margin.bottom;
+        const barColor = cssVar("--accent", "#c23a2b");
+        const axisColor = cssVar("--muted", "#777");
+        const gridColor = cssVar("--border", "#e6e3df");
+        /* 每次考试一根柱，纵轴 0 起、上界为最高档位，数值即 G 后面的数字。 */
+        const x = d3.scaleBand().domain(points.map((p) => p.exam.date)).range([0, innerW]).padding(points.length > 6 ? 0.32 : 0.42);
+        const y = d3.scaleLinear().domain([0, d3.max(known, (p) => p.value)]).range([innerH, 0]);
+        const labelEvery = width < 520 ? 2 : 1;
+        const labelDates = points.filter((p, i) => i % labelEvery === 0 || i === points.length - 1).map((p) => p.exam.date);
+        const svg = d3.select(gradeWrap).append("svg").attr("viewBox", "0 0 " + width + " " + height).attr("role", "img").attr("aria-label", "年级排名档位柱状图").style("width", "100%").style("height", "auto");
+        const g = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+        g.append("g").call(d3.axisLeft(y).ticks(4).tickSize(-innerW).tickFormat(() => "")).call((sel) => { sel.select(".domain").remove(); sel.selectAll("line").attr("stroke", gridColor).attr("stroke-dasharray", "3 4"); });
+        g.append("g").attr("transform", "translate(0," + innerH + ")").call(d3.axisBottom(x).tickValues(labelDates).tickSize(0).tickFormat((d) => Number(d.slice(5, 7)) + "月")).call((sel) => { sel.select(".domain").attr("stroke", gridColor); sel.selectAll("text").attr("fill", axisColor).attr("font-size", 11).attr("font-family", "inherit"); });
+        g.append("g").call(d3.axisLeft(y).ticks(4).tickSize(0)).call((sel) => { sel.select(".domain").remove(); sel.selectAll("text").attr("fill", axisColor).attr("font-size", 11).attr("font-family", "inherit").attr("dx", "-0.2em"); });
+        const bars = g.selectAll("rect.bar").data(known).join("rect").attr("class", "bar")
+          .attr("x", (p) => x(p.exam.date)).attr("y", (p) => y(p.value)).attr("width", x.bandwidth()).attr("height", (p) => innerH - y(p.value))
+          .attr("rx", 2).attr("fill", barColor).attr("fill-opacity", 0.85);
+        /* 柱顶标出档位代号，和纵轴上的数字一一对应。 */
+        g.selectAll("text.bar-label").data(known).join("text").attr("class", "bar-label")
+          .attr("x", (p) => x(p.exam.date) + x.bandwidth() / 2).attr("y", (p) => y(p.value) - 6)
+          .attr("text-anchor", "middle").attr("fill", axisColor).attr("font-size", 11).attr("font-family", "inherit")
+          .text((p) => p.exam.grade);
+        const tooltip = d3.select(gradeWrap).append("div").attr("class", "chart-tooltip");
+        function show(p) {
+          bars.attr("fill-opacity", (d) => (d === p ? 1 : 0.4));
+          tooltip.html(
+            '<div class="tip-kicker">' + formatDate(p.exam.date) + " · " + p.exam.name + "</div>" +
+            '<div class="tip-grade">' + gradeLabel(p.exam.grade) + "</div>" +
+            '<div class="tip-row"><span class="swatch" style="background:' + barColor + '"></span><span>排名档位</span><strong>' + p.value + "</strong></div>"
+          ).style("opacity", 1);
+          const tw = tooltip.node().offsetWidth;
+          const th = tooltip.node().offsetHeight;
+          const cx = margin.left + x(p.exam.date) + x.bandwidth() / 2;
+          tooltip.style("left", Math.min(Math.max(cx - tw / 2, 8), width - tw - 8) + "px")
+            .style("top", Math.max(8, margin.top + y(p.value) - th - 10) + "px");
+        }
+        function hide() {
+          bars.attr("fill-opacity", 0.85);
+          tooltip.style("opacity", 0);
+        }
+        bars.on("mouseenter", (event, p) => show(p)).on("mouseleave", hide)
+          .on("touchstart", (event, p) => { event.preventDefault(); show(p); })
+          .on("touchmove", (event, p) => { event.preventDefault(); show(p); });
+      }
+
+      function drawAll() {
+        draw();
+        drawGrades();
+      }
+
+      drawAll();
+      window.addEventListener("resize", drawAll);
+      window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", drawAll);
     </script>
   </body>
 </html>
