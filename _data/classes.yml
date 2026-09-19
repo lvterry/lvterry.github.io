@@ -1,0 +1,134 @@
+# _data/classes.yml
+# Elle 的课程数据。class.html 构建时通过 {{ site.data.classes | jsonify }} 读取，
+# 新增一次上课或一笔缴费，只在这个文件里追加一条，页面的 JS 不用动。
+#
+# 结构：
+#   courses[]            每门课一条。key 只用于锚点，label 是展示名。
+#   courses[].payments[] 缴费记录。date / amount / credits 必填，note 可选。
+#   courses[].sessions[] 上课记录。date 必填；别的都可以不写。
+#      - credits: 本次消耗的课时数，默认 1。连上两节或请假扣课时时才需要写。
+#      - mode:    线上 / 线下，默认 线下（页面里显示成「线上课」「线下课」）。
+#      - note:    临时调课、状态说明之类，没有就留空。
+#
+# 剩余课时 = 累计购课 - 已上课时（含 credits），页面自动算，不要在数据里写死。
+# 日期一律用 "YYYY-MM-DD"，加引号，否则会被 YAML 解析成日期对象。
+#
+# 新增一门课时：在这里追加一条，并在 class.html 的 :root 里补一组同名的
+# --course-<key> / --course-<key>-soft 颜色变量（浅色和深色两处）。
+
+title: Elle 的课程
+
+courses:
+  - key: spanish
+    label: 西班牙语课
+    emoji: 🇪🇸
+    color: var(--course-spanish)
+    payments:
+      - date: "2025-01-10"
+        amount: 1200
+        credits: 4
+        note: 第1次交费
+      - date: "2025-02-09"
+        amount: 3000
+        credits: 10
+        note: 第2次交费
+      - date: "2026-05-09"
+        amount: 3000
+        credits: 10
+        note: 第3次交费
+      - date: "2026-08-25"
+        amount: 3000
+        credits: 10
+        note: 第4次交费
+    sessions:
+      - date: "2025-01-16"
+      - date: "2025-01-23"
+        mode: 线上
+      - date: "2025-02-02"
+        mode: 线上
+      - date: "2025-02-06"
+        mode: 线上
+      - date: "2025-02-10"
+        mode: 线上
+      - date: "2025-02-28"
+        mode: 线上
+      - date: "2025-03-06"
+      - date: "2025-03-13"
+      - date: "2025-03-20"
+      - date: "2025-03-27"
+      - date: "2025-04-03"
+        mode: 线上
+      - date: "2025-04-10"
+      - date: "2025-04-23"
+        mode: 线上
+      - date: "2026-05-09"
+      - date: "2026-05-15"
+      - date: "2026-05-22"
+      - date: "2026-05-29"
+      - date: "2026-06-05"
+      - date: "2026-06-12"
+      - date: "2026-07-03"
+      - date: "2026-07-16"
+      - date: "2026-07-24"
+      - date: "2026-07-27"
+      - date: "2026-08-03"
+      - date: "2026-08-28"
+      - date: "2026-09-04"
+      - date: "2026-09-10"
+        note: 原 9/11 临时调课
+      - date: "2026-09-18"
+
+  - key: boxing
+    label: 拳击课
+    emoji: 🥊
+    color: var(--course-boxing)
+    payments:
+      - date: "2025-01-18"
+        amount: 4000
+        credits: 10
+        note: 第1次交费
+      - date: "2025-10-26"
+        amount: 4000
+        credits: 10
+        note: 第2次交费
+      - date: "2026-05-17"
+        amount: 4000
+        credits: 10
+        note: 第3次交费
+      - date: "2026-08-31"
+        amount: 4000
+        credits: 10
+        note: 第4次交费
+    sessions:
+      - date: "2025-02-08"
+      - date: "2025-03-01"
+      - date: "2025-03-08"
+      - date: "2025-03-15"
+      - date: "2025-03-29"
+      - date: "2025-04-06"
+      - date: "2025-04-12"
+      - date: "2025-04-26"
+      - date: "2025-11-09"
+      - date: "2025-11-16"
+      - date: "2025-11-23"
+      - date: "2025-12-07"
+      - date: "2025-12-14"
+      - date: "2025-12-21"
+      - date: "2025-12-28"
+      - date: "2026-01-02"
+      - date: "2026-01-11"
+      - date: "2026-01-18"
+      - date: "2026-05-10"
+      - date: "2026-05-17"
+      - date: "2026-05-24"
+      - date: "2026-05-31"
+      - date: "2026-06-07"
+      - date: "2026-06-14"
+      - date: "2026-06-21"
+      - date: "2026-06-28"
+        note: 白天复习功课，傍晚打拳，天热体力耗尽
+      - date: "2026-07-23"
+      - date: "2026-08-03"
+      - date: "2026-08-25"
+      - date: "2026-08-30"
+      - date: "2026-09-13"

@@ -1,0 +1,571 @@
+---
+# 课程数据在 _data/classes.yml，构建时由 Jekyll 注入本页；
+# 新增一次上课或一笔缴费只改那个文件，本页的 JS 不用动。
+---
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <title>课程 | Terry Wang</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no" />
+    <meta name="color-scheme" content="dark light" />
+    <meta name="description" content="Elle 的课程记录：西班牙语课与拳击课的剩余课时、上次上课时间，以及缴费与上课明细。" />
+    <meta name="robots" content="noindex" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <style>
+      :root {
+        --bg: #fdfdfc;
+        --fg: #1c1c1c;
+        --muted: #777;
+        --accent: #c23a2b;
+        --border: #e6e3df;
+        --code: #f3f1ee;
+        --up: #2f6b4f;
+        --down: #c23a2b;
+        --warn: #a8710f;
+        --course-spanish: #c23a2b;
+        --course-boxing: #2a5a8c;
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --bg: #161616;
+          --fg: #e9e6e1;
+          --muted: #8a8780;
+          --accent: #e07a6a;
+          --border: #2a2a2a;
+          --code: #1f1f1f;
+          --up: #8fbfa3;
+          --down: #e07a6a;
+          --warn: #d8b26a;
+          --course-spanish: #e07a6a;
+          --course-boxing: #7aa3d4;
+        }
+      }
+      *, *::before, *::after { box-sizing: border-box; }
+      html { -webkit-text-size-adjust: 100%; }
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--fg);
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        font-size: 17px;
+        line-height: 1.6;
+        -webkit-font-smoothing: antialiased;
+      }
+      ::selection { background: #ffe9b3; }
+      @media (prefers-color-scheme: dark) {
+        ::selection { background: #4a3a00; }
+      }
+      a {
+        color: var(--fg);
+        text-decoration: underline 0.08em;
+        text-decoration-color: var(--border);
+        text-underline-offset: 0.18em;
+      }
+      a:hover { color: var(--muted); }
+      button { font-family: inherit; }
+      button:not(:disabled) { cursor: pointer; }
+      .wrap { max-width: 920px; margin: 0 auto; padding: 0 1.25rem; }
+      header { padding: 2.5rem 0 1.5rem; }
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        text-decoration: none;
+        color: var(--fg);
+      }
+      .avatar {
+        width: 40px; height: 40px; border-radius: 50%;
+        display: grid; place-items: center;
+        background: var(--code); font-size: 0.7rem; font-weight: 600;
+        flex-shrink: 0;
+      }
+      .brand img.avatar { display: block; object-fit: cover; }
+      .name { font-weight: 600; font-size: 1.05rem; }
+      .brand-note { color: var(--muted); font-size: 0.85rem; }
+      .brand-copy { display: flex; flex-direction: column; }
+      .main-nav {
+        margin-top: 0.9rem;
+        display: flex; flex-wrap: wrap; gap: 1rem;
+        font-size: 0.95rem;
+      }
+      .main-nav .current { font-weight: 500; text-decoration: none; }
+      .banner { margin: 1rem 0 2rem; padding-bottom: 1.5rem; border-bottom: 1px solid var(--border); }
+      .kicker { margin: 0 0 0.5rem; color: var(--muted); font-size: 0.75rem; letter-spacing: 0.08em; }
+      h1 { font-size: 1.7rem; line-height: 1.25; margin: 0; font-weight: 600; text-wrap: balance; }
+      h2 { font-size: 1.15rem; margin: 0; }
+      h3 { font-size: 0.95rem; margin: 2rem 0 0.6rem; font-weight: 600; }
+      .lead { color: var(--muted); margin: 0.5rem 0 0; max-width: 52ch; font-variant-numeric: tabular-nums; }
+
+      .course {
+        border: 1px solid var(--border);
+        border-radius: 14px;
+        padding: 1.25rem 1.25rem 0.25rem;
+        margin-bottom: 2.5rem;
+      }
+      .course-head { display: flex; align-items: baseline; gap: 0.6rem; flex-wrap: wrap; }
+      .course-head h2 { display: inline-flex; align-items: baseline; gap: 0.45rem; }
+      .course-head .dot { width: 9px; height: 9px; border-radius: 99px; flex-shrink: 0; align-self: center; }
+      .course-sub { color: var(--muted); font-size: 0.85rem; font-variant-numeric: tabular-nums; }
+      .stats {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.75rem;
+        margin: 1.25rem 0 0;
+      }
+      @media (min-width: 640px) {
+        .stats { grid-template-columns: repeat(4, 1fr); }
+      }
+      .stat {
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 0.75rem 1rem;
+      }
+      .stat-label { font-size: 0.72rem; color: var(--muted); letter-spacing: 0.02em; }
+      .stat-value { margin-top: 0.15rem; font-size: 1.25rem; font-weight: 600; font-variant-numeric: tabular-nums; letter-spacing: -0.02em; }
+      .stat-hint { font-size: 0.8rem; color: var(--muted); font-variant-numeric: tabular-nums; }
+      .stat-hint.up { color: var(--up); }
+      .stat-hint.down { color: var(--down); }
+      .stat-hint.warn { color: var(--warn); }
+
+      .progress { margin-top: 1rem; }
+      .progress-head {
+        display: flex; justify-content: space-between; gap: 1rem;
+        font-size: 0.82rem; color: var(--muted); font-variant-numeric: tabular-nums;
+      }
+      .progress-track {
+        margin-top: 0.4rem;
+        height: 8px; border-radius: 99px;
+        background: color-mix(in oklab, var(--fg) 8%, transparent);
+        overflow: hidden;
+      }
+      .progress-fill { height: 100%; border-radius: 99px; }
+
+      .chart-panel { border: 1px solid var(--border); border-radius: 12px; padding: 0.5rem 0.5rem 0.25rem; margin-top: 1.5rem; }
+      @media (min-width: 640px) { .chart-panel { padding: 1rem; } }
+      .chart-canvas { position: relative; width: 100%; min-height: 220px; }
+      .bar { cursor: pointer; }
+      .chart-empty { margin: 0; padding: 3rem 1rem; text-align: center; color: var(--muted); }
+      .chart-tooltip {
+        position: absolute; z-index: 2;
+        min-width: 160px; max-width: 260px;
+        padding: 0.7rem 0.85rem;
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        background: var(--bg); color: var(--fg);
+        font-size: 0.8rem; line-height: 1.45;
+        pointer-events: none;
+        box-shadow: 0 8px 24px color-mix(in oklab, var(--fg) 10%, transparent);
+        opacity: 0;
+      }
+      .tip-kicker { color: var(--muted); font-size: 0.72rem; }
+      .tip-title { margin: 0.15rem 0 0.45rem; font-weight: 600; }
+      .tip-row { display: flex; align-items: center; gap: 0.4rem; font-variant-numeric: tabular-nums; }
+      .tip-row strong { margin-left: auto; }
+      .tip-list { color: var(--muted); font-size: 0.76rem; margin-top: 0.35rem; }
+      .hint { margin: 0.5rem 0 0; color: var(--muted); font-size: 0.8rem; }
+
+      .table-wrap {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        border: 1px solid var(--border);
+        border-radius: 12px;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 0.88rem;
+        font-variant-numeric: tabular-nums;
+      }
+      th, td {
+        padding: 0.55rem 0.7rem;
+        text-align: right;
+        border-bottom: 1px solid var(--border);
+        white-space: nowrap;
+      }
+      th:first-child, td:first-child,
+      th:nth-child(2), td:nth-child(2) { text-align: left; }
+      th.right-align, td.right-align { text-align: right; }
+      td.note { text-align: left; white-space: normal; min-width: 12ch; color: var(--muted); }
+      thead th {
+        font-weight: 500; color: var(--muted); font-size: 0.75rem;
+        background: color-mix(in oklab, var(--fg) 3%, var(--bg));
+      }
+      tbody tr:last-child td { border-bottom: none; }
+      tbody tr:hover td { background: color-mix(in oklab, var(--fg) 3.5%, transparent); }
+      tbody tr.latest td { background: color-mix(in oklab, var(--fg) 5%, transparent); font-weight: 500; }
+      .badge {
+        display: inline-block; padding: 0.05rem 0.4rem;
+        border: 1px solid var(--border); border-radius: 99px;
+        font-size: 0.72rem; color: var(--muted);
+      }
+      .up { color: var(--up); }
+      .down { color: var(--down); }
+      .na { color: var(--muted); }
+      .copyright { color: var(--muted); font-size: 0.85rem; margin: 1rem 0 2.5rem; }
+      @media (max-width: 520px) {
+        body { font-size: 16px; }
+        h1 { font-size: 1.45rem; }
+        .course { padding: 1rem 0.9rem 0.25rem; }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .chart-tooltip { transition: none; }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+
+      <header>
+        <a href="/" class="brand">
+          <img src="/apple-touch-icon.png" alt="" class="avatar" />
+          <span class="brand-copy">
+            <span class="name">Terry Wang</span>
+            <span class="brand-note">Notes on design, AI, products, and the occasional personal detour.</span>
+          </span>
+        </a>
+        <nav class="main-nav">
+          <a href="/">Posts</a>
+          <a href="/music.html">Music</a>
+          <a href="/recommendations.html">Recs</a>
+          <a href="/score.html">成绩</a>
+          <a href="/class.html" class="current">课程</a>
+        </nav>
+      </header>
+
+      <main>
+        <section class="banner">
+          <p class="kicker">ELLE · 课程记录</p>
+          <h1>西班牙语课与拳击课</h1>
+          <p class="lead" id="summary"></p>
+        </section>
+
+        <div id="courses"></div>
+
+        <p class="copyright">数据在 <code>_data/classes.yml</code>，构建时自动注入本页；更新只改那个文件。</p>
+      </main>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js"></script>
+    <script>
+      /* ===== 课程数据 =====
+         数据在 _data/classes.yml，构建时由 Jekyll 注入到下面这行；
+         新增上课/缴费只改那个文件，本页的 JS 不用动。 */
+      const DATA = {{ site.data.classes | jsonify }};
+      const COURSES = DATA.courses || [];
+
+      const WEEKDAYS = ["周日", "周一", "周二", "周三", "周四", "周五", "周六"];
+      const TODAY = (function () {
+        const now = new Date();
+        return new Date(now.getFullYear(), now.getMonth(), now.getDate(), 12);
+      })();
+
+      function parseDate(iso) {
+        const p = String(iso).split("-");
+        return new Date(Number(p[0]), Number(p[1]) - 1, Number(p[2]), 12);
+      }
+      function formatDate(iso) {
+        const p = String(iso).split("-");
+        return p[0] + "." + Number(p[1]) + "." + Number(p[2]);
+      }
+      function weekdayOf(iso) {
+        return WEEKDAYS[parseDate(iso).getDay()];
+      }
+      function formatMoney(n) {
+        return "¥" + Number(n).toLocaleString("zh-CN");
+      }
+      function daysBetween(a, b) {
+        return Math.round((b - a) / 86400000);
+      }
+      function cssVar(name, fallback) {
+        return getComputedStyle(document.documentElement).getPropertyValue(name).trim() || fallback;
+      }
+      function sessionCredits(s) {
+        const v = s.credits;
+        return typeof v === "number" && isFinite(v) && v > 0 ? v : 1;
+      }
+      function escapeHtml(str) {
+        return String(str == null ? "" : str).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+      }
+      /* 一门课的全部派生指标：剩余课时、上次上课、本卡进度等都在这里算。 */
+      function summarize(course) {
+        const sessions = (course.sessions || []).slice().sort((a, b) => (a.date < b.date ? -1 : 1));
+        const payments = (course.payments || []).slice().sort((a, b) => (a.date < b.date ? -1 : 1));
+        const attended = sessions.reduce((n, s) => n + sessionCredits(s), 0);
+        const purchased = payments.reduce((n, p) => n + (Number(p.credits) || 0), 0);
+        const spend = payments.reduce((n, p) => n + (Number(p.amount) || 0), 0);
+        const last = sessions.length ? sessions[sessions.length - 1] : null;
+        const lastPayment = payments.length ? payments[payments.length - 1] : null;
+        const previous = sessions.length > 1 ? sessions[sessions.length - 2] : null;
+        const remaining = purchased - attended;
+        /* 本卡进度：最近一次缴费之后消耗的课时 / 该次购买的课时。 */
+        const onCard = lastPayment ? sessions.filter((s) => s.date > lastPayment.date).reduce((n, s) => n + sessionCredits(s), 0) : 0;
+        const cardSize = lastPayment ? Number(lastPayment.credits) || 0 : 0;
+        const online = sessions.filter((s) => s.mode === "线上").length;
+        const recent = sessions.filter((s) => daysBetween(parseDate(s.date), TODAY) <= 90).length;
+        return {
+          sessions,
+          payments,
+          attended,
+          purchased,
+          spend,
+          remaining,
+          last,
+          lastPayment,
+          previous,
+          onCard,
+          cardSize,
+          online,
+          recent,
+          daysSinceLast: last ? daysBetween(parseDate(last.date), TODAY) : null,
+          gap: last && previous ? daysBetween(parseDate(previous.date), parseDate(last.date)) : null,
+          avgGap: sessions.length > 1 ? Math.round(daysBetween(parseDate(sessions[0].date), parseDate(last.date)) / (sessions.length - 1)) : null,
+          perSession: attended ? Math.round(spend / attended) : null,
+        };
+      }
+
+      const SUMMARIES = COURSES.map((c) => ({ course: c, s: summarize(c) }));
+
+      /* 顶部一句话总览：合计剩余课时 + 最近一次上课。 */
+      (function renderSummary() {
+        const el = document.getElementById("summary");
+        if (!el || !SUMMARIES.length) return;
+        const totalRemaining = SUMMARIES.reduce((n, x) => n + x.s.remaining, 0);
+        const latest = SUMMARIES.filter((x) => x.s.last).sort((a, b) => (a.s.last.date < b.s.last.date ? 1 : -1))[0];
+        const parts = SUMMARIES.map((x) => x.course.label + "剩 " + x.s.remaining + " 节");
+        let text = parts.join("、") + "，合计 " + totalRemaining + " 节。";
+        if (latest) text += "最近一次是 " + formatDate(latest.s.last.date) + " 的" + latest.course.label + "（" + latest.s.daysSinceLast + " 天前）。";
+        el.textContent = text;
+      })();
+
+      function stat(label, value, hint, tone) {
+        return (
+          '<div class="stat"><div class="stat-label">' + label + '</div><div class="stat-value">' + value +
+          '</div><div class="stat-hint ' + (tone || "") + '">' + hint + "</div></div>"
+        );
+      }
+
+      /* 单门课的卡片：4 个指标 + 本卡进度条 + 月度上课次数图 + 两张明细表。 */
+      function renderCourse(entry) {
+        const { course, s } = entry;
+        const color = course.color || "var(--accent)";
+        const section = document.createElement("section");
+        section.className = "course";
+        section.id = "course-" + course.key;
+
+        const remainTone = s.remaining <= 2 ? "down" : s.remaining <= 4 ? "warn" : "up";
+        const gapTone = s.daysSinceLast === null ? "" : s.daysSinceLast >= 21 ? "warn" : "";
+        const stats = [
+          s.last
+            ? stat("上次上课", formatDate(s.last.date), s.daysSinceLast + " 天前 · " + weekdayOf(s.last.date) + (s.last.note ? " · " + escapeHtml(s.last.note) : ""), gapTone)
+            : stat("上次上课", "—", "暂无记录"),
+          stat("剩余课时", s.remaining, "累计购课 " + s.purchased + " · 已上 " + s.attended, remainTone),
+          s.lastPayment
+            ? stat("上次缴费", formatMoney(s.lastPayment.amount), formatDate(s.lastPayment.date) + " · " + s.lastPayment.credits + " 课时")
+            : stat("上次缴费", "—", "暂无记录"),
+          stat("累计花费", formatMoney(s.spend), s.perSession ? "平均 " + formatMoney(s.perSession) + " / 节" : "—"),
+        ].join("");
+
+        const pct = s.cardSize ? Math.min(100, (s.onCard / s.cardSize) * 100) : 0;
+        const progress =
+          '<div class="progress">' +
+            '<div class="progress-head"><span>本卡已上 ' + s.onCard + " / " + s.cardSize + " 节</span><span>剩 " + Math.max(0, s.cardSize - s.onCard) + " 节未用</span></div>" +
+            '<div class="progress-track"><div class="progress-fill" style="width:' + pct.toFixed(1) + "%;background:" + color + '"></div></div>' +
+          "</div>";
+
+        const fastest = s.gap === null ? "" : "最近两次间隔 " + s.gap + " 天" + (s.avgGap ? " · 平均间隔 " + s.avgGap + " 天" : "");
+        const sessionHint = "倒序排列，共 " + s.sessions.length + " 次" + (s.online ? "，其中线上 " + s.online + " 次" : "") + "。近 90 天 " + s.recent + " 次。" + fastest;
+
+        section.innerHTML =
+          '<div class="course-head"><h2><span class="dot" style="background:' + color + '"></span>' +
+            escapeHtml((course.emoji ? course.emoji + " " : "") + course.label) + "</h2>" +
+            '<span class="course-sub">上次上课 ' + (s.last ? formatDate(s.last.date) : "—") + " · 剩 " + s.remaining + " 节</span></div>" +
+          '<div class="stats">' + stats + "</div>" +
+          progress +
+          '<div class="chart-panel"><div class="chart-canvas" id="chart-' + course.key + '"></div></div>' +
+          '<p class="hint" id="hint-' + course.key + '">横轴为月份，纵轴为该月上课次数。悬停或点按查看当月日期。</p>' +
+          "<h3>上课记录</h3>" +
+          '<p class="hint">' + sessionHint + "</p>" +
+          '<div class="table-wrap" id="sessions-' + course.key + '"></div>' +
+          "<h3>缴费记录</h3>" +
+          '<div class="table-wrap" id="payments-' + course.key + '"></div>';
+
+        document.getElementById("courses").append(section);
+
+        renderSessionTable(course, s, color);
+        renderPaymentTable(course, s);
+        entry.draw = function () { drawMonthly(course, s, color); };
+      }
+
+      function renderSessionTable(course, s, color) {
+        const rows = s.sessions.slice().reverse();
+        const firstDate = s.sessions.length ? s.sessions[0].date : null;
+        const html =
+          "<table><thead><tr><th>日期</th><th>星期</th><th>形式</th><th>课时</th><th title='与上一次上课相隔的天数'>间隔</th><th>备注</th></tr></thead><tbody>" +
+          rows
+            .map((session, i) => {
+              const mode = session.mode || "线下";
+              const credits = sessionCredits(session);
+              /* 间隔 = 与上一次上课相隔的天数；最早一次无法比较，显示 —。 */
+              const older = rows[i + 1];
+              const gap = older ? daysBetween(parseDate(older.date), parseDate(session.date)) : null;
+              const isLatest = i === 0;
+              return (
+                '<tr class="' + (isLatest ? "latest" : "") + '">' +
+                "<td>" + formatDate(session.date) + (isLatest ? ' <span class="badge">最近</span>' : "") + "</td>" +
+                "<td>" + weekdayOf(session.date) + "</td>" +
+                '<td class="' + (mode === "线上" ? "na" : "") + '">' + escapeHtml(mode) + "课</td>" +
+                '<td class="' + (credits > 1 ? "up" : "") + '">' + credits + "</td>" +
+                '<td class="na">' + (gap === null ? "—" : gap) + "</td>" +
+                '<td class="note">' + (session.note ? escapeHtml(session.note) : "—") + "</td>" +
+                "</tr>"
+              );
+            })
+            .join("") +
+          "</tbody></table>";
+        document.getElementById("sessions-" + course.key).innerHTML = html;
+      }
+
+      function renderPaymentTable(course, s) {
+        let runningCredits = 0;
+        const rows = s.payments.map((p) => {
+          runningCredits += Number(p.credits) || 0;
+          const unit = p.credits ? Math.round(Number(p.amount) / Number(p.credits)) : null;
+          return { p, runningCredits, unit };
+        });
+        const html =
+          "<table><thead><tr><th>日期</th><th>金额</th><th>课时</th><th>单价</th><th>累计课时</th><th>备注</th></tr></thead><tbody>" +
+          rows
+            .slice()
+            .reverse()
+            .map(({ p, runningCredits: rc, unit }, i) => {
+              const isLatest = i === 0;
+              return (
+                '<tr class="' + (isLatest ? "latest" : "") + '">' +
+                "<td>" + formatDate(p.date) + (isLatest ? ' <span class="badge">最近</span>' : "") + "</td>" +
+                "<td>" + formatMoney(p.amount) + "</td>" +
+                "<td>" + (p.credits || "—") + "</td>" +
+                '<td class="na">' + (unit === null ? "—" : formatMoney(unit)) + "</td>" +
+                "<td>" + rc + "</td>" +
+                '<td class="note">' + (p.note ? escapeHtml(p.note) : "—") + "</td>" +
+                "</tr>"
+              );
+            })
+            .join("") +
+          "</tbody></table>";
+        document.getElementById("payments-" + course.key).innerHTML = html;
+      }
+
+      /* 月度上课次数柱状图：从第一次上课到当前月，空月份留空档。 */
+      function drawMonthly(course, s, color) {
+        const wrap = document.getElementById("chart-" + course.key);
+        if (!wrap) return;
+        wrap.innerHTML = "";
+        if (!s.sessions.length) {
+          wrap.innerHTML = '<p class="chart-empty">暂无上课记录。</p>';
+          return;
+        }
+        const byMonth = new Map();
+        s.sessions.forEach((session) => {
+          const key = session.date.slice(0, 7);
+          if (!byMonth.has(key)) byMonth.set(key, []);
+          byMonth.get(key).push(session);
+        });
+        const start = s.sessions[0].date.slice(0, 7);
+        const end = TODAY.getFullYear() + "-" + String(TODAY.getMonth() + 1).padStart(2, "0");
+        const months = [];
+        let cursor = parseDate(start + "-01");
+        const lastMonth = parseDate(end + "-01");
+        while (cursor <= lastMonth) {
+          const key = cursor.getFullYear() + "-" + String(cursor.getMonth() + 1).padStart(2, "0");
+          months.push({ key, date: new Date(cursor.getTime()), items: byMonth.get(key) || [] });
+          cursor = new Date(cursor.getFullYear(), cursor.getMonth() + 1, 1, 12);
+        }
+        const width = Math.max(wrap.clientWidth, 280);
+        const height = width < 520 ? 220 : 260;
+        const margin = { top: 20, right: 16, bottom: 36, left: 40 };
+        const innerW = width - margin.left - margin.right;
+        const innerH = height - margin.top - margin.bottom;
+        const axisColor = cssVar("--muted", "#777");
+        const gridColor = cssVar("--border", "#e6e3df");
+        const maxCount = d3.max(months, (m) => m.items.length) || 1;
+        const x = d3.scaleBand().domain(months.map((m) => m.key)).range([0, innerW]).padding(months.length > 18 ? 0.3 : 0.42);
+        const y = d3.scaleLinear().domain([0, maxCount]).nice().range([innerH, 0]);
+        const svg = d3.select(wrap).append("svg")
+          .attr("viewBox", "0 0 " + width + " " + height)
+          .attr("role", "img")
+          .attr("aria-label", course.label + "月度上课次数")
+          .style("width", "100%").style("height", "auto");
+        const g = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+        g.append("g").call(d3.axisLeft(y).ticks(Math.min(4, maxCount)).tickSize(-innerW).tickFormat(() => ""))
+          .call((sel) => { sel.select(".domain").remove(); sel.selectAll("line").attr("stroke", gridColor).attr("stroke-dasharray", "3 4"); });
+        const labelEvery = Math.max(1, Math.ceil(months.length / (width < 520 ? 5 : 9)));
+        const labelTicks = months.filter((m, i) => i % labelEvery === 0 || i === months.length - 1).map((m) => m.key);
+        /* 月份跨度会跨年，只写「1月」会出现两个一样的标签：每换一年就在那格带上年份。 */
+        function monthTick(key, i) {
+          const prev = i > 0 ? labelTicks[i - 1] : null;
+          const month = Number(key.slice(5, 7));
+          if (!prev || prev.slice(0, 4) !== key.slice(0, 4)) return key.slice(0, 4) + "." + month;
+          return month + "月";
+        }
+        g.append("g").attr("transform", "translate(0," + innerH + ")")
+          .call(d3.axisBottom(x).tickValues(labelTicks).tickSize(0).tickFormat(monthTick))
+          .call((sel) => {
+            sel.select(".domain").attr("stroke", gridColor);
+            sel.selectAll("text").attr("fill", axisColor).attr("font-size", 11).attr("font-family", "inherit");
+          });
+        g.append("g").call(d3.axisLeft(y).ticks(Math.min(4, maxCount)).tickSize(0))
+          .call((sel) => {
+            sel.select(".domain").remove();
+            sel.selectAll("text").attr("fill", axisColor).attr("font-size", 11).attr("font-family", "inherit").attr("dx", "-0.2em");
+          });
+
+        const EMPTY_STUB = 2;
+        const bars = g.selectAll("rect.bar").data(months).join("rect").attr("class", "bar")
+          .attr("x", (m) => x(m.key)).attr("y", (m) => (m.items.length ? y(m.items.length) : innerH - EMPTY_STUB))
+          .attr("width", x.bandwidth())
+          .attr("height", (m) => (m.items.length ? innerH - y(m.items.length) : EMPTY_STUB))
+          .attr("rx", 2)
+          .attr("fill", color)
+          /* 没有课的月份留一条很浅的短线：既不误导成有课，也方便悬停查看。 */
+          .attr("fill-opacity", (m) => (m.items.length ? 0.85 : 0.18));
+        g.selectAll("text.bar-label").data(months.filter((m) => m.items.length)).join("text").attr("class", "bar-label")
+          .attr("x", (m) => x(m.key) + x.bandwidth() / 2).attr("y", (m) => y(m.items.length) - 5)
+          .attr("text-anchor", "middle").attr("fill", axisColor).attr("font-size", 11).attr("font-family", "inherit")
+          .text((m) => m.items.length);
+
+        const tooltip = d3.select(wrap).append("div").attr("class", "chart-tooltip");
+        function show(m) {
+          bars.attr("fill-opacity", (d) => (d === m ? 1 : d.items.length ? 0.35 : 0.1));
+          const list = m.items.map((session) => formatDate(session.date) + (session.mode === "线上" ? "（线上）" : "")).join("、");
+          tooltip.html(
+            '<div class="tip-kicker">' + m.date.getFullYear() + " 年 " + (m.date.getMonth() + 1) + ' 月</div>' +
+            '<div class="tip-title">' + m.items.length + " 次上课</div>" +
+            '<div class="tip-row"><span>本月课时</span><strong>' + m.items.reduce((n, session) => n + sessionCredits(session), 0) + "</strong></div>" +
+            (m.items.length ? '<div class="tip-list">' + list + "</div>" : '<div class="tip-list">本月没有上课记录</div>')
+          ).style("opacity", 1);
+          const tw = tooltip.node().offsetWidth;
+          const th = tooltip.node().offsetHeight;
+          const cx = margin.left + x(m.key) + x.bandwidth() / 2;
+          tooltip.style("left", Math.min(Math.max(cx - tw / 2, 8), width - tw - 8) + "px")
+            .style("top", Math.max(8, margin.top + (m.items.length ? y(m.items.length) : innerH) - th - 10) + "px");
+        }
+        function hide() { bars.attr("fill-opacity", (d) => (d.items.length ? 0.85 : 0.12)); tooltip.style("opacity", 0); }
+        bars.on("mousemove", (event, m) => show(m)).on("mouseleave", hide)
+          .on("touchstart", (event, m) => { event.preventDefault(); show(m); })
+          .on("touchmove", (event, m) => { event.preventDefault(); show(m); });
+      }
+
+      SUMMARIES.forEach(renderCourse);
+
+      function drawAll() {
+        SUMMARIES.forEach((entry) => { if (entry.draw) entry.draw(); });
+      }
+      drawAll();
+      window.addEventListener("resize", drawAll);
+      window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", drawAll);
+    </script>
+  </body>
+</html>
