@@ -197,6 +197,7 @@
       tbody tr:hover td { background: color-mix(in oklab, var(--fg) 3.5%, transparent); }
       .up { color: var(--up); }
       .down { color: var(--down); }
+      .na { color: var(--muted); }
       .copyright { color: var(--muted); font-size: 0.85rem; margin: 3rem 0 2.5rem; }
       @media (max-width: 520px) {
         body { font-size: 16px; }
@@ -219,7 +220,7 @@
         <div class="chart-panel">
           <div class="chart-canvas" id="chart"></div>
         </div>
-        <p class="hint">横轴为考试时间，纵轴为分数。悬停或点按查看明细。</p>
+        <p class="hint" id="chart-hint">横轴为考试时间，纵轴为分数。悬停或点按查看明细。</p>
 
         <h2>年级排名</h2>
         <div class="chart-panel">
@@ -228,13 +229,16 @@
         <p class="hint">横轴为考试时间，纵轴为排名档位（G6 = 6、G7 = 7、G8 = 8），柱越高名次越靠前。悬停或点按查看明细。</p>
 
         <h2>历次考试</h2>
+        <p class="hint">月考通常只公布语数英；未公布的成绩与无法同口径比较的「较上次」均显示「—」。</p>
         <div class="table-wrap" id="table"></div>
       </main>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js"></script>
     <script>
-      /* ===== 成绩数据（更新时只改这里） ===== */
+      /* ===== 成绩数据（更新时只改这里） =====
+         只写当次实际公布的科目，缺失的科目留空不写，不要填 0：
+         0 表示"考了得 0 分"，留空表示"当次未公布"。 */
       const SUBJECTS = [
         { key: "chinese", label: "语文", color: "var(--subject-chinese)" },
         { key: "math", label: "数学", color: "var(--subject-math)" },
@@ -245,25 +249,48 @@
         { key: "morals", label: "道法", color: "var(--subject-morals)" },
       ];
       const CORE3 = ["chinese", "math", "english"];
-      const GRADE_HINT = { G8: "年级前 20%" };
       const EXAMS = [
-        { date: "2025-09-08", name: "初一第一学期暑假作业验收", grade: "G8", scores: { chinese: 90, math: 85, english: 77.5, history: 0, biology: 0, geography: 0, morals: 0 } },
-        { date: "2025-10-09", name: "初一第一学期10月月考", grade: "G8", scores: { chinese: 79, math: 86, english: 90.5, history: 0, biology: 0, geography: 0, morals: 0 } },
+        { date: "2025-09-08", name: "初一第一学期暑假作业验收", grade: "G8", scores: { chinese: 90, math: 85, english: 77.5 } },
+        { date: "2025-10-09", name: "初一第一学期10月月考", grade: "G8", scores: { chinese: 79, math: 86, english: 90.5 } },
         { date: "2025-11-04", name: "初一第一学期期中考试", grade: "G6", scores: { chinese: 78.5, math: 80, english: 90, history: 88, biology: 81, geography: 77, morals: 86 } },
-        { date: "2025-12-01", name: "初一第一学期12月月考", grade: "G8", scores: { chinese: 71, math: 77, english: 77, history: 0, biology: 0, geography: 0, morals: 0 } },
+        { date: "2025-12-01", name: "初一第一学期12月月考", grade: "G8", scores: { chinese: 71, math: 77, english: 77 } },
         { date: "2026-01-12", name: "初一第一学期期末考试", grade: "G7", scores: { chinese: 73, math: 82, english: 87, history: 85, biology: 85, geography: 93, morals: 89 } },
-        { date: "2026-03-09", name: "初一第二学期寒假作业验收", grade: "G7", scores: { chinese: 87, math: 83, english: 79, history: 0, biology: 0, geography: 0, morals: 0 } },
+        { date: "2026-03-09", name: "初一第二学期寒假作业验收", grade: "G7", scores: { chinese: 87, math: 83, english: 79 } },
         { date: "2026-04-20", name: "初一第二学期期中考试", grade: "G7", scores: { chinese: 83, math: 79, english: 89.5, history: 87, biology: 87, geography: 91, morals: 79 } },
-        { date: "2026-05-26", name: "初一第二学期5月月考", grade: "G8", scores: { chinese: 80, math: 84, english: 79.5, history: 0, biology: 0, geography: 0, morals: 0 } },
+        { date: "2026-05-26", name: "初一第二学期5月月考", grade: "G8", scores: { chinese: 80, math: 84, english: 79.5 } },
         { date: "2026-06-29", name: "初一第二学期期末考试", grade: "G8", scores: { chinese: 76, math: 82, english: 82, history: 89, biology: 96, geography: 90, morals: 86 } },
       ];
 
       const KEYS = SUBJECTS.map((s) => s.key);
-      function totalOf(exam, keys) {
-        return (keys || KEYS).reduce((sum, k) => sum + exam.scores[k], 0);
+      function scoreOf(exam, key) {
+        const v = exam.scores[key];
+        return typeof v === "number" && isFinite(v) ? v : null;
+      }
+      /* 只有 keys 全部有成绩才返回总分：口径不齐时不把缺失当 0 硬加。 */
+      function sumOf(exam, keys) {
+        let total = 0;
+        for (const k of keys || KEYS) {
+          const v = scoreOf(exam, k);
+          if (v === null) return null;
+          total += v;
+        }
+        return total;
+      }
+      function formatScore(v) {
+        return v === null || v === undefined ? "—" : String(v);
+      }
+      /* G band：把全部成绩等分成 10 档，G8 即第 8 档 = 年级前 20%–30%。 */
+      function bandLabel(g) {
+        const m = /^G(\d{1,2})$/.exec(String(g || ""));
+        if (!m) return g;
+        const n = Number(m[1]);
+        if (n < 1 || n > 10) return g;
+        const lower = (10 - n) * 10;
+        return lower === 0 ? "年级前 " + (lower + 10) + "%" : "年级前 " + lower + "–" + (lower + 10) + "%";
       }
       function gradeLabel(g) {
-        return GRADE_HINT[g] ? g + " · " + GRADE_HINT[g] : g;
+        const band = bandLabel(g);
+        return band === g ? g : g + " · " + band;
       }
       function formatDate(iso) {
         const p = iso.split("-");
@@ -277,17 +304,29 @@
         return getComputedStyle(document.documentElement).getPropertyValue(name).trim() || fallback;
       }
 
-      const latest = EXAMS[EXAMS.length - 1];
-      const prev = EXAMS[EXAMS.length - 2];
-      const latest7 = totalOf(latest);
-      const latest3 = totalOf(latest, CORE3);
-      const d7 = prev ? latest7 - totalOf(prev) : null;
-      const core3Delta = prev ? latest3 - totalOf(prev, CORE3) : null;
+      /* 只和上一次同口径的考试比较，避免拿三门总分去减七门总分。 */
+      function previousIndexWithTotal(from, keys) {
+        for (let i = from - 1; i >= 0; i -= 1) {
+          if (sumOf(EXAMS[i], keys) !== null) return i;
+        }
+        return -1;
+      }
+
+      const lastIndex = EXAMS.length - 1;
+      const latest = EXAMS[lastIndex];
+      const latest7 = sumOf(latest, KEYS);
+      const latest3 = sumOf(latest, CORE3);
+      const prev7Index = previousIndexWithTotal(lastIndex, KEYS);
+      const prev3Index = previousIndexWithTotal(lastIndex, CORE3);
+      const d7 = latest7 !== null && prev7Index >= 0 ? latest7 - sumOf(EXAMS[prev7Index], KEYS) : null;
+      const core3Delta = latest3 !== null && prev3Index >= 0 ? latest3 - sumOf(EXAMS[prev3Index], CORE3) : null;
 
       document.getElementById("stats").innerHTML = [
         stat("最近一次", latest.name, formatDate(latest.date)),
-        stat("七门总分", latest7, formatDelta(d7), d7 > 0 ? "up" : d7 < 0 ? "down" : ""),
-        stat("语数英", latest3, formatDelta(core3Delta), core3Delta > 0 ? "up" : core3Delta < 0 ? "down" : ""),
+        latest7 !== null
+          ? stat("七门总分", latest7, formatDelta(d7), d7 > 0 ? "up" : d7 < 0 ? "down" : "")
+          : stat("七门总分", "—", "当次仅公布语数英"),
+        stat("语数英", formatScore(latest3), formatDelta(core3Delta), core3Delta > 0 ? "up" : core3Delta < 0 ? "down" : ""),
         stat("年级排名", latest.grade, gradeLabel(latest.grade)),
       ].join("");
 
@@ -295,14 +334,14 @@
         return '<div class="stat"><div class="stat-label">' + label + '</div><div class="stat-value">' + value + '</div><div class="stat-hint ' + (tone || "") + '">' + hint + "</div></div>";
       }
 
-      let mode = "total7";
+      let mode = "core3";
       let active = KEYS.slice();
 
       const modesEl = document.getElementById("modes");
       const subjectsEl = document.getElementById("subjects");
       [
-        { id: "total7", label: "七门总分" },
         { id: "core3", label: "语数英" },
+        { id: "total7", label: "七门总分" },
         { id: "subject", label: "单科" },
       ].forEach((item) => {
         const btn = document.createElement("button");
@@ -340,23 +379,35 @@
       });
 
       const tableRows = EXAMS.slice().reverse().map((exam, i, arr) => {
-        const older = arr[i + 1];
-        const t7 = totalOf(exam);
-        const t3 = totalOf(exam, CORE3);
-        const dd = older ? t7 - totalOf(older) : null;
+        const t7 = sumOf(exam, KEYS);
+        const t3 = sumOf(exam, CORE3);
+        /* 往回找最近一次同样有七门总分的考试，跨口径不做差。 */
+        let dd = null;
+        if (t7 !== null) {
+          for (let j = i + 1; j < arr.length; j += 1) {
+            const older = sumOf(arr[j], KEYS);
+            if (older !== null) {
+              dd = t7 - older;
+              break;
+            }
+          }
+        }
         return { exam, t7, t3, dd };
       });
       document.getElementById("table").innerHTML =
         "<table><thead><tr><th>日期</th><th>考试</th>" +
         SUBJECTS.map((s) => "<th>" + s.label + "</th>").join("") +
-        "<th>语数英</th><th>七门</th><th>较上次</th><th>排名</th></tr></thead><tbody>" +
+        "<th>语数英</th><th>七门</th><th>七门较上次</th><th>排名</th></tr></thead><tbody>" +
         tableRows
           .map(({ exam, t7, t3, dd }) => {
             const cls = dd > 0 ? "up" : dd < 0 ? "down" : "";
             return (
               "<tr><td>" + formatDate(exam.date) + "</td><td>" + exam.name + "</td>" +
-              KEYS.map((k) => "<td>" + exam.scores[k] + "</td>").join("") +
-              "<td>" + t3 + "</td><td>" + t7 + "</td><td class='" + cls + "'>" + formatDelta(dd) + "</td><td title='" + gradeLabel(exam.grade) + "'>" + exam.grade + "</td></tr>"
+              KEYS.map((k) => {
+                const v = scoreOf(exam, k);
+                return "<td class='" + (v === null ? "na" : "") + "'>" + formatScore(v) + "</td>";
+              }).join("") +
+              "<td>" + formatScore(t3) + "</td><td>" + formatScore(t7) + "</td><td class='" + cls + "'>" + formatDelta(dd) + "</td><td title='" + gradeLabel(exam.grade) + "'>" + exam.grade + "</td></tr>"
             );
           })
           .join("") +
@@ -365,16 +416,17 @@
       function buildSeries() {
         const dates = EXAMS.map((e) => new Date(e.date + "T12:00:00"));
         if (mode === "total7") {
-          return [{ id: "total7", label: "七门总分", color: cssVar("--chart-line", "#1c1c1c"), values: EXAMS.map((e, i) => ({ date: dates[i], value: totalOf(e) })) }];
+          /* 缺失处为 null：折线在此断开，不做跨口径连线。 */
+          return [{ id: "total7", label: "七门总分", color: cssVar("--chart-line", "#1c1c1c"), values: EXAMS.map((e, i) => ({ date: dates[i], value: sumOf(e, KEYS) })) }];
         }
         if (mode === "core3") {
-          return [{ id: "core3", label: "语数英总分", color: cssVar("--accent", "#c23a2b"), values: EXAMS.map((e, i) => ({ date: dates[i], value: totalOf(e, CORE3) })) }];
+          return [{ id: "core3", label: "语数英总分", color: cssVar("--accent", "#c23a2b"), values: EXAMS.map((e, i) => ({ date: dates[i], value: sumOf(e, CORE3) })) }];
         }
         return SUBJECTS.filter((s) => active.includes(s.key)).map((s) => ({
           id: s.key,
           label: s.label,
           color: cssVar(s.color.replace("var(", "").replace(")", ""), cssVar("--fg", "#1c1c1c")),
-          values: EXAMS.map((e, i) => ({ date: dates[i], value: e.scores[s.key] })),
+          values: EXAMS.map((e, i) => ({ date: dates[i], value: scoreOf(e, s.key) })),
         }));
       }
 
@@ -386,11 +438,13 @@
       }
 
       const wrap = document.getElementById("chart");
+      const chartHint = document.getElementById("chart-hint");
       function draw() {
         const series = buildSeries().map((s) => ({ ...s, color: resolveColor(s) }));
         wrap.innerHTML = "";
         if (!series.length) {
           wrap.innerHTML = '<p class="chart-empty">选择至少一门科目。</p>';
+          if (chartHint) chartHint.textContent = "";
           return;
         }
         const width = Math.max(wrap.clientWidth, 280);
@@ -398,15 +452,21 @@
         const margin = { top: 20, right: 16, bottom: 36, left: 44 };
         const innerW = width - margin.left - margin.right;
         const innerH = height - margin.top - margin.bottom;
-        const all = series.flatMap((s) => s.values.map((v) => v.value));
+        const all = series.flatMap((s) => s.values.map((v) => v.value)).filter((v) => v !== null);
+        if (!all.length) {
+          wrap.innerHTML = '<p class="chart-empty">所选科目暂无成绩。</p>';
+          if (chartHint) chartHint.textContent = "";
+          return;
+        }
         const rawMin = d3.min(all);
         const rawMax = d3.max(all);
         const pad = Math.max((rawMax - rawMin) * 0.18, mode === "subject" ? 4 : 8);
         const yMax = Math.ceil(rawMax + pad);
         const x = d3.scaleTime().domain(d3.extent(series[0].values, (d) => d.date)).range([0, innerW]);
         const y = d3.scaleLinear().domain([0, yMax]).nice().range([innerH, 0]);
-        const line = d3.line().x((d) => x(d.date)).y((d) => y(d.value)).curve(d3.curveMonotoneX);
-        const area = d3.area().x((d) => x(d.date)).y0(innerH).y1((d) => y(d.value)).curve(d3.curveMonotoneX);
+        const line = d3.line().defined((d) => d.value !== null).x((d) => x(d.date)).y((d) => y(d.value)).curve(d3.curveMonotoneX);
+        const bridge = d3.line().x((d) => x(d.date)).y((d) => y(d.value)).curve(d3.curveMonotoneX);
+        const area = d3.area().defined((d) => d.value !== null).x((d) => x(d.date)).y0(innerH).y1((d) => y(d.value)).curve(d3.curveMonotoneX);
         const svg = d3.select(wrap).append("svg").attr("viewBox", "0 0 " + width + " " + height).attr("role", "img").attr("aria-label", "成绩曲线").style("width", "100%").style("height", "auto");
         const g = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
         const axisColor = cssVar("--muted", "#777");
@@ -417,10 +477,17 @@
         g.append("g").attr("transform", "translate(0," + innerH + ")").call(d3.axisBottom(x).tickValues(width < 520 ? dates.filter(function(_, i) { return i % 2 === 0 || i === dates.length - 1; }) : dates).tickFormat((d) => d.getMonth() + 1 + "月")).call((sel) => { sel.select(".domain").attr("stroke", gridColor); sel.selectAll("line").attr("stroke", gridColor); sel.selectAll("text").attr("fill", axisColor).attr("font-size", 11).attr("font-family", "inherit"); });
         g.append("g").call(d3.axisLeft(y).ticks(5).tickSize(0)).call((sel) => { sel.select(".domain").remove(); sel.selectAll("text").attr("fill", axisColor).attr("font-size", 11).attr("font-family", "inherit").attr("dx", "-0.2em"); });
         const single = series.length === 1;
+        const hasGap = series.some((s) => s.values.some((v) => v.value === null));
         series.forEach((s) => {
+          const known = s.values.filter((v) => v.value !== null);
+          const gap = known.length !== s.values.length;
           if (single) g.append("path").datum(s.values).attr("fill", s.color).attr("fill-opacity", 0.08).attr("d", area);
+          /* 跨缺失点的趋势用浅虚线表示，实线段仍只在连续有分的区间绘制。 */
+          if (gap && known.length > 1) {
+            g.append("path").datum(known).attr("class", "gap-bridge").attr("fill", "none").attr("stroke", s.color).attr("stroke-width", single ? 1.6 : 1.3).attr("stroke-opacity", 0.45).attr("stroke-dasharray", "3 4").attr("d", bridge);
+          }
           g.append("path").datum(s.values).attr("fill", "none").attr("stroke", s.color).attr("stroke-width", single ? 2.2 : 1.8).attr("stroke-linejoin", "round").attr("stroke-linecap", "round").attr("d", line);
-          g.selectAll("circle." + s.id).data(s.values).join("circle").attr("cx", (d) => x(d.date)).attr("cy", (d) => y(d.value)).attr("r", single ? 4 : 3).attr("fill", cssVar("--bg", "#fdfdfc")).attr("stroke", s.color).attr("stroke-width", 1.8);
+          g.selectAll("circle." + s.id).data(known).join("circle").attr("cx", (d) => x(d.date)).attr("cy", (d) => y(d.value)).attr("r", single ? 4 : 3).attr("fill", cssVar("--bg", "#fdfdfc")).attr("stroke", s.color).attr("stroke-width", 1.8);
         });
         const tooltip = d3.select(wrap).append("div").attr("class", "chart-tooltip");
         const hover = g.append("g").style("pointer-events", "none");
@@ -435,7 +502,7 @@
           tooltip.html(
             '<div class="tip-kicker">' + formatDate(exam.date) + " · " + exam.name + "</div>" +
             '<div class="tip-grade">' + gradeLabel(exam.grade) + "</div>" +
-            series.map((s) => '<div class="tip-row"><span class="swatch" style="background:' + s.color + '"></span><span>' + s.label + "</span><strong>" + s.values[i].value + "</strong></div>").join("")
+            series.map((s) => '<div class="tip-row"><span class="swatch" style="background:' + s.color + '"></span><span>' + s.label + "</span><strong>" + formatScore(s.values[i].value) + "</strong></div>").join("")
           ).style("opacity", 1);
           const tw = tooltip.node().offsetWidth;
           const left = Math.min(Math.max(cx + margin.left - tw / 2, 8), width - tw - 8);
@@ -450,6 +517,11 @@
           .on("mouseleave", hide)
           .on("touchstart", (event) => { event.preventDefault(); showAt(d3.pointer(event, g.node())[0]); })
           .on("touchmove", (event) => showAt(d3.pointer(event, g.node())[0]));
+        if (chartHint) {
+          chartHint.textContent = hasGap
+            ? "横轴为考试时间，纵轴为分数。悬停或点按查看明细；虚线为跨口径趋势，表示该次未公布对应科目。"
+            : "横轴为考试时间，纵轴为分数。悬停或点按查看明细。";
+        }
       }
 
       /* ===== 年级排名柱状图：G6 = 6、G7 = 7、G8 = 8，柱越高名次越靠前 ===== */
