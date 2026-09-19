@@ -1,0 +1,122 @@
+# _data/scores.yml
+# 考试成绩数据。score.html 构建时通过 {{ site.data.scores | jsonify }} 读取，
+# 新增一次考试只需在 exams 下面追加一条，不需要改页面的 JS。
+#
+# 只写当次实际公布的科目，缺失的科目留空不写，不要填 0：
+# 0 表示"考了得 0 分"，留空表示"当次未公布"。
+#
+# exams[].scores 的键取自下面 subjects 里的 key。新增科目时，
+# 除在这里加一条，还要在 score.html 的 :root 里补一个对应的 CSS 变量。
+#
+# grade 是年级排名档位：把全部成绩等分成 10 档，G8 即第 8 档 = 年级前 20%–30%。
+
+subjects:
+  - key: chinese
+    label: 语文
+    color: var(--subject-chinese)
+  - key: math
+    label: 数学
+    color: var(--subject-math)
+  - key: english
+    label: 英语
+    color: var(--subject-english)
+  - key: history
+    label: 历史
+    color: var(--subject-history)
+  - key: biology
+    label: 生物
+    color: var(--subject-biology)
+  - key: geography
+    label: 地理
+    color: var(--subject-geography)
+  - key: morals
+    label: 道法
+    color: var(--subject-morals)
+
+# 语数英：每次考试都公布，作为全期可比的基线，也是默认视图。
+core:
+  - chinese
+  - math
+  - english
+
+# 日期用 "YYYY-MM-DD"，加引号以免被解析成日期对象。
+exams:
+  - date: "2025-09-08"
+    name: 初一第一学期暑假作业验收
+    grade: G8
+    scores:
+      chinese: 90
+      math: 85
+      english: 77.5
+  - date: "2025-10-09"
+    name: 初一第一学期10月月考
+    grade: G8
+    scores:
+      chinese: 79
+      math: 86
+      english: 90.5
+  - date: "2025-11-04"
+    name: 初一第一学期期中考试
+    grade: G6
+    scores:
+      chinese: 78.5
+      math: 80
+      english: 90
+      history: 88
+      biology: 81
+      geography: 77
+      morals: 86
+  - date: "2025-12-01"
+    name: 初一第一学期12月月考
+    grade: G8
+    scores:
+      chinese: 71
+      math: 77
+      english: 77
+  - date: "2026-01-12"
+    name: 初一第一学期期末考试
+    grade: G7
+    scores:
+      chinese: 73
+      math: 82
+      english: 87
+      history: 85
+      biology: 85
+      geography: 93
+      morals: 89
+  - date: "2026-03-09"
+    name: 初一第二学期寒假作业验收
+    grade: G7
+    scores:
+      chinese: 87
+      math: 83
+      english: 79
+  - date: "2026-04-20"
+    name: 初一第二学期期中考试
+    grade: G7
+    scores:
+      chinese: 83
+      math: 79
+      english: 89.5
+      history: 87
+      biology: 87
+      geography: 91
+      morals: 79
+  - date: "2026-05-26"
+    name: 初一第二学期5月月考
+    grade: G8
+    scores:
+      chinese: 80
+      math: 84
+      english: 79.5
+  - date: "2026-06-29"
+    name: 初一第二学期期末考试
+    grade: G8
+    scores:
+      chinese: 76
+      math: 82
+      english: 82
+      history: 89
+      biology: 96
+      geography: 90
+      morals: 86
