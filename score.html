@@ -209,10 +209,25 @@
       @media (prefers-reduced-motion: reduce) {
         .chart-tooltip { transition: none; }
       }
+
+      /* 私人页面之间的切换导航：只有成绩和课程两项 */
+      .page-nav {
+        display: flex; gap: 1.25rem;
+        padding: 2rem 0 0;
+        font-size: 0.95rem;
+      }
+      .page-nav a { color: var(--muted); text-decoration: none; }
+      .page-nav a:hover { color: var(--fg); }
+      .page-nav a.current { color: var(--fg); font-weight: 500; }
     </style>
   </head>
   <body>
     <div class="wrap">
+
+      <nav class="page-nav" aria-label="页面导航">
+        <a href="/score.html" class="current" aria-current="page">成绩</a>
+        <a href="/class.html">课程</a>
+      </nav>
 
       <main>
 
