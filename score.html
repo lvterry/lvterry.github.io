@@ -394,10 +394,9 @@
         const rawMin = d3.min(all);
         const rawMax = d3.max(all);
         const pad = Math.max((rawMax - rawMin) * 0.18, mode === "subject" ? 4 : 8);
-        const yMin = Math.max(0, Math.floor(rawMin - pad));
         const yMax = Math.ceil(rawMax + pad);
         const x = d3.scaleTime().domain(d3.extent(series[0].values, (d) => d.date)).range([0, innerW]);
-        const y = d3.scaleLinear().domain([yMin, yMax]).nice().range([innerH, 0]);
+        const y = d3.scaleLinear().domain([0, yMax]).nice().range([innerH, 0]);
         const line = d3.line().x((d) => x(d.date)).y((d) => y(d.value)).curve(d3.curveMonotoneX);
         const area = d3.area().x((d) => x(d.date)).y0(innerH).y1((d) => y(d.value)).curve(d3.curveMonotoneX);
         const svg = d3.select(wrap).append("svg").attr("viewBox", "0 0 " + width + " " + height).attr("role", "img").attr("aria-label", "成绩曲线").style("width", "100%").style("height", "auto");
