@@ -67,7 +67,7 @@
       a:hover { color: var(--muted); }
       button { font-family: inherit; }
       button:not(:disabled) { cursor: pointer; }
-      .wrap { max-width: 920px; margin: 0 auto; padding: 0 1.25rem; }
+      .wrap { max-width: 1180px; margin: 0 auto; padding: 0 1.25rem; }
       header { padding: 2.5rem 0 1.5rem; }
       .brand {
         display: flex;
@@ -97,6 +97,25 @@
       h1 { font-size: 1.7rem; line-height: 1.25; margin: 0; font-weight: 600; text-wrap: balance; }
       h2 { font-size: 1.15rem; margin: 0; }
       h3 { font-size: 0.95rem; margin: 2rem 0 0.6rem; font-weight: 600; }
+
+      /* 顶部并排概览：两门课的关键指标同屏可见，点按跳到下方明细。 */
+      .glance { display: grid; grid-template-columns: 1fr; gap: 0.75rem; margin-top: 1.25rem; }
+      @media (min-width: 720px) { .glance { grid-template-columns: repeat(2, 1fr); } }
+      .glance-card {
+        display: block; color: var(--fg); text-decoration: none;
+        border: 1px solid var(--border); border-radius: 12px;
+        padding: 0.85rem 1rem;
+        background: color-mix(in oklab, var(--fg) 2%, transparent);
+      }
+      .glance-card:hover { color: var(--fg); background: color-mix(in oklab, var(--fg) 4.5%, transparent); }
+      .glance-head { display: flex; align-items: center; gap: 0.45rem; }
+      .glance-name { font-weight: 600; }
+      .glance-remain { margin-left: auto; font-size: 0.9rem; color: var(--muted); font-variant-numeric: tabular-nums; }
+      .glance-remain.up { color: var(--up); }
+      .glance-remain.down { color: var(--down); }
+      .glance-remain.warn { color: var(--warn); }
+      .glance-meta { margin-top: 0.3rem; color: var(--muted); font-size: 0.8rem; font-variant-numeric: tabular-nums; }
+      .glance-card .progress-track { margin-top: 0.55rem; }
 
       .course {
         border: 1px solid var(--border);
@@ -221,6 +240,7 @@
       <main>
         <section class="banner">
           <h1>西班牙语课与拳击课</h1>
+          <div class="glance" id="glance"></div>
         </section>
 
         <div id="courses"></div>
@@ -266,6 +286,10 @@
         const v = s.credits;
         return typeof v === "number" && isFinite(v) && v > 0 ? v : 1;
       }
+      /* 本卡已消耗比例：最近一次缴费之后上的课时 / 该次购买的课时。 */
+      function cardPct(s) {
+        return s.cardSize ? Math.min(100, (s.onCard / s.cardSize) * 100) : 0;
+      }
       function escapeHtml(str) {
         return String(str == null ? "" : str).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
       }
@@ -308,6 +332,30 @@
 
       const SUMMARIES = COURSES.map((c) => ({ course: c, s: summarize(c) }));
 
+      /* 顶部概览：剩余课时、上次上课、累计与均价一眼看全，点按跳到该课明细。 */
+      (function renderGlance() {
+        const el = document.getElementById("glance");
+        if (!el || !SUMMARIES.length) return;
+        el.innerHTML = SUMMARIES.map(({ course, s }) => {
+          const color = course.color || "var(--accent)";
+          const tone = s.remaining <= 2 ? "down" : s.remaining <= 4 ? "warn" : "up";
+          const bits = [
+            s.last ? "上次上课 " + formatDate(s.last.date) + " · " + s.daysSinceLast + " 天前" : "暂无上课记录",
+            "已上 " + s.attended + " 节",
+          ];
+          if (s.perSession) bits.push("平均 " + formatMoney(s.perSession) + " / 节");
+          return (
+            '<a class="glance-card" href="#course-' + course.key + '">' +
+              '<div class="glance-head"><span class="glance-name">' + escapeHtml((course.emoji ? course.emoji + " " : "") + course.label) + "</span>" +
+                '<span class="glance-remain ' + tone + '">剩 ' + s.remaining + " 节</span></div>" +
+              '<div class="glance-meta">' + bits.join(" · ") + "</div>" +
+              '<div class="progress-track" title="本卡已上 ' + s.onCard + " / " + s.cardSize + ' 节">' +
+                '<div class="progress-fill" style="width:' + cardPct(s).toFixed(1) + "%;background:" + color + '"></div></div>' +
+            "</a>"
+          );
+        }).join("");
+      })();
+
       function stat(label, value, hint, tone) {
         return (
           '<div class="stat"><div class="stat-label">' + label + '</div><div class="stat-value">' + value +
@@ -336,7 +384,7 @@
           stat("累计花费", formatMoney(s.spend), s.perSession ? "平均 " + formatMoney(s.perSession) + " / 节" : "—"),
         ].join("");
 
-        const pct = s.cardSize ? Math.min(100, (s.onCard / s.cardSize) * 100) : 0;
+        const pct = cardPct(s);
         const progress =
           '<div class="progress">' +
             '<div class="progress-head"><span>本卡已上 ' + s.onCard + " / " + s.cardSize + " 节</span><span>剩 " + Math.max(0, s.cardSize - s.onCard) + " 节未用</span></div>" +
