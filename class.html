@@ -106,7 +106,6 @@
       }
       .course-head { display: flex; align-items: baseline; gap: 0.6rem; flex-wrap: wrap; }
       .course-head h2 { display: inline-flex; align-items: baseline; gap: 0.45rem; }
-      .course-head .dot { width: 9px; height: 9px; border-radius: 99px; flex-shrink: 0; align-self: center; }
       .course-sub { color: var(--muted); font-size: 0.85rem; font-variant-numeric: tabular-nums; }
       .stats {
         display: grid;
@@ -345,7 +344,7 @@
           "</div>";
 
         section.innerHTML =
-          '<div class="course-head"><h2><span class="dot" style="background:' + color + '"></span>' +
+          '<div class="course-head"><h2>' +
             escapeHtml((course.emoji ? course.emoji + " " : "") + course.label) + "</h2>" +
             '<span class="course-sub">上次上课 ' + (s.last ? formatDate(s.last.date) : "—") + " · 剩 " + s.remaining + " 节</span></div>" +
           '<div class="stats">' + stats + "</div>" +
