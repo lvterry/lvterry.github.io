@@ -189,6 +189,7 @@
       th:nth-child(2), td:nth-child(2) { text-align: left; }
       th.right-align, td.right-align { text-align: right; }
       td.note { text-align: left; white-space: normal; min-width: 12ch; color: var(--muted); }
+      th.note { text-align: left; }
       thead th {
         font-weight: 500; color: var(--muted); font-size: 0.75rem;
         background: color-mix(in oklab, var(--fg) 3%, var(--bg));
@@ -357,9 +358,6 @@
             '<div class="progress-track"><div class="progress-fill" style="width:' + pct.toFixed(1) + "%;background:" + color + '"></div></div>' +
           "</div>";
 
-        const fastest = s.gap === null ? "" : "最近两次间隔 " + s.gap + " 天" + (s.avgGap ? " · 平均间隔 " + s.avgGap + " 天" : "");
-        const sessionHint = "倒序排列，共 " + s.sessions.length + " 次" + (s.online ? "，其中线上 " + s.online + " 次" : "") + "。近 90 天 " + s.recent + " 次。" + fastest;
-
         section.innerHTML =
           '<div class="course-head"><h2><span class="dot" style="background:' + color + '"></span>' +
             escapeHtml((course.emoji ? course.emoji + " " : "") + course.label) + "</h2>" +
@@ -369,7 +367,6 @@
           '<div class="chart-panel"><div class="chart-canvas" id="chart-' + course.key + '"></div></div>' +
           '<p class="hint" id="hint-' + course.key + '">横轴为月份，纵轴为该月上课次数。悬停或点按查看当月日期。</p>' +
           "<h3>上课记录</h3>" +
-          '<p class="hint">' + sessionHint + "</p>" +
           '<div class="table-wrap" id="sessions-' + course.key + '"></div>' +
           "<h3>缴费记录</h3>" +
           '<div class="table-wrap" id="payments-' + course.key + '"></div>';
@@ -385,7 +382,7 @@
         const rows = s.sessions.slice().reverse();
         const firstDate = s.sessions.length ? s.sessions[0].date : null;
         const html =
-          "<table><thead><tr><th>日期</th><th>星期</th><th>形式</th><th>课时</th><th title='与上一次上课相隔的天数'>间隔</th><th>备注</th></tr></thead><tbody>" +
+          "<table><thead><tr><th>日期</th><th>星期</th><th>形式</th><th>课时</th><th title='与上一次上课相隔的天数'>间隔</th><th class='note'>备注</th></tr></thead><tbody>" +
           rows
             .map((session, i) => {
               const mode = session.mode || "线下";
@@ -418,7 +415,7 @@
           return { p, runningCredits, unit };
         });
         const html =
-          "<table><thead><tr><th>日期</th><th>金额</th><th>课时</th><th>单价</th><th>累计课时</th><th>备注</th></tr></thead><tbody>" +
+          "<table><thead><tr><th>日期</th><th>金额</th><th>课时</th><th>单价</th><th>累计课时</th><th class='note'>备注</th></tr></thead><tbody>" +
           rows
             .slice()
             .reverse()
