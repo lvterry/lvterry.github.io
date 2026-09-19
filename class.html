@@ -97,7 +97,6 @@
       h1 { font-size: 1.7rem; line-height: 1.25; margin: 0; font-weight: 600; text-wrap: balance; }
       h2 { font-size: 1.15rem; margin: 0; }
       h3 { font-size: 0.95rem; margin: 2rem 0 0.6rem; font-weight: 600; }
-      .lead { color: var(--muted); margin: 0.5rem 0 0; max-width: 52ch; font-variant-numeric: tabular-nums; }
 
       .course {
         border: 1px solid var(--border);
@@ -223,7 +222,6 @@
       <main>
         <section class="banner">
           <h1>西班牙语课与拳击课</h1>
-          <p class="lead" id="summary"></p>
         </section>
 
         <div id="courses"></div>
@@ -310,18 +308,6 @@
       }
 
       const SUMMARIES = COURSES.map((c) => ({ course: c, s: summarize(c) }));
-
-      /* 顶部一句话总览：合计剩余课时 + 最近一次上课。 */
-      (function renderSummary() {
-        const el = document.getElementById("summary");
-        if (!el || !SUMMARIES.length) return;
-        const totalRemaining = SUMMARIES.reduce((n, x) => n + x.s.remaining, 0);
-        const latest = SUMMARIES.filter((x) => x.s.last).sort((a, b) => (a.s.last.date < b.s.last.date ? 1 : -1))[0];
-        const parts = SUMMARIES.map((x) => x.course.label + "剩 " + x.s.remaining + " 节");
-        let text = parts.join("、") + "，合计 " + totalRemaining + " 节。";
-        if (latest) text += "最近一次是 " + formatDate(latest.s.last.date) + " 的" + latest.course.label + "（" + latest.s.daysSinceLast + " 天前）。";
-        el.textContent = text;
-      })();
 
       function stat(label, value, hint, tone) {
         return (
