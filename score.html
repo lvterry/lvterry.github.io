@@ -282,7 +282,8 @@
       }
       /* G band：把全部成绩等分成 10 档，G8 即第 8 档 = 年级前 20%–30%。 */
       function bandLabel(g) {
-        const m = /^G(\d{1,2})$/.exec(String(g || ""));
+        if (g === null || g === undefined) return "";
+        const m = /^G(\d{1,2})$/.exec(String(g));
         if (!m) return g;
         const n = Number(m[1]);
         if (n < 1 || n > 10) return g;
@@ -290,6 +291,7 @@
         return lower === 0 ? "年级前 " + (lower + 10) + "%" : "年级前 " + lower + "–" + (lower + 10) + "%";
       }
       function gradeLabel(g) {
+        if (g === null || g === undefined) return "";
         const band = bandLabel(g);
         return band === g ? g : g + " · " + band;
       }
@@ -328,7 +330,7 @@
           ? stat("七门总分", latest7, formatDelta(d7), d7 > 0 ? "up" : d7 < 0 ? "down" : "")
           : stat("七门总分", "—", "当次仅公布语数英"),
         stat("语数英", formatScore(latest3), formatDelta(core3Delta), core3Delta > 0 ? "up" : core3Delta < 0 ? "down" : ""),
-        stat("年级排名", latest.grade, gradeLabel(latest.grade)),
+        stat("年级排名", latest.grade ? formatScore(latest.grade) : "—", latest.grade ? gradeLabel(latest.grade) : "当次未公布"),
       ].join("");
 
       function stat(label, value, hint, tone) {
@@ -408,7 +410,7 @@
                 const v = scoreOf(exam, k);
                 return "<td class='" + (v === null ? "na" : "") + "'>" + formatScore(v) + "</td>";
               }).join("") +
-              "<td>" + formatScore(t3) + "</td><td>" + formatScore(t7) + "</td><td class='" + cls + "'>" + formatDelta(dd) + "</td><td title='" + gradeLabel(exam.grade) + "'>" + exam.grade + "</td></tr>"
+              "<td>" + formatScore(t3) + "</td><td>" + formatScore(t7) + "</td><td class='" + cls + "'>" + formatDelta(dd) + "</td><td class='" + (exam.grade ? "" : "na") + "' title='" + (exam.grade ? gradeLabel(exam.grade) : "") + "'>" + (exam.grade ? exam.grade : "—") + "</td></tr>"
             );
           })
           .join("") +
@@ -502,7 +504,7 @@
           hover.select(".hover-line").attr("x1", cx).attr("x2", cx).style("opacity", 1);
           tooltip.html(
             '<div class="tip-kicker">' + formatDate(exam.date) + " · " + exam.name + "</div>" +
-            '<div class="tip-grade">' + gradeLabel(exam.grade) + "</div>" +
+            '<div class="tip-grade">' + (exam.grade ? gradeLabel(exam.grade) : "—") + "</div>" +
             series.map((s) => '<div class="tip-row"><span class="swatch" style="background:' + s.color + '"></span><span>' + s.label + "</span><strong>" + formatScore(s.values[i].value) + "</strong></div>").join("")
           ).style("opacity", 1);
           const tw = tooltip.node().offsetWidth;
@@ -572,8 +574,8 @@
           bars.attr("fill-opacity", (d) => (d === p ? 1 : 0.4));
           tooltip.html(
             '<div class="tip-kicker">' + formatDate(p.exam.date) + " · " + p.exam.name + "</div>" +
-            '<div class="tip-grade">' + gradeLabel(p.exam.grade) + "</div>" +
-            '<div class="tip-row"><span class="swatch" style="background:' + barColor + '"></span><span>排名档位</span><strong>' + p.value + "</strong></div>"
+            '<div class="tip-grade">' + (p.exam.grade ? gradeLabel(p.exam.grade) : "—") + "</div>" +
+            '<div class="tip-row"><span class="swatch" style="background:' + barColor + '"></span><span>排名档位</span><strong>' + (p.value !== null ? p.value : "—") + "</strong></div>"
           ).style("opacity", 1);
           const tw = tooltip.node().offsetWidth;
           const th = tooltip.node().offsetHeight;

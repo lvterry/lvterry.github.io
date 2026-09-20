@@ -120,3 +120,9 @@ exams:
       biology: 96
       geography: 90
       morals: 86
+  - date: "2026-09-20"
+    name: 初二第一学期9月月考
+    scores:
+      chinese: 85
+      math: 85
+      english: 88
