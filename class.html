@@ -321,6 +321,11 @@
       function daysBetween(a, b) {
         return Math.round((b - a) / 86400000);
       }
+      /* 「几天前」的口语写法：当天说「今天」，隔一天起才说「N 天前」。 */
+      function agoLabel(days) {
+        if (days === null || days === undefined) return "";
+        return days <= 0 ? "今天" : days + " 天前";
+      }
       function cssVar(name, fallback) {
         return getComputedStyle(document.documentElement).getPropertyValue(name).trim() || fallback;
       }
@@ -382,7 +387,7 @@
           const color = course.color || "var(--accent)";
           const tone = s.remaining <= 2 ? "down" : s.remaining <= 4 ? "warn" : "up";
           const bits = [
-            s.last ? "上次上课 " + formatDate(s.last.date) + " · " + s.daysSinceLast + " 天前" : "暂无上课记录",
+            s.last ? "上次上课 " + formatDate(s.last.date) + " · " + agoLabel(s.daysSinceLast) : "暂无上课记录",
             "已上 " + s.attended + " 节",
           ];
           if (s.perSession) bits.push("平均 " + formatMoney(s.perSession) + " / 节");
@@ -417,7 +422,7 @@
         const gapTone = s.daysSinceLast === null ? "" : s.daysSinceLast >= 21 ? "warn" : "";
         const stats = [
           s.last
-            ? stat("上次上课", formatDate(s.last.date), s.daysSinceLast + " 天前 · " + weekdayOf(s.last.date) + (s.last.note ? " · " + escapeHtml(s.last.note) : ""), gapTone)
+            ? stat("上次上课", formatDate(s.last.date), agoLabel(s.daysSinceLast) + " · " + weekdayOf(s.last.date) + (s.last.note ? " · " + escapeHtml(s.last.note) : ""), gapTone)
             : stat("上次上课", "—", "暂无记录"),
           stat("剩余课时", s.remaining, "累计购课 " + s.purchased + " · 已上 " + s.attended, remainTone),
           s.lastPayment
