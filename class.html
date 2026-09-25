@@ -321,10 +321,12 @@
       function daysBetween(a, b) {
         return Math.round((b - a) / 86400000);
       }
-      /* 「几天前」的口语写法：当天说「今天」，隔一天起才说「N 天前」。 */
+      /* 「几天前」的口语写法：当天说「今天」，隔一天说「昨天」，再往前才用「N 天前」。 */
       function agoLabel(days) {
         if (days === null || days === undefined) return "";
-        return days <= 0 ? "今天" : days + " 天前";
+        if (days <= 0) return "今天";
+        if (days === 1) return "昨天";
+        return days + " 天前";
       }
       function cssVar(name, fallback) {
         return getComputedStyle(document.documentElement).getPropertyValue(name).trim() || fallback;
