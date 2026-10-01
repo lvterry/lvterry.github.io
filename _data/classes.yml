@@ -78,6 +78,7 @@ courses:
         note: 原 9/11 临时调课
       - date: "2026-09-18"
       - date: "2026-09-24"
+      - date: "2026-10-01"
 
   - key: boxing
     label: 拳击课
