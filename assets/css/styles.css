@@ -261,7 +261,7 @@ blockquote {
 
 .post-content blockquote p { margin: 0.5rem 0; }
 
-.post-content code {
+.post-content code, .post-card code {
   background: var(--code-bg);
   padding: 0.1rem 0.35rem;
   border-radius: 3px;
