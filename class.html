@@ -153,7 +153,6 @@
       }
       .course-head { display: flex; align-items: baseline; gap: 0.6rem; flex-wrap: wrap; }
       .course-head h2 { display: inline-flex; align-items: baseline; gap: 0.45rem; }
-      .course-sub { color: var(--muted); font-size: 0.85rem; font-variant-numeric: tabular-nums; }
       .stats {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
@@ -389,7 +388,7 @@
           const color = course.color || "var(--accent)";
           const tone = s.remaining <= 2 ? "down" : s.remaining <= 4 ? "warn" : "up";
           const bits = [
-            s.last ? "上次上课 " + formatDate(s.last.date) + " · " + agoLabel(s.daysSinceLast) : "暂无上课记录",
+            s.last ? "上次上课 " + formatDate(s.last.date) : "暂无上课记录",
             "已上 " + s.attended + " 节",
           ];
           if (s.perSession) bits.push("平均 " + formatMoney(s.perSession) + " / 节");
@@ -436,14 +435,13 @@
         const pct = cardPct(s);
         const progress =
           '<div class="progress">' +
-            '<div class="progress-head"><span>本卡已上 ' + s.onCard + " / " + s.cardSize + " 节</span><span>剩 " + Math.max(0, s.cardSize - s.onCard) + " 节未用</span></div>" +
+            '<div class="progress-head"><span>本卡已上 ' + s.onCard + " / " + s.cardSize + " 节</span></div>" +
             '<div class="progress-track"><div class="progress-fill" style="width:' + pct.toFixed(1) + "%;background:" + color + '"></div></div>' +
           "</div>";
 
         section.innerHTML =
           '<div class="course-head"><h2>' +
-            escapeHtml((course.emoji ? course.emoji + " " : "") + course.label) + "</h2>" +
-            '<span class="course-sub">上次上课 ' + (s.last ? formatDate(s.last.date) : "—") + " · 剩 " + s.remaining + " 节</span></div>" +
+            escapeHtml((course.emoji ? course.emoji + " " : "") + course.label) + "</h2></div>" +
           '<div class="stats">' + stats + "</div>" +
           progress +
           '<div class="chart-panel"><div class="chart-canvas" id="chart-' + course.key + '"></div></div>' +
