@@ -40,6 +40,10 @@ courses:
         amount: 3000
         credits: 10
         note: 第4次交费
+      - date: "2026-11-05"
+        amount: 3000
+        credits: 10
+        note: 第5次交费
     sessions:
       - date: "2025-01-16"
       - date: "2025-01-23"
