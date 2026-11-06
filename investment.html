@@ -1,0 +1,326 @@
+---
+# 投资数据在 _data/investment/。改原则、权重、证据、时间线或建议时只改那些文件。
+# 公开页可以进搜索：上面没有股数和金额。noindex 挡不住已经写进仓库的秘密，所以秘密不能出现在这里。
+# 不放进全站导航。写作站的导航保持原样，这个工具用 /investment.html 进入。
+---
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <title>长期投资 | Terry Wang</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no" />
+    <meta name="color-scheme" content="dark light" />
+    <meta name="description" content="长期投资框架：目标权重、论点与证据、时间线和行动建议。公开页不含持仓金额或股数。" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <style>
+      :root {
+        --bg: #fdfdfc;
+        --fg: #1c1c1c;
+        --muted: #777;
+        --accent: #c23a2b;
+        --border: #e6e3df;
+        --code: #f3f1ee;
+        --up: #2f6b4f;
+        --down: #c23a2b;
+        --warn: #a8710f;
+        --name-goog: #2a5a8c;
+        --name-msft: #2f6b4f;
+        --name-nvda: #4d7340;
+        --name-tsla: #c23a2b;
+        --name-cash: #8a5a32;
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --bg: #161616;
+          --fg: #e9e6e1;
+          --muted: #8a8780;
+          --accent: #e07a6a;
+          --border: #2a2a2a;
+          --code: #1f1f1f;
+          --up: #8fbfa3;
+          --down: #e07a6a;
+          --warn: #d8b26a;
+          --name-goog: #7aa3d4;
+          --name-msft: #8fbfa3;
+          --name-nvda: #9bbb7a;
+          --name-tsla: #e07a6a;
+          --name-cash: #c4a07a;
+        }
+      }
+      *, *::before, *::after { box-sizing: border-box; }
+      html { -webkit-text-size-adjust: 100%; }
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--fg);
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        font-size: 17px;
+        line-height: 1.6;
+        -webkit-font-smoothing: antialiased;
+      }
+      ::selection { background: #ffe9b3; }
+      @media (prefers-color-scheme: dark) {
+        ::selection { background: #4a3a00; }
+      }
+      a {
+        color: var(--fg);
+        text-decoration: underline 0.08em;
+        text-decoration-color: var(--border);
+        text-underline-offset: 0.18em;
+      }
+      a:hover { color: var(--muted); }
+      button, input, select { font-family: inherit; }
+      button:not(:disabled) { cursor: pointer; }
+      :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+      .wrap { max-width: 1180px; margin: 0 auto; padding: 0 1.25rem; }
+      header { padding: 2.5rem 0 0.5rem; }
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        text-decoration: none;
+        color: var(--fg);
+      }
+      .avatar {
+        width: 40px; height: 40px; border-radius: 50%;
+        display: block; object-fit: cover; flex-shrink: 0;
+        background: var(--code);
+      }
+      .name { font-weight: 600; font-size: 1.05rem; }
+      .brand-note { color: var(--muted); font-size: 0.85rem; }
+      .brand-copy { display: flex; flex-direction: column; }
+      .banner { margin: 1rem 0 1.5rem; padding-bottom: 1.25rem; border-bottom: 1px solid var(--border); }
+      .kicker { margin: 0 0 0.5rem; color: var(--muted); font-size: 0.75rem; letter-spacing: 0.08em; }
+      h1 { font-size: 1.7rem; line-height: 1.25; margin: 0; font-weight: 600; text-wrap: balance; }
+      h2 { font-size: 1.15rem; margin: 0 0 0.8rem; }
+      h3 { font-size: 1rem; margin: 0; font-weight: 600; }
+      h4 { font-size: 0.82rem; margin: 0.8rem 0 0.35rem; color: var(--muted); font-weight: 600; }
+      section { margin: 0 0 2.2rem; }
+      .section-title { border-top: 1px solid var(--border); padding-top: 1.35rem; }
+      .lead { margin: 0.7rem 0 0; max-width: 42rem; color: var(--muted); font-size: 0.98rem; }
+      .asof { margin: 0.85rem 0 0; color: var(--muted); font-size: 0.84rem; font-variant-numeric: tabular-nums; }
+      .asof strong { color: var(--fg); font-weight: 600; }
+      .hint { margin: 0.45rem 0 0; color: var(--muted); font-size: 0.84rem; }
+      .hint.warn, .warn { color: var(--warn); }
+      .up { color: var(--up); }
+      .down { color: var(--down); }
+      .na { color: var(--muted); }
+      .empty {
+        margin: 0.5rem 0 0;
+        padding: 1.1rem 1rem;
+        border: 1px dashed var(--border);
+        border-radius: 12px;
+        color: var(--muted);
+      }
+      .glance { display: grid; grid-template-columns: 1fr; gap: 0.75rem; }
+      @media (min-width: 720px) { .glance { grid-template-columns: 1fr 1fr; } }
+      .glance-card {
+        display: block; color: var(--fg); text-decoration: none;
+        border: 1px solid var(--border); border-radius: 12px;
+        padding: 0.85rem 1rem;
+        background: color-mix(in oklab, var(--fg) 2%, transparent);
+      }
+      .glance-card:hover { color: var(--fg); background: color-mix(in oklab, var(--fg) 4.5%, transparent); }
+      .glance-name { font-weight: 600; }
+      .glance-meta { margin: 0.35rem 0 0; color: var(--muted); font-size: 0.84rem; }
+      .principles, .weights, .focus-list, .lane-list { margin: 0.4rem 0 0; padding-left: 1.15rem; }
+      .principles li + li, .weights li + li, .focus-list li + li, .lane-list li + li { margin-top: 0.28rem; }
+      .weights { list-style: none; padding-left: 0; }
+      .dot {
+        width: 0.55rem; height: 0.55rem; border-radius: 50%;
+        display: inline-block; margin-right: 0.4rem; vertical-align: 0.05em;
+      }
+      .seg-goog { background: var(--name-goog); }
+      .seg-msft { background: var(--name-msft); }
+      .seg-nvda { background: var(--name-nvda); }
+      .seg-tsla { background: var(--name-tsla); }
+      .seg-cash { background: var(--name-cash); }
+      .mix {
+        display: flex; height: 10px; border-radius: 99px; overflow: hidden;
+        background: color-mix(in oklab, var(--fg) 8%, transparent);
+      }
+      .mix .seg { display: block; height: 100%; }
+      .mix-block { margin: 0 0 0.9rem; }
+      .company {
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 0.9rem 1rem 1rem;
+        margin-top: 0.75rem;
+      }
+      .company-head { display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; flex-wrap: wrap; }
+      .ticker { font-weight: 600; letter-spacing: 0.02em; }
+      .meta { display: grid; grid-template-columns: 6.5rem 1fr; gap: 0.28rem 0.75rem; margin: 0.75rem 0; font-size: 0.9rem; }
+      .meta dt { margin: 0; color: var(--muted); }
+      .meta dd { margin: 0; }
+      .evidence { display: grid; grid-template-columns: 1fr; gap: 0.75rem; margin-top: 0.8rem; }
+      @media (min-width: 800px) { .evidence { grid-template-columns: 1fr 1fr; } }
+      .lane { border: 1px solid var(--border); border-radius: 12px; padding: 0.7rem 0.85rem 0.85rem; }
+      .lane h4 { margin-top: 0; }
+      .lane-list, .focus-list { font-size: 0.9rem; }
+      .badge {
+        display: inline-block; padding: 0.05rem 0.45rem;
+        border: 1px solid var(--border); border-radius: 99px;
+        font-size: 0.75rem; color: var(--muted); white-space: nowrap;
+      }
+      .badge.up { color: var(--up); }
+      .badge.down { color: var(--down); }
+      .badge.warn { color: var(--warn); }
+      .tag-row { display: flex; flex-wrap: wrap; gap: 0.35rem; }
+      .cell-meta { color: var(--muted); font-size: 0.78rem; margin-top: 0.15rem; overflow-wrap: anywhere; }
+      .table-wrap {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        border: 1px solid var(--border);
+        border-radius: 12px;
+      }
+      table { width: 100%; border-collapse: collapse; font-size: 0.88rem; font-variant-numeric: tabular-nums; }
+      th, td { padding: 0.55rem 0.7rem; text-align: right; border-bottom: 1px solid var(--border); white-space: nowrap; }
+      th:first-child, td:first-child { text-align: left; white-space: normal; }
+      thead th {
+        font-weight: 500; color: var(--muted); font-size: 0.75rem;
+        background: color-mix(in oklab, var(--fg) 3%, var(--bg));
+      }
+      tbody tr:last-child td, tbody tr:last-child th { border-bottom: none; }
+      .filters { display: flex; flex-wrap: wrap; gap: 0.55rem 0.75rem; margin: 0.2rem 0 0.8rem; }
+      .filters label { display: flex; flex-direction: column; gap: 0.2rem; color: var(--muted); font-size: 0.78rem; }
+      input, select {
+        color: var(--fg); background: var(--bg);
+        border: 1px solid var(--border); border-radius: 8px;
+        padding: 0.35rem 0.5rem; font-size: 0.9rem;
+      }
+      .fold { border: 1px solid var(--border); border-radius: 12px; padding: 0 1rem; }
+      .fold > summary {
+        display: flex; align-items: center; gap: 0.5rem;
+        padding: 0.75rem 0; cursor: pointer; font-weight: 600; list-style: none;
+      }
+      .fold > summary::-webkit-details-marker { display: none; }
+      .fold > summary::marker { content: ""; }
+      .fold > summary:hover { color: var(--muted); }
+      .focus-shot { margin-top: 0.75rem; }
+      .focus-shot > :last-child { margin-bottom: 0.85rem; }
+      .button-row { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.8rem; }
+      .btn {
+        display: inline-flex; align-items: center; justify-content: center;
+        border: 1px solid var(--border); background: transparent; color: var(--fg);
+        border-radius: 999px; padding: 0.35rem 0.85rem; font-size: 0.85rem;
+      }
+      .btn:hover { background: color-mix(in oklab, var(--fg) 4%, transparent); }
+      .btn input {
+        position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+        overflow: hidden; clip: rect(0 0 0 0); border: 0;
+      }
+      .stack > * + * { margin-top: 0.35rem; }
+      .copyright { color: var(--muted); font-size: 0.85rem; margin: 0 0 2.5rem; }
+      code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 0.86em; }
+      @media (max-width: 520px) {
+        body { font-size: 16px; }
+        h1 { font-size: 1.45rem; }
+        .meta { grid-template-columns: 1fr; gap: 0.05rem; }
+        .meta dd { margin-bottom: 0.45rem; }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap" id="investment">
+      <header>
+        <a class="brand" href="/">
+          <img class="avatar" src="/apple-touch-icon.png" alt="" />
+          <span class="brand-copy">
+            <span class="name">Terry Wang</span>
+            <span class="brand-note">长期投资框架</span>
+          </span>
+        </a>
+      </header>
+      <main>
+        <section class="banner">
+          <p class="kicker">公开页 · 不含金额</p>
+          <h1>长期投资概览</h1>
+          <p class="lead">这页只回答四件事：框架上持有什么，为什么持有，证据有没有变，以及什么时候要重新看。它不是行情终端。股数和金额不在这个网站上。</p>
+          <p class="asof" data-mount="asof"></p>
+        </section>
+
+        <section aria-labelledby="glance-title">
+          <h2 id="glance-title">一眼</h2>
+          <div class="glance" data-mount="glance"></div>
+        </section>
+
+        <section id="principles" aria-labelledby="principles-title">
+          <h2 id="principles-title" class="section-title">原则</h2>
+          <div data-mount="principles"></div>
+        </section>
+
+        <section id="holdings" aria-labelledby="holdings-title">
+          <h2 id="holdings-title" class="section-title">持仓框架</h2>
+          <p class="hint">公开页的「实际」留空。有本机文件时，只在这次打开的页面里填上百分比。</p>
+          <div data-mount="holdings"></div>
+        </section>
+
+        <section id="companies" aria-labelledby="companies-title">
+          <h2 id="companies-title" class="section-title">论点与证据</h2>
+          <p class="hint">事实、管理层指引、媒体和我们的判断分开记。关注项只是待核对的问题。</p>
+          <div data-mount="companies"></div>
+        </section>
+
+        <section id="themes" aria-labelledby="themes-title">
+          <h2 id="themes-title" class="section-title">共同风险</h2>
+          <div data-mount="themes"></div>
+        </section>
+
+        <section id="timeline" aria-labelledby="timeline-title">
+          <h2 id="timeline-title" class="section-title">时间线</h2>
+          <p class="hint">可以按公司、主题、日期和重要性筛选。后续写 continues，更正写 corrects，旧记录留着。</p>
+          <div data-mount="timeline"></div>
+        </section>
+
+        <section id="focus" aria-labelledby="focus-title">
+          <h2 id="focus-title" class="section-title">焦点怎么转移</h2>
+          <p class="hint">每个月或焦点真的变了，再追加一条快照。没有记录过的月份不要补。</p>
+          <div data-mount="focus"></div>
+        </section>
+
+        <section id="actions" aria-labelledby="actions-title">
+          <h2 id="actions-title" class="section-title">行动建议</h2>
+          <div data-mount="actions"></div>
+        </section>
+
+        <section id="local" aria-labelledby="local-title">
+          <h2 id="local-title" class="section-title">本机持仓</h2>
+          <details class="fold">
+            <summary>在这台浏览器里载入持仓</summary>
+            <div data-mount="local"></div>
+          </details>
+        </section>
+
+        <section id="method" aria-labelledby="method-title">
+          <h2 id="method-title" class="section-title">口径</h2>
+          <div data-mount="method"></div>
+        </section>
+
+        <noscript>
+          <p class="empty">需要启用 JavaScript 才能排版这页。数据已经在页面里，不会向行情服务器请求。</p>
+        </noscript>
+      </main>
+      <p class="copyright">框架页。怎么更新写在仓库 <code>docs/investment.md</code>，那个文件不随网站发布。</p>
+    </div>
+    <script>
+      const INVESTMENT_DATA = {
+        principles: {{ site.data.investment.principles | jsonify | replace: '<', '\u003c' }},
+        targets: {{ site.data.investment.targets | jsonify | replace: '<', '\u003c' }},
+        companies: {{ site.data.investment.companies | jsonify | replace: '<', '\u003c' }},
+        holdings: {{ site.data.investment.holdings | jsonify | replace: '<', '\u003c' }},
+        quotes: {{ site.data.investment.quotes | jsonify | replace: '<', '\u003c' }},
+        events: {{ site.data.investment.events | jsonify | replace: '<', '\u003c' }},
+        focus: {{ site.data.investment.focus | jsonify | replace: '<', '\u003c' }},
+        suggestions: {{ site.data.investment.suggestions | jsonify | replace: '<', '\u003c' }},
+        themes: {{ site.data.investment.themes | jsonify | replace: '<', '\u003c' }},
+        methodology: {{ site.data.investment.methodology | jsonify | replace: '<', '\u003c' }}
+      };
+    </script>
+    <script src="/assets/js/investment.js"></script>
+    <script>
+      InvestmentPage.mount(document.getElementById("investment"), INVESTMENT_DATA);
+    </script>
+  </body>
+</html>

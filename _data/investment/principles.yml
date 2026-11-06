@@ -1,0 +1,27 @@
+# _data/investment/principles.yml
+# 长期投资原则。investment.html 构建时读这个文件。
+# 改措辞只改这里。目标百分比不要写在这里，以 targets.yml 为准。
+# 观察阈值没确认之前，value_pp 保持空。不要把口头说过的偏离写成强制规则。
+# 维护方式见 docs/investment.md。这个目录不写股数，也不写金额。
+
+title: 原则
+
+items:
+  - id: platform
+    text: 只买 AI 时代的平台型公司。
+  - id: horizon
+    text: 投资期限至少 5 年。
+  - id: sizing
+    text: 先决定仓位多大，再谈买卖时点。
+  - id: weights
+    text: 目标权重以持仓框架为准，和页面上的清单是同一份数据。
+  - id: reassess
+    text: 只在两类情况下重新评估：目标权重出现明确偏离，或者长期论点变了。
+  - id: not-unconditional
+    text: 长期持有不是无条件拿着。坏消息不自动等于噪音。
+
+watch_threshold:
+  confirmed: false
+  status: 待确认
+  value_pp: null
+  note: 偏离到什么程度才要动手，还没有定成规则。数值先空着。以后如果填了数字，也只是一条可配置的观察线，不是到点必须交易。

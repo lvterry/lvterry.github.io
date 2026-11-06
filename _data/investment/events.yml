@@ -1,0 +1,21 @@
+# _data/investment/events.yml
+# 时间线。本轮不回填未核实的新闻、财报或仓位变动。
+# 追加事件，不要改掉已经写过的事实。更正用一条新记录指向旧 id。
+#
+# - id: evt-goog-001          # 发布后不要改这个 id
+#   ticker: GOOG              # 跨公司事件就去掉 ticker
+#   theme: 云收入
+#   kind: 新闻                # 新闻 / 财报 / 持仓变化 / 论点变化
+#   importance: 中            # 高 / 中 / 低
+#   event_at: "2026-11-06"    # 事情发生的时间
+#   recorded_at: "2026-11-06" # 写进这个文件的时间
+#   source_url: "https://..."
+#   fact: 核对过的事实，不写判断
+#   impact: 对论点可能意味着什么。没想清楚就留空
+#   verified: false           # 打开过来源才改成 true
+#   continues: evt-old        # 这是旧事件的后续。旧记录保留
+#   corrects: null            # 这是对旧事件的更正。不要删旧记录
+#   correction_note: null
+
+timezone: Asia/Shanghai
+events: []

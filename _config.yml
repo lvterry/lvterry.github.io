@@ -21,3 +21,6 @@ exclude:
   - Gemfile
   - Gemfile.lock
   - tests
+  # Maintainer notes only. jekyll-commonmark-ghpages would otherwise
+  # publish docs/*.md as a public HTML page.
+  - docs

@@ -1,0 +1,27 @@
+# _data/investment/targets.yml
+# 目标权重。百分比只在这个文件里改，原则段落会引用这里。
+# 这是框架，不是账户金额。现金包含 SGOV 和 TFLO，两者都不是股票。
+# ticker 要稳定：GOOG、MSFT、NVDA、TSLA、CASH。页面和本地导入都靠这几个代码。
+
+weights:
+  - ticker: GOOG
+    name: Alphabet
+    target_pct: 30
+    bucket: equity
+  - ticker: MSFT
+    name: Microsoft
+    target_pct: 20
+    bucket: equity
+  - ticker: NVDA
+    name: NVIDIA
+    target_pct: 25
+    bucket: equity
+  - ticker: TSLA
+    name: Tesla
+    target_pct: 15
+    bucket: equity
+  - ticker: CASH
+    name: 现金
+    target_pct: 10
+    bucket: cash
+    instruments: [SGOV, TFLO]
