@@ -1,0 +1,47 @@
+# _data/investment/holdings.yml
+# 公开页上的持仓框架。实际百分比可以一直是 null。
+# 不要在这里写股数、成本、市值或账户余额。那些只留在自己电脑上的 JSON 里。
+# 缺数据就留 null。不要写 0，0 会被当成「真的是零」。
+# holdings_as_of 用引号包住的时间，时区 Asia/Shanghai，并单独标明是否含盘后。
+# 价格不要写在这个文件，价格放 quotes.yml。
+
+timezone: Asia/Shanghai
+holdings_as_of: null
+after_hours_included: null
+
+positions:
+  - ticker: GOOG
+    actual_pct: null
+    valuation: null
+    valuation_note: null
+    valuation_source: null
+    return_pct: null
+    contribution_pct: null
+  - ticker: MSFT
+    actual_pct: null
+    valuation: null
+    valuation_note: null
+    valuation_source: null
+    return_pct: null
+    contribution_pct: null
+  - ticker: NVDA
+    actual_pct: null
+    valuation: null
+    valuation_note: null
+    valuation_source: null
+    return_pct: null
+    contribution_pct: null
+  - ticker: TSLA
+    actual_pct: null
+    valuation: null
+    valuation_note: null
+    valuation_source: null
+    return_pct: null
+    contribution_pct: null
+  - ticker: CASH
+    actual_pct: null
+    valuation: null
+    valuation_note: null
+    valuation_source: null
+    return_pct: null
+    contribution_pct: null

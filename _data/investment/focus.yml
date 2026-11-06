@@ -1,0 +1,18 @@
+# _data/investment/focus.yml
+# 焦点转移。每个月或每次焦点真正变化时追加一条快照。
+# 不要回填没有记录过的历史，也不要为了「看起来完整」编过去的主题。
+# 旧快照保留。新的一个月如果取代了旧焦点，填 supersedes，不要改旧条目。
+#
+# snapshots:
+#   - id: focus-2026-11
+#     as_of: "2026-11-30"
+#     recorded_at: "2026-11-30"
+#     why: 这个月关注点为什么在这里
+#     themes:
+#       - name: 客户融资
+#         why: 为什么这件事比上个月更重要
+#         tickers: [NVDA]
+#     supersedes: focus-2026-10
+
+timezone: Asia/Shanghai
+snapshots: []

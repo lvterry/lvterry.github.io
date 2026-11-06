@@ -1,0 +1,20 @@
+# _data/investment/quotes.yml
+# 行情快照。没有来源就不要写价格。不要从早报或记忆里补数字。
+# 这个目录不接付费接口，也没有定时任务。要更新就手工追加一条。
+# 旧快照留着，不要为了新价格删掉旧的。页面显示每个代码时间最晚的一条。
+#
+# 有来源之后按这个形状追加，日期加引号：
+# snapshots:
+#   - ticker: GOOG
+#     price:            # 只有核对过来源才填数字
+#     currency: USD
+#     as_of: "2026-11-06T16:00:00+08:00"
+#     after_hours_included: false
+#     source_url: "https://example.com/source"
+#     recorded_at: "2026-11-06T16:10:00+08:00"
+#
+# as_of 用同一套 ISO 时间，页面按字符串比较先后。
+# after_hours_included 必须写 true 或 false，不知道就不要添这条快照。
+
+timezone: Asia/Shanghai
+snapshots: []

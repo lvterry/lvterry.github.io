@@ -1,0 +1,117 @@
+# _data/investment/companies.yml
+# 每家公司的论点与证据壳。没有核实过的内容留空，不要填看起来像事实的数字。
+# status 只用：正面 / 观察 / 恶化 / 待核实。
+# confidence 建议用：高 / 中 / 低。没有把握就留空。
+# evidence 分四栏，不要混写：
+#   facts      已核对的事实
+#   guidance   管理层自己的说法
+#   media      媒体或第二手转述
+#   judgment   我们的判断
+# 每一条可以是一句话，或者：
+#   - text: 事实摘要
+#     source_url: "https://..."
+#     as_of: "YYYY-MM-DD"
+#     recorded_at: "YYYY-MM-DD"
+#     verified: false
+# 日期加引号。verified 没核对就是 false，不要空着当已核实。
+# focus 是要盯的问题清单，不是已经发生的事实。
+
+companies:
+  - ticker: GOOG
+    name: Alphabet
+    thesis: null
+    status: 待核实
+    status_rationale: null
+    confidence: null
+    last_review: null
+    next_verification: null
+    focus:
+      - 云收入
+      - backlog 能不能变成收入，以及取消
+      - 资本开支
+      - 经营现金流和自由现金流
+      - 投入的回报
+      - 搜索变现
+      - Gemini 的能力、采用和人才
+    evidence:
+      facts: []
+      guidance: []
+      media: []
+      judgment: []
+
+  - ticker: MSFT
+    name: Microsoft
+    thesis: null
+    status: 待核实
+    status_rationale: null
+    confidence: null
+    last_review: null
+    next_verification: null
+    focus:
+      - 云收入
+      - backlog 能不能变成收入，以及取消
+      - 资本开支
+      - 经营现金流和自由现金流
+      - 投入的回报
+    evidence:
+      facts: []
+      guidance: []
+      media: []
+      judgment: []
+
+  - ticker: NVDA
+    name: NVIDIA
+    thesis: null
+    status: 待核实
+    status_rationale: null
+    confidence: null
+    last_review: null
+    next_verification: null
+    focus:
+      - 客户 take-or-pay 是否真的约束双方
+      - 融资是否独立，而不是靠客户或自己兜
+      - 担保和投资敞口
+      - 应收账款和回款
+      - 交付、电力和许可
+      - 监管
+    evidence:
+      facts: []
+      guidance: []
+      media: []
+      judgment: []
+
+  - ticker: TSLA
+    name: Tesla
+    thesis: null
+    status: 待核实
+    status_rationale: null
+    confidence: null
+    last_review: null
+    next_verification: null
+    focus:
+      - 自动驾驶的许可、付费运营和单位经济
+      - 机器人的外部付费和量产
+      - 汽车业务现金流
+      - 并购条款和治理
+    evidence:
+      facts: []
+      guidance: []
+      media: []
+      judgment: []
+
+  - ticker: CASH
+    name: 现金
+    thesis: null
+    status: 待核实
+    status_rationale: null
+    confidence: null
+    last_review: null
+    next_verification: null
+    focus:
+      - 比例是否偏离目标
+      - SGOV 和 TFLO 算现金，不算股票
+    evidence:
+      facts: []
+      guidance: []
+      media: []
+      judgment: []

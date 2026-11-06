@@ -1,0 +1,57 @@
+# _data/investment/suggestions.yml
+# 行动建议。这不是下单，页面也不会发订单。
+# action 留空时，页面显示「无法判断」。
+# 不要用「继续持有」占位。证据不够就继续留空。
+# action 只在真的要写判断时用这四个：
+#   继续持有 / 加强观察 / 评估再平衡 / 评估减仓
+# price_vs_thesis 只用：价格偏离 / 论点恶化 / 两者都有。不清楚就留空。
+# 论点恶化即使权重仍在目标上，也可以把 action 写成评估，而不是看偏离。
+#
+# evidence / triggers / falsifiers / pending_checks / timepoints 都是字符串列表。
+
+items:
+  - ticker: GOOG
+    action: null
+    price_vs_thesis: null
+    evidence: []
+    triggers: []
+    falsifiers: []
+    pending_checks: []
+    timepoints: []
+    note: null
+  - ticker: MSFT
+    action: null
+    price_vs_thesis: null
+    evidence: []
+    triggers: []
+    falsifiers: []
+    pending_checks: []
+    timepoints: []
+    note: null
+  - ticker: NVDA
+    action: null
+    price_vs_thesis: null
+    evidence: []
+    triggers: []
+    falsifiers: []
+    pending_checks: []
+    timepoints: []
+    note: null
+  - ticker: TSLA
+    action: null
+    price_vs_thesis: null
+    evidence: []
+    triggers: []
+    falsifiers: []
+    pending_checks: []
+    timepoints: []
+    note: null
+  - ticker: CASH
+    action: null
+    price_vs_thesis: null
+    evidence: []
+    triggers: []
+    falsifiers: []
+    pending_checks: []
+    timepoints: []
+    note: null

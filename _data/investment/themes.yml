@@ -1,0 +1,17 @@
+# _data/investment/themes.yml
+# 几家公司共用的风险。评估没有写之前，assessment 保持 null，status 用待核实。
+# 不要因为主题列在这里，就把它写成已经发生的事实。
+
+title: 共同风险
+note: 四只股票坐在同一条平台和宏观链条上。名字多，不等于分散。
+items:
+  - id: rates-financing
+    title: 利率与融资
+    tickers: [GOOG, MSFT, NVDA, TSLA]
+    status: 待核实
+    assessment: null
+  - id: datacenter-permitting
+    title: 数据中心许可
+    tickers: [GOOG, MSFT, NVDA]
+    status: 待核实
+    assessment: null
