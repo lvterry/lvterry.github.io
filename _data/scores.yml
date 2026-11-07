@@ -1,6 +1,6 @@
 # _data/scores.yml
-# 考试成绩数据。score.html 构建时通过 {{ site.data.scores | jsonify }} 读取，
-# 新增一次考试只需在 exams 下面追加一条，不需要改页面的 JS。
+# 考试成绩数据。score.html 构建时通过 {{ site.data.scores | jsonify }} 读取。
+# 已有口径内的新考试，在 exams 下面追加一条即可。检查：node tests/scores.cjs
 #
 # 只写当次实际公布的科目，缺失的科目留空不写，不要填 0：
 # 0 表示"考了得 0 分"，留空表示"当次未公布"。
@@ -8,7 +8,17 @@
 # exams[].scores 的键取自下面 subjects 里的 key。新增科目时，
 # 除在这里加一条，还要在 score.html 的 :root 里补一个对应的 CSS 变量。
 #
-# grade 是年级排名档位：把全部成绩等分成 10 档，G8 即第 8 档 = 年级前 20%–30%。
+# grade 只写年级排名档位：全部成绩等分成 10 档，G8 是第 8 档，
+# 即年级前 20%–30%。成绩单上表示年级的 G8（初二）不是排名，不要写入 grade。
+# 没有公布排名就不要写这个字段。
+#
+# date / date_end 用 "YYYY-MM-DD"，加引号以免被解析成日期对象。
+# 考试跨越多日时，date 写开始日，date_end 写结束日。成绩单发放日不是考试日期。
+#
+# totals 是全科总分口径。凑齐该口径的每一科才计算总分，缺科不按 0 分相加。
+# 一次考试同时凑齐多档时，只采用科目更多的那一档，
+# 避免把八门总分拆成没有公布过的七门总分。
+# out_of 只在成绩单写明全科满分时填写，不要编造单科满分。
 
 subjects:
   - key: chinese
@@ -20,6 +30,9 @@ subjects:
   - key: english
     label: 英语
     color: var(--subject-english)
+  - key: physics
+    label: 物理
+    color: var(--subject-physics)
   - key: history
     label: 历史
     color: var(--subject-history)
@@ -39,7 +52,30 @@ core:
   - math
   - english
 
-# 日期用 "YYYY-MM-DD"，加引号以免被解析成日期对象。
+# 凑齐某一档的每一科才有该档总分。同时凑齐多档时只取科目更多的那档。
+totals:
+  - id: total7
+    label: 七门
+    keys:
+      - chinese
+      - math
+      - english
+      - history
+      - biology
+      - geography
+      - morals
+  - id: total8
+    label: 八门
+    keys:
+      - chinese
+      - math
+      - english
+      - physics
+      - history
+      - biology
+      - geography
+      - morals
+
 exams:
   - date: "2025-09-08"
     name: 初一第一学期暑假作业验收
@@ -127,3 +163,18 @@ exams:
       chinese: 85
       math: 85
       english: 88
+  # 2026–2027学年第一学期初二期中。考试日 11月3日至11月5日。
+  # 公布总分 691.5，全科满分 800。没有单科满分，也没有排名。
+  - date: "2026-11-03"
+    date_end: "2026-11-05"
+    name: 初二第一学期期中考试
+    out_of: 800
+    scores:
+      chinese: 81.5
+      math: 77
+      english: 93.5
+      physics: 86
+      biology: 95
+      history: 88
+      geography: 85
+      morals: 85.5
