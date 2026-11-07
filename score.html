@@ -1,5 +1,6 @@
 ---
-# 成绩数据在 _data/scores.yml，构建时由 Jekyll 注入本页；新增考试只改那个文件。
+# 成绩数据在 _data/scores.yml，构建时由 Jekyll 注入本页。
+# 已有口径内的新考试只改那个文件。新科目还要在本页 :root 补颜色变量。
 ---
 <!doctype html>
 <html lang="zh-CN">
@@ -8,7 +9,7 @@
     <title>成绩 | Terry Wang</title>
     <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no" />
     <meta name="color-scheme" content="dark light" />
-    <meta name="description" content="考试成绩曲线：七门总分、语数英、单科。" />
+    <meta name="description" content="考试成绩曲线：语数英、七门或八门总分、单科。" />
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
@@ -26,6 +27,7 @@
         --subject-chinese: #c23a2b;
         --subject-math: #2a5a8c;
         --subject-english: #2f6b4f;
+        --subject-physics: #5e4d82;
         --subject-history: #8a5a32;
         --subject-biology: #4d7340;
         --subject-geography: #3d6a78;
@@ -45,6 +47,7 @@
           --subject-chinese: #e07a6a;
           --subject-math: #7aa3d4;
           --subject-english: #8fbfa3;
+          --subject-physics: #c2b0d4;
           --subject-history: #c4a07a;
           --subject-biology: #9bbb7a;
           --subject-geography: #7aa8b5;
@@ -244,93 +247,42 @@
         <div class="chart-panel">
           <div class="chart-canvas" id="grade-chart"></div>
         </div>
-        <p class="hint">横轴为考试时间，纵轴为排名档位（G6 = 6、G7 = 7、G8 = 8），柱越高名次越靠前。悬停或点按查看明细。</p>
+        <p class="hint">横轴为考试时间，纵轴为排名档位（G6 = 6、G7 = 7、G8 = 8），柱越高名次越靠前。未公布排名的考试不画柱。悬停或点按查看明细。</p>
 
         <h2>历次考试</h2>
-        <p class="hint">月考通常只公布语数英；未公布的成绩与无法同口径比较的「较上次」均显示「—」。</p>
+        <p class="hint">月考通常只公布语数英。未公布的成绩，以及七门和八门之间无法比较的「较上次」，都显示「—」。</p>
         <div class="table-wrap" id="table"></div>
       </main>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js"></script>
+    <script src="/assets/js/scores.js"></script>
     <script>
       /* ===== 成绩数据 =====
-         数据在 _data/scores.yml，构建时由 Jekyll 注入到下面这行；
-         新增考试只改那个文件，本页的 JS 不用动。 */
+         数据在 _data/scores.yml，构建时由 Jekyll 注入到下面这行。
+         计分在 assets/js/scores.js：缺科不是 0，七门和八门不混着相减。
+         横轴用考试开始日；结束日只用于显示。发放日不写入日期。 */
       const DATA = {{ site.data.scores | jsonify }};
       const SUBJECTS = DATA.subjects;
-      const CORE3 = DATA.core;
       const EXAMS = DATA.exams;
-
+      const TOTALS = ScorePage.totalDefinitions(DATA);
       const KEYS = SUBJECTS.map((s) => s.key);
-      function scoreOf(exam, key) {
-        const v = exam.scores[key];
-        return typeof v === "number" && isFinite(v) ? v : null;
-      }
-      /* 只有 keys 全部有成绩才返回总分：口径不齐时不把缺失当 0 硬加。 */
-      function sumOf(exam, keys) {
-        let total = 0;
-        for (const k of keys || KEYS) {
-          const v = scoreOf(exam, k);
-          if (v === null) return null;
-          total += v;
-        }
-        return total;
-      }
-      function formatScore(v) {
-        return v === null || v === undefined ? "—" : String(v);
-      }
-      /* G band：把全部成绩等分成 10 档，G8 即第 8 档 = 年级前 20%–30%。 */
-      function bandLabel(g) {
-        if (g === null || g === undefined) return "";
-        const m = /^G(\d{1,2})$/.exec(String(g));
-        if (!m) return g;
-        const n = Number(m[1]);
-        if (n < 1 || n > 10) return g;
-        const lower = (10 - n) * 10;
-        return lower === 0 ? "年级前 " + (lower + 10) + "%" : "年级前 " + lower + "–" + (lower + 10) + "%";
-      }
-      function gradeLabel(g) {
-        if (g === null || g === undefined) return "";
-        const band = bandLabel(g);
-        return band === g ? g : g + " · " + band;
-      }
-      function formatDate(iso) {
-        const p = iso.split("-");
-        return p[0] + "." + Number(p[1]) + "." + Number(p[2]);
-      }
-      function formatDelta(v) {
-        if (v === null || v === undefined) return "—";
-        return v > 0 ? "+" + v : String(v);
-      }
+      const scoreOf = ScorePage.scoreOf;
+      const formatScore = ScorePage.formatScore;
+      const formatExamDate = ScorePage.formatExamDate;
+      const gradeLabel = ScorePage.gradeLabel;
+      const chartDateISO = ScorePage.chartDateISO;
+
       function cssVar(name, fallback) {
         return getComputedStyle(document.documentElement).getPropertyValue(name).trim() || fallback;
       }
 
-      /* 只和上一次同口径的考试比较，避免拿三门总分去减七门总分。 */
-      function previousIndexWithTotal(from, keys) {
-        for (let i = from - 1; i >= 0; i -= 1) {
-          if (sumOf(EXAMS[i], keys) !== null) return i;
-        }
-        return -1;
-      }
-
-      const lastIndex = EXAMS.length - 1;
-      const latest = EXAMS[lastIndex];
-      const latest7 = sumOf(latest, KEYS);
-      const latest3 = sumOf(latest, CORE3);
-      const prev7Index = previousIndexWithTotal(lastIndex, KEYS);
-      const prev3Index = previousIndexWithTotal(lastIndex, CORE3);
-      const d7 = latest7 !== null && prev7Index >= 0 ? latest7 - sumOf(EXAMS[prev7Index], KEYS) : null;
-      const core3Delta = latest3 !== null && prev3Index >= 0 ? latest3 - sumOf(EXAMS[prev3Index], CORE3) : null;
-
+      const summary = ScorePage.latestSummary(DATA);
       document.getElementById("stats").innerHTML = [
-        stat("最近一次", latest.name, formatDate(latest.date)),
-        latest7 !== null
-          ? stat("七门总分", latest7, formatDelta(d7), d7 > 0 ? "up" : d7 < 0 ? "down" : "")
-          : stat("七门总分", "—", "当次仅公布语数英"),
-        stat("语数英", formatScore(latest3), formatDelta(core3Delta), core3Delta > 0 ? "up" : core3Delta < 0 ? "down" : ""),
-        stat("年级排名", latest.grade ? formatScore(latest.grade) : "—", latest.grade ? gradeLabel(latest.grade) : "当次未公布"),
+        stat("最近一次", summary.name, summary.date),
+        stat(summary.totalLabel, summary.totalText, summary.totalHint, summary.totalTone),
+        stat("语数英", summary.coreText, summary.coreDelta, summary.coreTone),
+        stat("年级排名", summary.rankText, summary.rankHint),
       ].join("");
 
       function stat(label, value, hint, tone) {
@@ -342,11 +294,7 @@
 
       const modesEl = document.getElementById("modes");
       const subjectsEl = document.getElementById("subjects");
-      [
-        { id: "core3", label: "语数英" },
-        { id: "total7", label: "七门总分" },
-        { id: "subject", label: "单科" },
-      ].forEach((item) => {
+      ScorePage.viewModes(DATA).forEach((item) => {
         const btn = document.createElement("button");
         btn.type = "button";
         btn.className = "chip";
@@ -381,49 +329,36 @@
         subjectsEl.append(btn);
       });
 
-      const tableRows = EXAMS.slice().reverse().map((exam, i, arr) => {
-        const t7 = sumOf(exam, KEYS);
-        const t3 = sumOf(exam, CORE3);
-        /* 往回找最近一次同样有七门总分的考试，跨口径不做差。 */
-        let dd = null;
-        if (t7 !== null) {
-          for (let j = i + 1; j < arr.length; j += 1) {
-            const older = sumOf(arr[j], KEYS);
-            if (older !== null) {
-              dd = t7 - older;
-              break;
-            }
-          }
-        }
-        return { exam, t7, t3, dd };
-      });
+      const tableRows = ScorePage.tableModel(DATA);
       document.getElementById("table").innerHTML =
         "<table><thead><tr><th>日期</th><th>考试</th>" +
         SUBJECTS.map((s) => "<th>" + s.label + "</th>").join("") +
-        "<th>语数英</th><th>七门</th><th>七门较上次</th><th>排名</th></tr></thead><tbody>" +
+        "<th>语数英</th><th>总分</th><th>口径</th><th>较上次</th><th>排名</th></tr></thead><tbody>" +
         tableRows
-          .map(({ exam, t7, t3, dd }) => {
-            const cls = dd > 0 ? "up" : dd < 0 ? "down" : "";
+          .map((row) => {
+            const cls = row.delta > 0 ? "up" : row.delta < 0 ? "down" : "";
+            const totalTitle = row.outOf === null ? "" : " title='满分 " + row.outOf + "'";
             return (
-              "<tr><td>" + formatDate(exam.date) + "</td><td>" + exam.name + "</td>" +
-              KEYS.map((k) => {
-                const v = scoreOf(exam, k);
-                return "<td class='" + (v === null ? "na" : "") + "'>" + formatScore(v) + "</td>";
-              }).join("") +
-              "<td>" + formatScore(t3) + "</td><td>" + formatScore(t7) + "</td><td class='" + cls + "'>" + formatDelta(dd) + "</td><td class='" + (exam.grade ? "" : "na") + "' title='" + (exam.grade ? gradeLabel(exam.grade) : "") + "'>" + (exam.grade ? exam.grade : "—") + "</td></tr>"
+              "<tr><td>" + row.date + "</td><td>" + row.name + "</td>" +
+              row.subjects.map((cell) => "<td class='" + (cell.missing ? "na" : "") + "'>" + cell.text + "</td>").join("") +
+              "<td>" + row.coreText + "</td><td" + totalTitle + ">" + row.totalText + "</td><td class='" + (row.scaleText === "—" ? "na" : "") + "'>" + row.scaleText + "</td><td class='" + cls + "'>" + row.deltaText + "</td><td class='" + (row.rank.missing ? "na" : "") + "' title='" + row.rank.title + "'>" + row.rank.text + "</td></tr>"
             );
           })
           .join("") +
         "</tbody></table>";
 
       function buildSeries() {
-        const dates = EXAMS.map((e) => new Date(e.date + "T12:00:00"));
-        if (mode === "total7") {
-          /* 缺失处为 null：折线在此断开，不做跨口径连线。 */
-          return [{ id: "total7", label: "七门总分", color: cssVar("--chart-line", "#1c1c1c"), values: EXAMS.map((e, i) => ({ date: dates[i], value: sumOf(e, KEYS) })) }];
-        }
-        if (mode === "core3") {
-          return [{ id: "core3", label: "语数英总分", color: cssVar("--accent", "#c23a2b"), values: EXAMS.map((e, i) => ({ date: dates[i], value: sumOf(e, CORE3) })) }];
+        const dates = EXAMS.map((e) => new Date(chartDateISO(e) + "T12:00:00"));
+        const modeled = ScorePage.seriesValues(DATA, mode);
+        if (mode === "core3" || TOTALS.some((t) => t.id === mode)) {
+          /* 缺失处为 null：折线在此断开。七门和八门不是同一条曲线。 */
+          const totalDef = TOTALS.find((t) => t.id === mode);
+          return [{
+            id: mode,
+            label: totalDef ? totalDef.label + "总分" : "语数英总分",
+            color: totalDef ? cssVar("--chart-line", "#1c1c1c") : cssVar("--accent", "#c23a2b"),
+            values: modeled.map((v, i) => ({ date: dates[i], value: v.value })),
+          }];
         }
         return SUBJECTS.filter((s) => active.includes(s.key)).map((s) => ({
           id: s.key,
@@ -434,8 +369,8 @@
       }
 
       function resolveColor(seriesItem) {
-        if (seriesItem.id === "total7") return cssVar("--chart-line", "#1c1c1c");
         if (seriesItem.id === "core3") return cssVar("--accent", "#c23a2b");
+        if (TOTALS.some((t) => t.id === seriesItem.id)) return cssVar("--chart-line", "#1c1c1c");
         const sub = SUBJECTS.find((s) => s.key === seriesItem.id);
         return sub ? cssVar(sub.color.slice(4, -1), cssVar("--fg", "#1c1c1c")) : cssVar("--fg", "#1c1c1c");
       }
@@ -480,7 +415,10 @@
         g.append("g").attr("transform", "translate(0," + innerH + ")").call(d3.axisBottom(x).tickValues(width < 520 ? dates.filter(function(_, i) { return i % 2 === 0 || i === dates.length - 1; }) : dates).tickFormat((d) => d.getMonth() + 1 + "月")).call((sel) => { sel.select(".domain").attr("stroke", gridColor); sel.selectAll("line").attr("stroke", gridColor); sel.selectAll("text").attr("fill", axisColor).attr("font-size", 11).attr("font-family", "inherit"); });
         g.append("g").call(d3.axisLeft(y).ticks(5).tickSize(0)).call((sel) => { sel.select(".domain").remove(); sel.selectAll("text").attr("fill", axisColor).attr("font-size", 11).attr("font-family", "inherit").attr("dx", "-0.2em"); });
         const single = series.length === 1;
-        const hasGap = series.some((s) => s.values.some((v) => v.value === null));
+        const hasBridge = series.some((s) => {
+          const knownCount = s.values.filter((v) => v.value !== null).length;
+          return knownCount > 1 && knownCount !== s.values.length;
+        });
         series.forEach((s) => {
           const known = s.values.filter((v) => v.value !== null);
           const gap = known.length !== s.values.length;
@@ -503,7 +441,7 @@
           const cx = x(dates[i]);
           hover.select(".hover-line").attr("x1", cx).attr("x2", cx).style("opacity", 1);
           tooltip.html(
-            '<div class="tip-kicker">' + formatDate(exam.date) + " · " + exam.name + "</div>" +
+            '<div class="tip-kicker">' + formatExamDate(exam) + " · " + exam.name + "</div>" +
             '<div class="tip-grade">' + (exam.grade ? gradeLabel(exam.grade) : "—") + "</div>" +
             series.map((s) => '<div class="tip-row"><span class="swatch" style="background:' + s.color + '"></span><span>' + s.label + "</span><strong>" + formatScore(s.values[i].value) + "</strong></div>").join("")
           ).style("opacity", 1);
@@ -521,7 +459,7 @@
           .on("touchstart", (event) => { event.preventDefault(); showAt(d3.pointer(event, g.node())[0]); })
           .on("touchmove", (event) => showAt(d3.pointer(event, g.node())[0]));
         if (chartHint) {
-          chartHint.textContent = hasGap
+          chartHint.textContent = hasBridge
             ? "横轴为考试时间，纵轴为分数。悬停或点按查看明细；虚线为跨口径趋势，表示该次未公布对应科目。"
             : "横轴为考试时间，纵轴为分数。悬停或点按查看明细。";
         }
@@ -529,16 +467,13 @@
 
       /* ===== 年级排名柱状图：G6 = 6、G7 = 7、G8 = 8，柱越高名次越靠前 ===== */
       const gradeWrap = document.getElementById("grade-chart");
-      function gradeValue(g) {
-        const m = /^G(\d{1,2})$/.exec(String(g === null || g === undefined ? "" : g));
-        return m ? Number(m[1]) : null;
-      }
 
       function drawGrades() {
         if (!gradeWrap) return;
         gradeWrap.innerHTML = "";
-        const points = EXAMS.map((exam) => ({ exam, value: gradeValue(exam.grade) }));
-        const known = points.filter((p) => p.value !== null);
+        /* 未公布排名不占柱，也不把年级代号写成名次。 */
+        const points = ScorePage.gradePoints(DATA).map((p) => ({ exam: EXAMS[p.index], value: p.value }));
+        const known = points;
         if (!known.length) {
           gradeWrap.innerHTML = '<p class="chart-empty">暂无排名数据。</p>';
           return;
@@ -573,7 +508,7 @@
         function show(p) {
           bars.attr("fill-opacity", (d) => (d === p ? 1 : 0.4));
           tooltip.html(
-            '<div class="tip-kicker">' + formatDate(p.exam.date) + " · " + p.exam.name + "</div>" +
+            '<div class="tip-kicker">' + formatExamDate(p.exam) + " · " + p.exam.name + "</div>" +
             '<div class="tip-grade">' + (p.exam.grade ? gradeLabel(p.exam.grade) : "—") + "</div>" +
             '<div class="tip-row"><span class="swatch" style="background:' + barColor + '"></span><span>排名档位</span><strong>' + (p.value !== null ? p.value : "—") + "</strong></div>"
           ).style("opacity", 1);
