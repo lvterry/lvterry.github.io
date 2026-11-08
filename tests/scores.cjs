@@ -229,10 +229,11 @@ function assertRecord(data) {
   assert.equal(typeof mid.date_end, "string");
   assert.notEqual(mid.date, REPORT_DATE);
   assert.notEqual(mid.date_end, REPORT_DATE);
-  assert.equal(Object.hasOwn(mid, "grade"), false);
-  assert.equal(ScorePage.gradeValue(mid.grade), null);
-  assert.equal(ScorePage.rankCell(mid).text, "—");
-  assert.notEqual(ScorePage.rankCell(mid).text, "G8");
+  assert.equal(mid.grade, "G8");
+  assert.equal(ScorePage.gradeValue(mid.grade), 8);
+  assert.equal(ScorePage.rankCell(mid).text, "G8");
+  assert.equal(ScorePage.rankCell(mid).missing, false);
+  assert.equal(ScorePage.rankCell(mid).title, "G8 · 年级前 20\u201330%");
   assert.equal(mid.out_of, 800);
   assert.deepEqual(mid.scores, {
     chinese: 81.5,
@@ -270,9 +271,8 @@ function assertRecord(data) {
   assert.equal(summary.coreText, "252");
   assert.equal(summary.coreDelta, "-6");
   assert.equal(summary.coreTone, "down");
-  assert.equal(summary.rankText, "—");
-  assert.equal(summary.rankHint, "当次未公布");
-  assert.notEqual(summary.rankText, "G8");
+  assert.equal(summary.rankText, "G8");
+  assert.equal(summary.rankHint, "G8 · 年级前 20\u201330%");
 
   const midRow = rows[0];
   assert.equal(midRow.name, mid.name);
@@ -281,7 +281,8 @@ function assertRecord(data) {
   assert.equal(midRow.scaleText, "八门");
   assert.equal(midRow.deltaText, "—");
   assert.equal(midRow.coreText, "252");
-  assert.equal(midRow.rank.text, "—");
+  assert.equal(midRow.rank.text, "G8");
+  assert.equal(midRow.rank.missing, false);
   assert.equal(midRow.outOf, 800);
   assert.deepEqual(Object.fromEntries(midRow.subjects.map((cell) => [cell.key, cell.text])), {
     chinese: "81.5",
@@ -312,9 +313,10 @@ function assertRecord(data) {
   assert.equal(coreSeries.every((point) => point.value !== null), true);
 
   const grades = ScorePage.gradePoints(data);
-  assert.equal(grades.length, HISTORICAL.length);
-  assert.equal(grades.some((point) => point.date === "2026-11-03"), false);
-  assert.equal(grades.some((point) => point.grade === "G8"), true);
+  assert.equal(grades.length, HISTORICAL.length + 1);
+  assert.equal(grades[grades.length - 1].date, "2026-11-03");
+  assert.equal(grades[grades.length - 1].grade, "G8");
+  assert.equal(grades[grades.length - 1].value, 8);
   assert.deepEqual(ScorePage.viewModes(data).map((mode) => mode.label), ["语数英", "七门总分", "八门总分", "单科"]);
 }
 
@@ -325,8 +327,7 @@ assertRecord(data);
 const midSource = yaml.slice(yaml.indexOf('date: "2026-11-03"'));
 assert.match(yaml, /date: "2026-11-03"/);
 assert.match(yaml, /date_end: "2026-11-05"/);
-assert.equal(midSource.includes("grade"), false);
-assert.equal(midSource.includes("G8"), false);
+assert.match(midSource, /grade: G8/);
 assert.equal(midSource.includes(REPORT_DATE), false);
 assert.equal(yaml.includes("max:"), false);
 
