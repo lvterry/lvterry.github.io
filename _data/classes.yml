@@ -1,20 +1,20 @@
 # _data/classes.yml
-# Elle 的课程数据。class.html 构建时通过 {{ site.data.classes | jsonify }} 读取，
-# 新增一次上课或一笔缴费，只在这个文件里追加一条，页面的 JS 不用动。
+# 课程页的存档，不是运行时数据源。打开 class.html 时浏览器读取 Google 表格。
+# 新增上课或缴费只往表格的 Sessions / Payments 追加一行，不要改这个文件，
+# 也不要为此发布网站。表格读不到时，页面才显示这里的内容，并写明存档日期。
+# 维护方式见 docs/classes.md。
 #
-# 结构：
-#   courses[]            每门课一条。key 只用于锚点，label 是展示名。
-#   courses[].payments[] 缴费记录。date / amount / credits 必填，note 可选。
-#   courses[].sessions[] 上课记录。date 必填；别的都可以不写。
-#      - credits: 本次消耗的课时数，默认 1。连上两节或请假扣课时时才需要写。
-#      - mode:    线上 / 线下，默认 线下（页面里显示成「线上课」「线下课」）。
-#      - note:    临时调课、状态说明之类，没有就留空。
+# snapshot_as_of 是这份存档冻结的日期。只有重新从表格导出存档时才改它。
+# 页面用它标注「不是实时数据」，不会把它当成刚刚读到的课。
 #
-# 剩余课时 = 累计购课 - 已上课时（含 credits），页面自动算，不要在数据里写死。
-# 日期一律用 "YYYY-MM-DD"，加引号，否则会被 YAML 解析成日期对象。
-#
-# 新增一门课时：在这里追加一条，并在 class.html 的 :root 里补一组同名的
-# --course-<key> / --course-<key>-soft 颜色变量（浅色和深色两处）。
+# 结构仍与原来相同，方便对照：
+#   courses[]            每门课一条。key 只用于锚点和配色，label 是展示名。
+#   courses[].payments[] 缴费。date / amount / credits 必填，note 可选。
+#   courses[].sessions[] 上课。date 必填；credits 默认 1；mode 为 线上 / 线下。
+# 剩余课时和本卡进度由页面计算。日期加引号，写成 "YYYY-MM-DD"。
+# 颜色在 class.html 的 --course-<key>，不从表格读取。
+
+snapshot_as_of: "2026-11-22"
 
 title: Elle 的课程
 

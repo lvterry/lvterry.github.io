@@ -1,6 +1,7 @@
 ---
-# 课程数据在 _data/classes.yml，构建时由 Jekyll 注入本页；
-# 新增一次上课或一笔缴费只改那个文件，本页的 JS 不用动。
+# 上课和缴费在打开页面时从 Google 表格读取，不在构建时写死。
+# _data/classes.yml 只是读不到表格时的存档，页面会标明它不是实时数据。
+# 新增一节课或一笔缴费：往表格的 Sessions / Payments 追加一行。
 ---
 <!doctype html>
 <html lang="zh-CN">
@@ -245,6 +246,16 @@
       .down { color: var(--down); }
       .na { color: var(--muted); }
       .copyright { color: var(--muted); font-size: 0.85rem; margin: 1rem 0 2.5rem; }
+      #sheet-loading[hidden],
+      #sheet-status[hidden] { display: none; }
+      .sheet-status {
+        margin: 0.9rem 0 0;
+        padding: 0.7rem 0.85rem;
+        border: 1px solid color-mix(in oklab, var(--warn) 55%, var(--border));
+        border-radius: 12px;
+        background: color-mix(in oklab, var(--warn) 14%, transparent);
+        font-size: 0.9rem;
+      }
       @media (max-width: 520px) {
         body { font-size: 16px; }
         h1 { font-size: 1.45rem; }
@@ -275,6 +286,8 @@
       <main>
         <section class="banner">
           <h1>西班牙语课与拳击课</h1>
+          <p class="hint" id="sheet-loading" role="status">正在读取课程表…</p>
+          <p class="sheet-status" id="sheet-status" role="status" hidden></p>
           <div class="glance" id="glance"></div>
         </section>
 
@@ -283,13 +296,11 @@
       </main>
     </div>
 
+    <script src="/assets/js/classes.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js"></script>
     <script>
-      /* ===== 课程数据 =====
-         数据在 _data/classes.yml，构建时由 Jekyll 注入到下面这行；
-         新增上课/缴费只改那个文件，本页的 JS 不用动。 */
-      const DATA = {{ site.data.classes | jsonify }};
-      const COURSES = DATA.courses || [];
+      /* 运行时读 Google 表格。SNAPSHOT 只在读表失败时使用，并且会先标上存档日期。 */
+      const SNAPSHOT = {{ site.data.classes | jsonify }};
 
       const WEEKDAYS = ["周日", "周一", "周二", "周三", "周四", "周五", "周六"];
       const TODAY = (function () {
@@ -297,14 +308,8 @@
         return new Date(now.getFullYear(), now.getMonth(), now.getDate(), 12);
       })();
 
-      function parseDate(iso) {
-        const p = String(iso).split("-");
-        return new Date(Number(p[0]), Number(p[1]) - 1, Number(p[2]), 12);
-      }
-      function formatDate(iso) {
-        const p = String(iso).split("-");
-        return p[0] + "." + Number(p[1]) + "." + Number(p[2]);
-      }
+      const parseDate = ClassPage.parseDate;
+      const formatDate = ClassPage.formatDate;
       function weekdayOf(iso) {
         return WEEKDAYS[parseDate(iso).getDay()];
       }
@@ -324,62 +329,23 @@
       function cssVar(name, fallback) {
         return getComputedStyle(document.documentElement).getPropertyValue(name).trim() || fallback;
       }
-      function sessionCredits(s) {
-        const v = s.credits;
-        return typeof v === "number" && isFinite(v) && v > 0 ? v : 1;
-      }
-      /* 本卡已消耗比例：最近一次缴费之后上的课时 / 该次购买的课时。 */
-      function cardPct(s) {
-        return s.cardSize ? Math.min(100, (s.onCard / s.cardSize) * 100) : 0;
-      }
-      function escapeHtml(str) {
-        return String(str == null ? "" : str).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
-      }
-      /* 一门课的全部派生指标：剩余课时、上次上课、本卡进度等都在这里算。 */
+      const sessionCredits = ClassPage.sessionCredits;
+      const cardPct = ClassPage.cardPct;
+      const escapeHtml = ClassPage.escapeHtml;
+      /* 剩余课时、上次上课、本卡进度都在 classes.js 里算，页面只负责画。 */
       function summarize(course) {
-        const sessions = (course.sessions || []).slice().sort((a, b) => (a.date < b.date ? -1 : 1));
-        const payments = (course.payments || []).slice().sort((a, b) => (a.date < b.date ? -1 : 1));
-        const attended = sessions.reduce((n, s) => n + sessionCredits(s), 0);
-        const purchased = payments.reduce((n, p) => n + (Number(p.credits) || 0), 0);
-        const spend = payments.reduce((n, p) => n + (Number(p.amount) || 0), 0);
-        const last = sessions.length ? sessions[sessions.length - 1] : null;
-        const lastPayment = payments.length ? payments[payments.length - 1] : null;
-        const previous = sessions.length > 1 ? sessions[sessions.length - 2] : null;
-        const remaining = purchased - attended;
-        /* 本卡进度：最近一次缴费之后消耗的课时 / 该次购买的课时。 */
-        const onCard = lastPayment ? sessions.filter((s) => s.date > lastPayment.date).reduce((n, s) => n + sessionCredits(s), 0) : 0;
-        const cardSize = lastPayment ? Number(lastPayment.credits) || 0 : 0;
-        const online = sessions.filter((s) => s.mode === "线上").length;
-        const recent = sessions.filter((s) => daysBetween(parseDate(s.date), TODAY) <= 90).length;
-        return {
-          sessions,
-          payments,
-          attended,
-          purchased,
-          spend,
-          remaining,
-          last,
-          lastPayment,
-          previous,
-          onCard,
-          cardSize,
-          online,
-          recent,
-          daysSinceLast: last ? daysBetween(parseDate(last.date), TODAY) : null,
-          gap: last && previous ? daysBetween(parseDate(previous.date), parseDate(last.date)) : null,
-          avgGap: sessions.length > 1 ? Math.round(daysBetween(parseDate(sessions[0].date), parseDate(last.date)) / (sessions.length - 1)) : null,
-          perSession: attended ? Math.round(spend / attended) : null,
-        };
+        return ClassPage.summarize(course, TODAY);
       }
 
-      const SUMMARIES = COURSES.map((c) => ({ course: c, s: summarize(c) }));
+      let SUMMARIES = [];
 
       /* 顶部概览：剩余课时、上次上课、累计与均价一眼看全，点按跳到该课明细。 */
-      (function renderGlance() {
+      function renderGlance() {
         const el = document.getElementById("glance");
         if (!el || !SUMMARIES.length) return;
         el.innerHTML = SUMMARIES.map(({ course, s }) => {
-          const color = course.color || "var(--accent)";
+          if (!ClassPage.isSafeKey(course.key)) return "";
+          const color = ClassPage.colorFor(course.key);
           const tone = s.remaining <= 2 ? "down" : s.remaining <= 4 ? "warn" : "up";
           const bits = [
             s.last ? "上次上课 " + formatDate(s.last.date) : "暂无上课记录",
@@ -396,7 +362,7 @@
             "</a>"
           );
         }).join("");
-      })();
+      }
 
       function stat(label, value, hint, tone) {
         return (
@@ -408,7 +374,8 @@
       /* 单门课的卡片：4 个指标 + 本卡进度条 + 月度上课次数图 + 两张明细表。 */
       function renderCourse(entry) {
         const { course, s } = entry;
-        const color = course.color || "var(--accent)";
+        if (!ClassPage.isSafeKey(course.key)) return;
+        const color = ClassPage.colorFor(course.key);
         const section = document.createElement("section");
         section.className = "course";
         section.id = "course-" + course.key;
@@ -613,14 +580,51 @@
           .on("touchmove", (event, m) => { event.preventDefault(); show(m); });
       }
 
-      SUMMARIES.forEach(renderCourse);
-
       function drawAll() {
         SUMMARIES.forEach((entry) => { if (entry.draw) entry.draw(); });
       }
-      drawAll();
+
+      function renderPage(courses) {
+        document.getElementById("courses").innerHTML = "";
+        SUMMARIES = courses.map((course) => ({ course: course, s: summarize(course) }));
+        renderGlance();
+        SUMMARIES.forEach(renderCourse);
+        drawAll();
+      }
+
       window.addEventListener("resize", drawAll);
       window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", drawAll);
+
+      const loadingEl = document.getElementById("sheet-loading");
+      const statusEl = document.getElementById("sheet-status");
+      ClassPage.start({
+        snapshot: SNAPSHOT,
+        load: function (options) { return ClassPage.loadSheets(options); },
+        onStatus: function (status) {
+          if (status.kind === "loading") {
+            loadingEl.hidden = false;
+            statusEl.hidden = true;
+            statusEl.textContent = "";
+            return;
+          }
+          loadingEl.hidden = true;
+          if (status.kind === "stale" || status.kind === "error") {
+            statusEl.hidden = false;
+            statusEl.textContent = status.text;
+            return;
+          }
+          statusEl.hidden = true;
+          statusEl.textContent = "";
+        },
+        onReady: function (courses, meta) {
+          if (meta.source === "error") return;
+          if (!courses.length) {
+            document.getElementById("glance").textContent = "课程表里还没有课程。";
+            return;
+          }
+          renderPage(courses);
+        }
+      });
     </script>
   </body>
 </html>
