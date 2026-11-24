@@ -13,7 +13,8 @@ bodyClass: collection-page
   </section>
 
   <ul class="collection-grid">
-    {% for artwork in site.data.artworks %}
+    {% comment %}Append new works to _data/artworks.yml. This loop shows the newest first.{% endcomment %}
+    {% for artwork in site.data.artworks reversed %}
     <li>
       <a class="collection-image" href="{{ artwork.image | relative_url }}" aria-label="查看《{{ artwork.title | escape }}》原图">
         <img src="{{ artwork.image | relative_url }}" alt="{{ artwork.alt | escape }}" width="{{ artwork.width }}" height="{{ artwork.height }}" decoding="async"{% unless forloop.first %} loading="lazy"{% endunless %}>
