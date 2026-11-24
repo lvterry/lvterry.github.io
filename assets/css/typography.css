@@ -1,0 +1,32 @@
+@font-face {
+  font-family: "Allo";
+  src: url("../fonts/allo/AlloVariableFriendly.woff2") format("woff2");
+  font-weight: 100 900;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Allo";
+  src: url("../fonts/allo/Allo-Oblique.woff2") format("woff2");
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Allo";
+  src: url("../fonts/allo/Allo-BoldOblique.woff2") format("woff2");
+  font-style: italic;
+  font-weight: 700;
+  font-display: swap;
+}
+
+:root {
+  --site-font: "Allo", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+body {
+  font-family: var(--site-font);
+  font-size: 15px;
+  font-synthesis: none;
+}

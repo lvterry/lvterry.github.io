@@ -1,5 +1,4 @@
 <header class="site-header">
-  <div class="header-top">
   <a href="/" title="home" class="brand-mark">
     <img src="/apple-touch-icon.png" alt="" class="avatar" />
     <span class="brand-copy">
@@ -7,14 +6,19 @@
       <span class="brand-note">Notes on design, AI, products, and the occasional personal detour.</span>
     </span>
   </a>
-  <button class="font-toggle" type="button" aria-label="切换为宋体" aria-pressed="false" title="切换为宋体">宋</button>
-  </div>
-  <nav class="main-nav">
-    <a href="/">Posts</a>
-    <a href="/quotes.html">Quotes</a>
-    <a href="/music.html">Music</a>
-    <a href="/collection.html">Collection</a>
-    <a href="/recommendations.html">Recs</a>
-    <a href="/ai.html">AI Usage</a>
+  <nav class="main-nav" aria-label="Main navigation">
+    {% assign current_url = page.url %}
+    {% assign current_type = "page" %}
+    {% if page.url == "/index.html" or page.url == "/" %}
+      {% assign current_url = "/" %}
+    {% elsif paginator.page or page.layout == "post" %}
+      {% assign current_url = "/" %}
+      {% assign current_type = "location" %}
+    {% endif %}
+    {% assign nav_items = "/|Posts,/quotes.html|Quotes,/music.html|Music,/collection.html|Collection,/recommendations.html|Recs,/ai.html|AI Usage" | split: "," %}
+    {% for item in nav_items %}
+      {% assign link = item | split: "|" %}
+      <a href="{{ link[0] }}"{% if link[0] == current_url %} aria-current="{{ current_type }}"{% endif %}>{{ link[1] }}</a>
+    {% endfor %}
   </nav>
 </header>
