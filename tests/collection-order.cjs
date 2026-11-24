@@ -82,6 +82,16 @@ assert.equal(artworks[0].title, OLDEST);
 assert.equal(artworks[artworks.length - 2].title, PREVIOUS);
 assert.equal(artworks[artworks.length - 1].title, NEWEST);
 
+const BLOSSOM_VERSION = "1.6.1";
+const blossomDir = "assets/vendor/blossom-carousel/" + BLOSSOM_VERSION;
+const blossomJs = fs.readFileSync(blossomDir + "/blossom-carousel-web.umd.js", "utf8");
+const blossomLicense = fs.readFileSync(blossomDir + "/LICENSE", "utf8");
+assert.match(blossomJs, /customElements\.define\(`blossom-carousel`/);
+assert.match(blossomJs, /customElements\.define\(`blossom-prev`/);
+assert.match(blossomJs, /customElements\.define\(`blossom-next`/);
+assert.match(blossomLicense, /Apache License/);
+assert.match(blossomLicense, /Version 2\.0/);
+
 const template = fs.readFileSync("collection.html", "utf8");
 assert.match(template, /\{%\s*for artwork in site\.data\.artworks reversed\s*%\}/);
 assert.doesNotMatch(template, /\{%\s*for artwork in site\.data\.artworks\s*%\}/);
@@ -89,7 +99,19 @@ assert.match(template, /querySelectorAll\("\.collection-image"\)/);
 assert.match(template, /showAt\(currentIndex \+ 1\)/);
 assert.match(template, /showAt\(currentIndex - 1\)/);
 assert.match(template, /showAt\(currentIndex \+ \(dx < 0 \? 1 : -1\)\)/);
-assert.match(template, /\{%\s*unless forloop\.first\s*%\} loading="lazy"/);
+assert.match(template, /\{%\s*unless forloop\.index <= 3\s*%\} loading="lazy"/);
+assert.match(template, /<blossom-carousel[^>]*id="collection-cover"/);
+assert.match(template, /data-blossom-slide/);
+assert.match(template, /<blossom-prev\b/);
+assert.match(template, /<blossom-next\b/);
+assert.match(template, new RegExp("blossom-carousel/" + BLOSSOM_VERSION.replace(".", "\\.") + "/blossom-carousel-web\\.umd\\.js"));
+assert.match(template, /object-fit:\s*contain/);
+assert.doesNotMatch(template, /object-fit:\s*cover/);
+assert.match(template, /@keyframes rotate-cover/);
+assert.match(template, /@keyframes slide-cover/);
+assert.match(template, /animation-timeline:\s*--slide/);
+assert.match(template, /prefers-reduced-motion:\s*reduce/);
+assert.doesNotMatch(template, /autoplay|setInterval/);
 
 const builtPath = "_site/collection.html";
 assert.ok(fs.existsSync(builtPath), "run bundle exec jekyll build before this test");
@@ -117,10 +139,22 @@ rendered.forEach((item, index) => {
   assert.equal(item.src, artwork.image, "thumbnail matches full image at " + index);
   assert.equal(item.alt, artwork.alt, "alt at " + index);
   const lazy = /\sloading="lazy"/.test(item.attrs);
-  assert.equal(lazy, index !== 0, "only the first visible image is eager at " + index);
+  assert.equal(lazy, index >= 3, "the centered work and its two neighbors load eagerly at " + index);
 });
 assert.equal(rendered[0].title, NEWEST);
 assert.equal(rendered[1].title, PREVIOUS);
 assert.equal(rendered[rendered.length - 1].title, OLDEST);
+
+const slideTitles = [];
+const slidePattern = /<li data-blossom-slide data-title="([^"]*)">/g;
+for (const match of html.matchAll(slidePattern)) slideTitles.push(match[1]);
+assert.deepEqual(slideTitles, expected.map((artwork) => artwork.title));
+assert.equal((html.match(/<li data-blossom-slide /g) || []).length, EXPECTED_COUNT);
+assert.match(html, /assets\/vendor\/blossom-carousel\/1\.6\.1\/blossom-carousel-web\.umd\.js/);
+assert.match(html, /assets\/vendor\/blossom-carousel\/1\.6\.1\/blossom-carousel-web\.css/);
+assert.match(html, /<blossom-carousel id="collection-cover"/);
+assert.match(html, /<blossom-prev for="collection-cover"/);
+assert.match(html, /<blossom-next for="collection-cover"/);
+assert.doesNotMatch(html, /autoplay|setInterval/);
 
 console.log("collection order: " + rendered.length + " works, " + rendered[0].title + " first, " + rendered[rendered.length - 1].title + " last");
