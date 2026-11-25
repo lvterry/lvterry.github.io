@@ -1,0 +1,19 @@
+# _data/quotes.yml
+# Quotes page, newest first: append new quotes to the top of this list.
+# text: the sentence, with typographic punctuation.
+# source: attribution line, e.g. "Alan Cooper, 1999" or "Author, Book Title".
+
+- text: "Most software is still crappy because of concepts, not buttons."
+  source: "Alan Cooper, 1999"
+
+- text: "Feature parity is just another way to say “we don’t need to exist”."
+  source: "Jason Fried"
+
+- text: "Problem solving and communication, not personal expression, is the key to effective visual design for graphical user interface."
+  source: "Kevin Mullet & Darrell Sano, Designing Visual Interfaces"
+
+- text: "AI is a tool. Tools abstract and automate tasks. Each new one adds abstraction and automation over what came before. That’s rarely controversial—until it touches something people are emotionally or professionally invested in."
+  source: "Steven Sinofsky, From Typewriters to Transformers"
+
+- text: "I think it is an economic decision. There’s a reasonable level at which to value design. There’s a diminishing return on investment at some fuzzy point. That’s different for every company and every situation... If you’re going to value design beyond that point, that becomes a values choice. That’s an intentional moment where someone says, “Look, I’ve seen the numbers. I know this doesn’t make any sense on paper. But this is something that I’m going to stake out at a leadership level and at a culture level. That we are going to care about design, and then we’re going to stick to it.”"
+  source: "Wilson Miner, Staff Design"

@@ -7,80 +7,15 @@ bodyClass: quotes-page
 {% include header.html %}
 
 <main>
-    <section class="page-banner">
-      <h1 class="page-title">Quotes I keep around</h1>
-      <p class="page-lead">Little sentences with enough voltage to rearrange a day.</p>
-    </section>
+    <h1 class="visually-hidden">Quotes I keep around</h1>
 
-    <div class="quote">
-        <blockquote>
-            Most software is still crappy because of concepts, not buttons.
-        </blockquote>
-        <p>
-            <em>Alan Cooper, 1999</em>
-        </p>
-    </div>
-
-    <div class="quote">
-        <blockquote>
-            Feature parity is just another way to say "we don't need to exist".
-        </blockquote>
-        <p>
-            <em>Jason Fried</em>
-        </p>
-    </div>
-
-    <div class="quote">
-        <blockquote>
-            Problem solving and communication, not personal expression, is the
-            key to effective visual design for graphical user interface.
-        </blockquote>
-        <p>
-            <em>Kevin Mullet & Darrell Sano, Designing Visual Interfaces</em>
-        </p>
-    </div>
-
-    <div class="quote">
-        <blockquote>
-            AI is a tool. Tools abstract and automate tasks. Each new one adds
-            abstraction and automation over what came before. That's rarely
-            controversial—until it touches something people are emotionally or
-            professionally invested in.
-        </blockquote>
-        <p>
-            <em
-                >Steven Sinofsky,
-                <a
-                    href="https://hardcoresoftware.learningbyshipping.com/p/232-from-typewriters-to-transformers"
-                    title="Hardcore Software"
-                    >From Typewriters to Transformers: AI is Just the Next Tools
-                    Abstraction</a
-                ></em
-            >
-        </p>
-    </div>
-
-    <div class="quote">
-        <blockquote>
-            I think it is an economic decision. There's a reasonable level at
-            which to value design. There's a diminishing return on investment at
-            some fuzzy point. That's different for every company and every
-            situation... If you're going to value design beyond that point, that
-            becomes a values choice. That's an intentional moment where someone
-            says, "Look, I've seen the numbers. I know this doesn't make any
-            sense on paper. But this is something that I'm going to stake out at
-            a leadership level and at a culture level. That we are going to care
-            about design, and then we're going to stick to it."
-        </blockquote>
-        <p>
-            <em
-                >Wilson Miner,
-                <a
-                    href="https://staff.design/wilson-miner"
-                    title="Staff Design Website"
-                    >Staff Design</a
-                ></em
-            >
-        </p>
+    {% comment %}Append new quotes to the top of _data/quotes.yml. The two cycle tags vary note color and tilt so neighbours never repeat.{% endcomment %}
+    <div class="quotes-wall">
+        {% for quote in site.data.quotes %}
+        <figure class="quote-card" style="--note: var(--note-{% cycle '1', '2', '3', '4', '5' %}); --tilt: {% cycle '-1.4', '0.9', '-0.6', '1.2', '-1.8' %}deg">
+            <blockquote>{{ quote.text }}</blockquote>
+            <figcaption class="quote-source">{{ quote.source }}</figcaption>
+        </figure>
+        {% endfor %}
     </div>
 </main>
