@@ -169,11 +169,6 @@
       .stat-hint.down { color: var(--down); }
       .stat-hint.warn { color: var(--warn); }
 
-      .progress { margin-top: 1rem; }
-      .progress-head {
-        display: flex; justify-content: space-between; gap: 1rem;
-        font-size: 0.82rem; color: var(--muted); font-variant-numeric: tabular-nums;
-      }
       .progress-track {
         margin-top: 0.4rem;
         height: 8px; border-radius: 99px;
@@ -369,7 +364,7 @@
         );
       }
 
-      /* 单门课的卡片：4 个指标 + 本卡进度条 + 月度上课次数图 + 两张明细表。 */
+      /* 单门课的卡片：4 个指标 + 月度上课次数图 + 两张明细表。 */
       function renderCourse(entry) {
         const { course, s } = entry;
         if (!ClassPage.isSafeKey(course.key)) return;
@@ -391,18 +386,10 @@
           stat("累计花费", formatMoney(s.spend), s.perSession ? "平均 " + formatMoney(s.perSession) + " / 节" : "—"),
         ].join("");
 
-        const pct = cardPct(s);
-        const progress =
-          '<div class="progress">' +
-            '<div class="progress-head"><span>本卡已上 ' + s.onCard + " / " + s.cardSize + " 节</span></div>" +
-            '<div class="progress-track"><div class="progress-fill" style="width:' + pct.toFixed(1) + "%;background:" + color + '"></div></div>' +
-          "</div>";
-
         section.innerHTML =
           '<div class="course-head"><h2>' +
             escapeHtml((course.emoji ? course.emoji + " " : "") + course.label) + "</h2></div>" +
           '<div class="stats">' + stats + "</div>" +
-          progress +
           '<div class="chart-panel"><div class="chart-canvas" id="chart-' + course.key + '"></div></div>' +
           '<p class="hint" id="hint-' + course.key + '">横轴为月份，纵轴为该月上课次数。悬停或点按查看当月日期。</p>' +
           '<details class="fold"><summary><span class="arrow"></span>上课记录</summary>' +
