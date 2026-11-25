@@ -110,6 +110,7 @@ assert.doesNotMatch(template, /object-fit:\s*cover/);
 assert.match(template, /@keyframes rotate-cover/);
 assert.match(template, /@keyframes slide-cover/);
 assert.match(template, /animation-timeline:\s*--slide/);
+assert.match(template, /^\s*view-timeline-inset:\s*calc\([^;]+\);/m, "Safari needs the calculated inset in its own declaration");
 assert.match(template, /prefers-reduced-motion:\s*reduce/);
 assert.doesNotMatch(template, /autoplay|setInterval/);
 

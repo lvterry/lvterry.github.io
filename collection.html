@@ -69,7 +69,6 @@ bodyClass: collection-page
     width: 100%;
     margin: 0;
     padding-block: 1.25rem;
-    padding-inline: calc(50% - var(--slot) / 2);
     scroll-snap-type: x mandatory;
     scroll-padding-inline: calc(50% - var(--slot) / 2);
     scrollbar-width: thin;
@@ -77,22 +76,19 @@ bodyClass: collection-page
   }
   .collection-cover::-webkit-scrollbar { display: block; height: 8px; }
   .collection-cover ul {
+    display: flex;
+    width: max-content;
     margin: 0;
-    padding: 0;
+    /* Keep the end slides centered without letting the transforms extend the track. */
+    padding: 0 calc(50% - var(--slot) / 2);
+    overflow-x: clip;
     list-style: none;
-    font-size: 0;
-    white-space: nowrap;
-    transform-style: preserve-3d;
   }
   .collection-cover li {
-    margin: 0;
-    display: inline-block;
+    flex: none;
     position: relative;
     width: var(--slot);
-    font-size: 1rem;
-    vertical-align: middle;
     scroll-snap-align: center;
-    transform-style: preserve-3d;
   }
   .collection-cover .slide,
   .collection-cover .card {
@@ -189,38 +185,43 @@ bodyClass: collection-page
     cursor: default;
   }
 
-  @supports (view-timeline: --slide inline) {
-    .collection-cover {
-      --slot: 104px;
-      padding-block: calc(var(--slot) * 0.55);
-    }
-    .collection-cover li {
-      width: var(--slot);
-      aspect-ratio: 1 / 2;
-      view-timeline: --slide inline calc(50% - var(--slot) * 1.4);
-    }
-    .collection-cover .slide {
-      perspective: 500px;
-      position: absolute;
-      top: 0;
-      left: -50%;
-      width: 200%;
-      aspect-ratio: 1;
-      transform-style: preserve-3d;
-      animation: linear slide-cover both;
-      animation-timeline: --slide;
-      animation-range: contain;
-    }
-    .collection-cover .card {
-      width: 100%;
-      height: 100%;
-      aspect-ratio: auto;
-      animation: linear rotate-cover both;
-      animation-timeline: --slide;
-      animation-range: contain;
-    }
-    @media (min-width: 720px) {
-      .collection-cover { --slot: 128px; }
+  @media (prefers-reduced-motion: no-preference) {
+    @supports (view-timeline: --slide inline) and (view-timeline-inset: calc(50% - 1px)) and (animation-range: contain) {
+      .collection-cover {
+        --slot: 104px;
+        padding-block: calc(var(--slot) * 0.55);
+      }
+      .collection-cover ul,
+      .collection-cover li { transform-style: preserve-3d; }
+      .collection-cover li {
+        aspect-ratio: 1 / 2;
+        view-timeline: --slide inline;
+        /* Safari drops the calculated inset when it comes from the shorthand. */
+        view-timeline-inset: calc(50% - var(--slot) * 1.4);
+      }
+      .collection-cover .slide {
+        perspective: 500px;
+        position: absolute;
+        top: 0;
+        left: -50%;
+        width: 200%;
+        aspect-ratio: 1;
+        transform-style: preserve-3d;
+        animation: linear slide-cover both;
+        animation-timeline: --slide;
+        animation-range: contain;
+      }
+      .collection-cover .card {
+        width: 100%;
+        height: 100%;
+        aspect-ratio: auto;
+        animation: linear rotate-cover both;
+        animation-timeline: --slide;
+        animation-range: contain;
+      }
+      @media (min-width: 720px) {
+        .collection-cover { --slot: 128px; }
+      }
     }
   }
 
@@ -236,29 +237,7 @@ bodyClass: collection-page
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .collection-cover {
-      --slot: min(72vw, 280px);
-      scroll-behavior: auto !important;
-      padding-block: 1.25rem;
-    }
-    .collection-cover li {
-      width: var(--slot);
-      aspect-ratio: auto;
-      view-timeline: none;
-    }
-    .collection-cover .slide,
-    .collection-cover .card {
-      animation: none;
-      transform: none;
-      position: relative;
-      left: auto;
-      top: auto;
-      width: 100%;
-      height: auto;
-      aspect-ratio: auto;
-      perspective: none;
-    }
-    .collection-cover .card { aspect-ratio: 1; }
+    .collection-cover { scroll-behavior: auto !important; }
     .collection-image::before { animation: none; }
     .collection-lightbox[open] { animation: none; }
   }
