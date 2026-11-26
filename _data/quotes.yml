@@ -3,6 +3,9 @@
 # text: the sentence, with typographic punctuation.
 # source: attribution line, e.g. "Alan Cooper, 1999" or "Author, Book Title".
 
+- text: "Design is not just what it looks like and feels like. Design is how it works."
+  source: "Steve Jobs"
+
 - text: "Most software is still crappy because of concepts, not buttons."
   source: "Alan Cooper, 1999"
 
